@@ -128,8 +128,8 @@
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="frmSzeregi_u.pas">
-            <Form>frmSzeregi</Form>
+        <DCCReference Include="frmPomoc_u.pas">
+            <Form>frmPomoc</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
