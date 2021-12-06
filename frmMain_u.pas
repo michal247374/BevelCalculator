@@ -1,13 +1,24 @@
 unit frmMain_u;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, frmPomoc_u,
   Vcl.Samples.Spin, System.Math;
-
 type
+  // od teraz TEdit bêd¹ wspiera³y wprowadzanie danych liczbowych. Typ danych liczbowych okreœlany jest za pomoc¹ pola Tag.
+  // Tag = 1 pozwala na wprowadzanie liczb ca³kowitych, a Tag = 2 liczb zmiennoprzecinkowych.
+  TEdit =  class(Vcl.StdCtrls.TEdit)
+  private
+    function GetAsInteger: Integer;
+    function GetAsDouble: Double;
+    procedure SetAsInteger(AValue: Integer);
+    procedure SetAsDouble(AValue: Double);
+  public
+    function IsValid: Boolean;
+    property AsInteger: Integer read GetAsInteger write SetAsInteger;
+    property AsDouble: Double read GetAsDouble write SetAsDouble;
+  end;
+
   TfrmMain = class(TForm)
     pgcMain: TPageControl;
     tshEtap1: TTabSheet;
@@ -192,7 +203,6 @@ type
   public
     { Public declarations }
   end;
-
 var
   frmMain: TfrmMain;
 
@@ -202,47 +212,46 @@ implementation
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
 begin
-   tshEtap2.TabVisible:= true;
-   pgcMain.TabIndex:=1;
-   edtPodProbZmeczZebnika.text := inttostr(frmMain.PodstawaProbyZmecz(strtoint(edtTwardosc1.Text)));
-   edtPodProbZmeczKola.text := inttostr(frmMain.PodstawaProbyZmecz(strtoint(edtTwardosc2.Text)));
-   frmMain.WspolczynnikZmianyObciarzenia;
-   edtRownowaznaZebnik.text:=inttostr(frmMain.RownowaznaLiczbaCykli(strtofloat(edtPredObr1.text)));
-   edtRownowaznaKolo.text:=inttostr(frmMain.RownowaznaLiczbaCykli(strtofloat(edtPredObr2.text)));
-   edtWspolTrwalosciPracyZebnik.Text:=floattostr(frmMain.WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczZebnika.text),strtofloat(edtRownowaznaZebnik.text)));
-   edtWspolTrwalosciPracyKolo.Text:=floattostr(frmMain.WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczKola.text),strtofloat(edtRownowaznaKolo.text)));
-
+  tshEtap2.TabVisible:= true;
+  pgcMain.TabIndex:=1;
+  edtPodProbZmeczZebnika.text := inttostr(PodstawaProbyZmecz(strtoint(edtTwardosc1.Text)));
+  edtPodProbZmeczKola.text := inttostr(PodstawaProbyZmecz(strtoint(edtTwardosc2.Text)));
+  WspolczynnikZmianyObciarzenia;
+  edtRownowaznaZebnik.text:=inttostr(RownowaznaLiczbaCykli(strtofloat(edtPredObr1.text)));
+  edtRownowaznaKolo.text:=inttostr(RownowaznaLiczbaCykli(strtofloat(edtPredObr2.text)));
+  edtWspolTrwalosciPracyZebnik.Text:=floattostr(WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczZebnika.text),strtofloat(edtRownowaznaZebnik.text)));
+  edtWspolTrwalosciPracyKolo.Text:=floattostr(WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczKola.text),strtofloat(edtRownowaznaKolo.text)));
+  // korzystaj¹c z rozszerzonej wersji TEdit powy¿sze 2 linijki mo¿na zapisaæ jak ni¿ej. Jednak aby mechanizm dzia³a³ dla wszystkich poni¿szych TEdit'ów nale¿y ustawiæ Tag = 2.
+  edtWspolTrwalosciPracyZebnik.AsDouble := WspolczynnikTrwalosciPracy(edtPodProbZmeczZebnika.AsDouble, edtRownowaznaZebnik.AsDouble);
+  edtWspolTrwalosciPracyKolo.AsDouble := WspolczynnikTrwalosciPracy(edtPodProbZmeczKola.AsDouble, edtRownowaznaKolo.AsDouble);
+  // Co wiêcej, przed wywo³aniem AsDouble warto wczeœniej sprawdziæ czy wartoœci s¹ prawid³owe (czy tekst mo¿na skonwertowaæ na liczbê). Np. tak:
+  if not edtPodProbZmeczZebnika.IsValid then
+    raise Exception.Create('Wartoœæ podana w edtPodProbZmeczZebnika nie reprezentuje liczby');
 end;
-
 procedure TfrmMain.btnMaterial1HelpClick(Sender: TObject);
 begin
    frmPomoc.Show;
    frmPomoc.pgcPomoc.TabIndex:=1;
 end;
-
 procedure TfrmMain.btnSzeregiClick(Sender: TObject);
 begin
    frmPomoc.Show;
    frmPomoc.pgcPomoc.TabIndex:=0;
    //MessageDlg('test',TMsgDlgType.mtInformation,mbYesNoCancel,0);
 end;
-
 procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
 begin
   edtPredObr2.text :=floattostr(strtofloat(edtPredObr1.Text)/strtofloat(cbxPrzelozenie.text));
   edtMoment2.text :=floattostr(strtofloat(edtMoment1.Text)*strtofloat(cbxPrzelozenie.text));
 end;
-
 procedure TfrmMain.edtMoment1Exit(Sender: TObject);
 begin
    edtMoment2.text :=floattostr(strtofloat(edtMoment1.Text)*strtofloat(cbxPrzelozenie.text));
 end;
-
 procedure TfrmMain.edtPredObr1Exit(Sender: TObject);
 begin
   if (Trim(edtPredObr2.text)<>'') then edtPredObr2.text :=floattostr(strtofloat(edtPredObr1.Text)/strtofloat(cbxPrzelozenie.text));
 end;
-
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
    Application.OnHint:=ShowHint;
@@ -250,7 +259,6 @@ begin
    pgcMain.TabIndex:=0;
    tshEtap2.TabVisible:= false;
 end;
-
 function TfrmMain.NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
 var
   intTypObrobki: Integer;
@@ -266,33 +274,25 @@ begin
   }
   if ((intTypObrobki>1) and (intTypObrobki<5)) then  //przelicza z HB na HRC
   begin
-
   end;
-
-
 end;
-
 procedure TfrmMain.sedCzas2Change(Sender: TObject); //Procedury odpowedzialne za automatyczn¹ zmiane wartosci pozosta³ych sedCzas
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
 end;
-
 procedure TfrmMain.sedCzas3Change(Sender: TObject);
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
 end;
-
 procedure TfrmMain.ShowHint(ASender: TObject);  //Procedura przenosz¹ca hinty na pasek stanu
 begin
   stbPasekStanu.Panels[0].Text:=Application.Hint;
 end;
-
 function TfrmMain.PodstawaProbyZmecz(intTwartosc: Integer): Integer; //Podajemy twardoœæ a zwraca bazow¹ liczbe cykli
 begin
   if intTwartosc<200 then Result:=Round((IntPower(10,6)))
   else Result:=Round(20*(IntPower(10,6))) ; //Trzeba tutaj wymyslic jakis sposób zeby zwraca³a tak¹ wartoœc jak na wykresie
 end;
-
 function TfrmMain.WspolczynnikTrwalosciPracy(douPodstawaProbyZmecz,douRownowaznaLiczbaCykli: double): Double;
 begin
    if douPodstawaProbyZmecz>douRownowaznaLiczbaCykli then
@@ -300,7 +300,6 @@ begin
    else
     Result:=Power(douPodstawaProbyZmecz/douRownowaznaLiczbaCykli,1/20)
 end;
-
 procedure TfrmMain.WspolczynnikZmianyObciarzenia; //Wylicza wspo³czynnik od zmiany obcia¿enia w czasie pracy
 var
   kHE,O1,O2,O3,t1,t2,t3: Double;
@@ -314,10 +313,51 @@ begin
   kHE:=(Power(O1,3)*t1)+(Power(O2,3)*t2)+(Power(O3,3)*t3);
   edtRownowaznaWspol.text:=floattostr(kHE);
 end;
-
 function TfrmMain.RownowaznaLiczbaCykli(douPredObrtowa: Double): Integer;
 begin
   Result:=Round(60*douPredObrtowa*strtoint(edtCzasPracy.text)*strtofloat(edtRownowaznaWspol.text));
 end;
+
+{$REGION 'TEdit'}
+
+function TEdit.GetAsDouble: Double;
+// konwertuje tekst na liczbê zmiennoprzecinkow¹. Jeœli konwersja siê nie powiedzie to generowany bêdzie wyj¹tek
+begin
+  Result := StrToFloat(Text);
+end;
+
+function TEdit.GetAsInteger: Integer;
+// konwertuje tekst na liczbê ca³kowit¹. Jeœli konwersja siê nie powiedzie to generowany bêdzie wyj¹tek
+begin
+  Result := StrToInt(Text);
+end;
+
+function TEdit.IsValid: Boolean;
+// zwraca True jeœli tekst reprezentuje poprawn¹ liczbê ca³kowit¹ (Tag = 1) lub zmiennoprzedinkow¹ (Tag = 2)
+var
+  ivalue: Integer;
+  dvalue: Double;
+begin
+  case Tag of
+    1: Result := TryStrToInt(Text, ivalue);
+    2: Result := TryStrToFloat(Text, dvalue);
+  else
+    raise Exception.Create('Pole edycyjne nie obs³uguje wartoœci liczbowych. Aby tak by³o pole Tag powinno mieæ wartoœæ: 1, dla liczb ca³kowitych, lub 2, dla liczb zmiennoprzecinkowych');
+  end;
+end;
+
+procedure TEdit.SetAsDouble(AValue: Double);
+// konwertuje liczbê zmiennoprzecinkow¹ na tekst i zapisuje t¹ wartoœæ do pola Text
+begin
+  Text := FloatToStr(AValue);
+end;
+
+procedure TEdit.SetAsInteger(AValue: Integer);
+// konwertuje liczbê ca³kowit¹ na tekst i zapisuje t¹ wartoœæ do pola Text
+begin
+  Text := IntToStr(AValue);
+end;
+
+{$ENDREGION}
 
 end.
