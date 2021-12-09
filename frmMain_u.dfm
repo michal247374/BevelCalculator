@@ -26,7 +26,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap1
+    ActivePage = tshEtap2
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -160,6 +160,7 @@
           Layout = tlCenter
         end
         object edtPredObr1: TEdit
+          Tag = 2
           Left = 210
           Top = 56
           Width = 130
@@ -170,6 +171,7 @@
           OnExit = edtPredObr1Exit
         end
         object edtMoc: TEdit
+          Tag = 2
           Left = 210
           Top = 26
           Width = 130
@@ -179,6 +181,7 @@
           Text = '5,0'
         end
         object edtMoment1: TEdit
+          Tag = 2
           Left = 210
           Top = 85
           Width = 130
@@ -230,6 +233,7 @@
           Layout = tlCenter
         end
         object edtCzasPracy: TEdit
+          Tag = 1
           Left = 60
           Top = 33
           Width = 130
@@ -370,6 +374,7 @@
           Layout = tlCenter
         end
         object sedCzas1: TSpinEdit
+          Tag = 1
           Left = 138
           Top = 50
           Width = 70
@@ -380,6 +385,7 @@
           Value = 100
         end
         object sedObciazenie1: TSpinEdit
+          Tag = 1
           Left = 254
           Top = 50
           Width = 70
@@ -390,6 +396,7 @@
           Value = 100
         end
         object sedCzas2: TSpinEdit
+          Tag = 1
           Left = 138
           Top = 85
           Width = 70
@@ -402,6 +409,7 @@
           OnChange = sedCzas2Change
         end
         object sedCzas3: TSpinEdit
+          Tag = 1
           Left = 138
           Top = 120
           Width = 70
@@ -414,6 +422,7 @@
           OnChange = sedCzas3Change
         end
         object sedObciazenie3: TSpinEdit
+          Tag = 1
           Left = 254
           Top = 120
           Width = 70
@@ -424,6 +433,7 @@
           Value = 0
         end
         object sedObciazenie2: TSpinEdit
+          Tag = 1
           Left = 254
           Top = 85
           Width = 70
@@ -434,12 +444,14 @@
           Value = 0
         end
         object btnZmianaObciazeniaWCzasieHelp: TButton
+          Tag = 2
           Left = 371
           Top = 8
           Width = 75
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 6
+          OnClick = btnHelpClick
         end
       end
       object pnlZmianaKierunku: TPanel
@@ -580,6 +592,7 @@
           Layout = tlCenter
         end
         object edtRe1: TEdit
+          Tag = 1
           Left = 460
           Top = 86
           Width = 100
@@ -589,7 +602,6 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 0
-          Text = '637'
         end
         object cbxMaterial1: TComboBox
           Left = 104
@@ -597,13 +609,11 @@
           Width = 385
           Height = 21
           Style = csDropDownList
-          ItemIndex = 0
           TabOrder = 1
-          Text = 'Stal stopowa 37Cr4'
-          Items.Strings = (
-            'Stal stopowa 37Cr4')
+          OnChange = cbxMaterial1Change
         end
         object edtRm1: TEdit
+          Tag = 1
           Left = 180
           Top = 86
           Width = 100
@@ -613,9 +623,9 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 2
-          Text = '883'
         end
         object edtTwardosc1: TEdit
+          Tag = 1
           Left = 419
           Top = 58
           Width = 100
@@ -625,7 +635,6 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 3
-          Text = '270'
         end
         object edtObrobkaCieplna1: TEdit
           Left = 104
@@ -637,16 +646,16 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 4
-          Text = '1: Ulepszanie cieplne'
         end
         object btnMaterial1Help: TButton
+          Tag = 1
           Left = 517
           Top = 8
           Width = 75
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 5
-          OnClick = btnMaterial1HelpClick
+          OnClick = btnHelpClick
         end
       end
       object pnlParametryWyjscia: TPanel
@@ -717,6 +726,7 @@
           Layout = tlCenter
         end
         object edtPredObr2: TEdit
+          Tag = 2
           Left = 230
           Top = 56
           Width = 130
@@ -733,9 +743,10 @@
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 1
-          OnClick = btnSzeregiClick
+          OnClick = btnHelpClick
         end
         object edtMoment2: TEdit
+          Tag = 2
           Left = 230
           Top = 85
           Width = 130
@@ -900,6 +911,7 @@
           Layout = tlCenter
         end
         object edtRe2: TEdit
+          Tag = 1
           Left = 460
           Top = 86
           Width = 100
@@ -909,7 +921,6 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 0
-          Text = '637'
         end
         object cbxMaterial2: TComboBox
           Left = 104
@@ -917,13 +928,11 @@
           Width = 385
           Height = 21
           Style = csDropDownList
-          ItemIndex = 0
           TabOrder = 1
-          Text = 'Stal stopowa 37Cr4'
-          Items.Strings = (
-            'Stal stopowa 37Cr4')
+          OnChange = cbxMaterial2Change
         end
         object edtRm2: TEdit
+          Tag = 1
           Left = 180
           Top = 86
           Width = 100
@@ -933,9 +942,9 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 2
-          Text = '883'
         end
         object edtTwardosc2: TEdit
+          Tag = 1
           Left = 419
           Top = 58
           Width = 100
@@ -945,7 +954,6 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 3
-          Text = '255'
         end
         object edtObrobkaCieplna2: TEdit
           Left = 104
@@ -957,7 +965,6 @@
           NumbersOnly = True
           ReadOnly = True
           TabOrder = 4
-          Text = '1: Ulepszanie cieplne'
         end
       end
       object pnlWspPrzeciazenia: TPanel
@@ -993,6 +1000,7 @@
           Layout = tlCenter
         end
         object edtTmaxTnom: TEdit
+          Tag = 2
           Left = 150
           Top = 33
           Width = 130
@@ -1002,12 +1010,14 @@
           Text = '1,0'
         end
         object bntWspPrzeciazeniaHelp: TButton
+          Tag = 3
           Left = 371
           Top = 8
           Width = 75
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 1
+          OnClick = btnHelpClick
         end
       end
       object pnlSchemat: TPanel
@@ -1052,12 +1062,14 @@
           Layout = tlCenter
         end
         object bntSchematHelp: TButton
+          Tag = 4
           Left = 517
           Top = 8
           Width = 75
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 0
+          OnClick = btnHelpClick
         end
         object cbxMontazKol: TComboBox
           Left = 87
@@ -1129,12 +1141,14 @@
           Layout = tlCenter
         end
         object btnWarunkiPracyHelp: TButton
+          Tag = 5
           Left = 869
           Top = 8
           Width = 75
           Height = 33
           Caption = 'Pomoc'
           TabOrder = 0
+          OnClick = btnHelpClick
         end
         object cbxObcOdSilnika: TComboBox
           Left = 124
@@ -1184,6 +1198,7 @@
       end
     end
     object tshEtap2: TTabSheet
+      Tag = 2
       Caption = 'Etap II'
       ImageIndex = 1
       object pnlNaglowek2: TPanel
@@ -1254,7 +1269,7 @@
         end
         object lblPodProbZmeczKola: TLabel
           Left = 40
-          Top = 64
+          Top = 68
           Width = 66
           Height = 21
           Alignment = taRightJustify
@@ -1273,8 +1288,9 @@
           Layout = tlCenter
         end
         object edtPodProbZmeczKola: TEdit
+          Tag = 1
           Left = 122
-          Top = 64
+          Top = 68
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -1283,6 +1299,7 @@
           TabOrder = 0
         end
         object edtPodProbZmeczZebnika: TEdit
+          Tag = 1
           Left = 122
           Top = 34
           Width = 130
@@ -1306,7 +1323,6 @@
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
-        OnClick = btnDalej1Click
       end
       object pnlRownowazna: TPanel
         Left = 3
@@ -1362,6 +1378,7 @@
           WordWrap = True
         end
         object edtRownowaznaKolo: TEdit
+          Tag = 1
           Left = 122
           Top = 72
           Width = 130
@@ -1372,6 +1389,7 @@
           TabOrder = 0
         end
         object edtRownowaznaZebnik: TEdit
+          Tag = 1
           Left = 122
           Top = 34
           Width = 130
@@ -1382,6 +1400,7 @@
           TabOrder = 1
         end
         object edtRownowaznaWspol: TEdit
+          Tag = 2
           Left = 296
           Top = 61
           Width = 156
@@ -1416,7 +1435,7 @@
         end
         object lblWspolTrwalosciPracyKolo: TLabel
           Left = 40
-          Top = 64
+          Top = 68
           Width = 66
           Height = 21
           Alignment = taRightJustify
@@ -1435,8 +1454,9 @@
           Layout = tlCenter
         end
         object edtWspolTrwalosciPracyKolo: TEdit
+          Tag = 2
           Left = 122
-          Top = 64
+          Top = 68
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -1445,6 +1465,7 @@
           TabOrder = 0
         end
         object edtWspolTrwalosciPracyZebnik: TEdit
+          Tag = 2
           Left = 122
           Top = 34
           Width = 130
@@ -1497,7 +1518,26 @@
           Caption = 'Z'#281'bnik'
           Layout = tlCenter
         end
+        object lblMPa5: TLabel
+          Left = 266
+          Top = 34
+          Width = 20
+          Height = 21
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblMPa6: TLabel
+          Left = 266
+          Top = 64
+          Width = 20
+          Height = 21
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
         object edtNapreKrytyczneKolo: TEdit
+          Tag = 2
           Left = 122
           Top = 64
           Width = 130
@@ -1508,6 +1548,7 @@
           TabOrder = 0
         end
         object edtNapreKrytyczneZebnik: TEdit
+          Tag = 2
           Left = 122
           Top = 34
           Width = 130
@@ -1542,7 +1583,7 @@
         end
         object lblShKolo: TLabel
           Left = 40
-          Top = 64
+          Top = 68
           Width = 66
           Height = 21
           Alignment = taRightJustify
@@ -1562,9 +1603,10 @@
         end
         object cbxShZebnik: TComboBox
           Left = 120
-          Top = 26
+          Top = 34
           Width = 145
           Height = 21
+          Style = csDropDownList
           ItemIndex = 1
           TabOrder = 0
           Text = '1,1'
@@ -1575,9 +1617,10 @@
         end
         object cbxShKolo: TComboBox
           Left = 120
-          Top = 67
+          Top = 68
           Width = 145
           Height = 21
+          Style = csDropDownList
           ItemIndex = 1
           TabOrder = 1
           Text = '1,1'
@@ -1611,7 +1654,7 @@
         end
         object lblDopNapreStykKolo: TLabel
           Left = 40
-          Top = 64
+          Top = 67
           Width = 66
           Height = 21
           Alignment = taRightJustify
@@ -1630,8 +1673,9 @@
           Layout = tlCenter
         end
         object edtDopNapreStykKolo: TEdit
+          Tag = 2
           Left = 122
-          Top = 64
+          Top = 68
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -1640,6 +1684,7 @@
           TabOrder = 0
         end
         object edtDopNapreStykZebnik: TEdit
+          Tag = 2
           Left = 122
           Top = 34
           Width = 130
@@ -1673,6 +1718,7 @@
           ParentFont = False
         end
         object edtOblDopNapreStyk: TEdit
+          Tag = 2
           Left = 122
           Top = 34
           Width = 130
@@ -1709,7 +1755,7 @@
           Left = 40
           Top = 96
           Width = 66
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Ko'#322'o z'#281'bate'
@@ -1717,9 +1763,9 @@
         end
         object lblMaxNaprZebnik: TLabel
           Left = 67
-          Top = 66
+          Top = 62
           Width = 39
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Z'#281'bnik'
@@ -1727,53 +1773,57 @@
         end
         object lblMaxNaprStyk: TLabel
           Left = 128
-          Top = 32
+          Top = 34
           Width = 117
-          Height = 13
+          Height = 16
           Caption = 'Dla napr'#281#380'e'#324' stykowych'
         end
         object lblMaxNaprGnac: TLabel
           Left = 304
-          Top = 32
+          Top = 34
           Width = 106
-          Height = 13
+          Height = 16
           Caption = 'Dla napr'#281#380'e'#324' gn'#261'cych'
         end
         object edtMaxNaprStykKolo: TEdit
+          Tag = 2
           Left = 122
           Top = 96
           Width = 130
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
           TabOrder = 0
         end
         object edtMaxNaprStykZebnik: TEdit
+          Tag = 2
           Left = 122
-          Top = 66
+          Top = 62
           Width = 130
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
           TabOrder = 1
         end
         object edtMaxNaprGnacZebnik: TEdit
+          Tag = 2
           Left = 290
-          Top = 66
+          Top = 62
           Width = 130
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
           TabOrder = 2
         end
         object edtMaxNaprGnacKolo: TEdit
+          Tag = 2
           Left = 290
-          Top = 93
+          Top = 96
           Width = 130
-          Height = 21
+          Height = 22
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True

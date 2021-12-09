@@ -15,6 +15,10 @@ type
     pgcPomoc: TPageControl;
     tshPrzelozenie: TTabSheet;
     tshMaterial: TTabSheet;
+    tshZmienneObcia: TTabSheet;
+    tshWspolPrzeciaz: TTabSheet;
+    tshSchemat: TTabSheet;
+    tshWarPracy: TTabSheet;
     procedure btnPoprzedniClick(Sender: TObject);
     procedure btnNastepnaClick(Sender: TObject);
   private

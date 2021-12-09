@@ -3,7 +3,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, frmPomoc_u,
-  Vcl.Samples.Spin, System.Math;
+  Vcl.Samples.Spin, System.Math, IniFiles;
 type
   // od teraz TEdit bêd¹ wspiera³y wprowadzanie danych liczbowych. Typ danych liczbowych okreœlany jest za pomoc¹ pola Tag.
   // Tag = 1 pozwala na wprowadzanie liczb ca³kowitych, a Tag = 2 liczb zmiennoprzecinkowych.
@@ -183,22 +183,26 @@ type
     edtMaxNaprGnacKolo: TEdit;
     lblMaxNaprStyk: TLabel;
     lblMaxNaprGnac: TLabel;
-    procedure btnSzeregiClick(Sender: TObject);
+    lblMPa5: TLabel;
+    lblMPa6: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
-    procedure btnMaterial1HelpClick(Sender: TObject);
+    procedure btnHelpClick(Sender: TObject);
     procedure edtPredObr1Exit(Sender: TObject);
     procedure cbxPrzelozenieChange(Sender: TObject);
     procedure edtMoment1Exit(Sender: TObject);
     procedure sedCzas2Change(Sender: TObject);
     procedure sedCzas3Change(Sender: TObject);
+    procedure cbxMaterial1Change(Sender: TObject);
+    procedure cbxMaterial2Change(Sender: TObject);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
-    function PodstawaProbyZmecz(intTwartosc: Integer): Integer;
-    function RownowaznaLiczbaCykli(douPredObrtowa: Double): Integer;
-    function WspolczynnikTrwalosciPracy(douPodstawaProbyZmecz, douRownowaznaLiczbaCykli: double): Double;
+    procedure PodstawaProbyZmecz();
+    procedure RownowaznaLiczbaCykli();
+    procedure WspolczynnikTrwalosciPracy();
     function NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
+    function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     { Private declarations }
   public
     { Public declarations }
@@ -209,74 +213,145 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
-begin
-  tshEtap2.TabVisible:= true;
-  pgcMain.TabIndex:=1;
-  edtPodProbZmeczZebnika.text := inttostr(PodstawaProbyZmecz(strtoint(edtTwardosc1.Text)));
-  edtPodProbZmeczKola.text := inttostr(PodstawaProbyZmecz(strtoint(edtTwardosc2.Text)));
-  WspolczynnikZmianyObciarzenia;
-  edtRownowaznaZebnik.text:=inttostr(RownowaznaLiczbaCykli(strtofloat(edtPredObr1.text)));
-  edtRownowaznaKolo.text:=inttostr(RownowaznaLiczbaCykli(strtofloat(edtPredObr2.text)));
-  edtWspolTrwalosciPracyZebnik.Text:=floattostr(WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczZebnika.text),strtofloat(edtRownowaznaZebnik.text)));
-  edtWspolTrwalosciPracyKolo.Text:=floattostr(WspolczynnikTrwalosciPracy(strtofloat(edtPodProbZmeczKola.text),strtofloat(edtRownowaznaKolo.text)));
-  // korzystaj¹c z rozszerzonej wersji TEdit powy¿sze 2 linijki mo¿na zapisaæ jak ni¿ej. Jednak aby mechanizm dzia³a³ dla wszystkich poni¿szych TEdit'ów nale¿y ustawiæ Tag = 2.
-  edtWspolTrwalosciPracyZebnik.AsDouble := WspolczynnikTrwalosciPracy(edtPodProbZmeczZebnika.AsDouble, edtRownowaznaZebnik.AsDouble);
-  edtWspolTrwalosciPracyKolo.AsDouble := WspolczynnikTrwalosciPracy(edtPodProbZmeczKola.AsDouble, edtRownowaznaKolo.AsDouble);
-  // Co wiêcej, przed wywo³aniem AsDouble warto wczeœniej sprawdziæ czy wartoœci s¹ prawid³owe (czy tekst mo¿na skonwertowaæ na liczbê). Np. tak:
-  if not edtPodProbZmeczZebnika.IsValid then
-    raise Exception.Create('Wartoœæ podana w edtPodProbZmeczZebnika nie reprezentuje liczby');
-end;
-procedure TfrmMain.btnMaterial1HelpClick(Sender: TObject);
-begin
-   frmPomoc.Show;
-   frmPomoc.pgcPomoc.TabIndex:=1;
-end;
-procedure TfrmMain.btnSzeregiClick(Sender: TObject);
-begin
-   frmPomoc.Show;
-   frmPomoc.pgcPomoc.TabIndex:=0;
-   //MessageDlg('test',TMsgDlgType.mtInformation,mbYesNoCancel,0);
-end;
-procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
-begin
-  edtPredObr2.text :=floattostr(strtofloat(edtPredObr1.Text)/strtofloat(cbxPrzelozenie.text));
-  edtMoment2.text :=floattostr(strtofloat(edtMoment1.Text)*strtofloat(cbxPrzelozenie.text));
-end;
-procedure TfrmMain.edtMoment1Exit(Sender: TObject);
-begin
-   edtMoment2.text :=floattostr(strtofloat(edtMoment1.Text)*strtofloat(cbxPrzelozenie.text));
-end;
-procedure TfrmMain.edtPredObr1Exit(Sender: TObject);
-begin
-  if (Trim(edtPredObr2.text)<>'') then edtPredObr2.text :=floattostr(strtofloat(edtPredObr1.Text)/strtofloat(cbxPrzelozenie.text));
-end;
-procedure TfrmMain.FormCreate(Sender: TObject);
+procedure TfrmMain.FormCreate(Sender: TObject); //Domyslna procedura forma, uruchamiana na pocz¹tku programu
+var
+  iniMaterialy: TIniFile;
+  intIloscMaterialow, intIndeks: Integer;
 begin
    Application.OnHint:=ShowHint;
-   cbxPrzelozenie.Hint:='Prze³o¿enie'+#13+ 'Druga linia|Wartoœæ prze³o¿enia powinna byæ znormalizowana'; //Dodanie #13 tworzy now¹ linie w hincie a | przenosi do pasku stanu
+   //Wczytywanie materia³ow z pliku Materaly.ini w katalogu z plikiem .exe
+   iniMaterialy:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+   intIloscMaterialow:=iniMaterialy.ReadInteger('Ustawienia','IloscMaterialow',000);
+   for intIndeks := 0 to intIloscMaterialow-1 do
+    begin
+    cbxMaterial1.Items.Add(iniMaterialy.ReadString(IntToStr(intIndeks),'Nazwa',''));
+    cbxMaterial2.Items.Add(iniMaterialy.ReadString(IntToStr(intIndeks),'Nazwa',''));
+    end;
+   iniMaterialy.Free;
+
+   cbxPrzelozenie.Hint:='Prze³o¿enie|Wartoœci prze³o¿eñ s¹ uszeregowane, wiêcej w pomocy'; //Dodanie #13 tworzy now¹ linie w hincie a | przenosi do pasku stanu
    pgcMain.TabIndex:=0;
    tshEtap2.TabVisible:= false;
 end;
-function TfrmMain.NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
-var
-  intTypObrobki: Integer;
-  douTwardoscHRC: Double;
+
+procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
 begin
-  intTypObrobki:= strtoint(Copy(strObrobkaCieplna,1,1));
-  {Pierwszy znak w obroce cieplnej to cyfra oznaczaj¹ca typ oborobki
-     1 dla ulepszania i normalizowania
-     2 dla hartowania na wzkros
-     3 dla hartowania powierzchniowego
-     4 dla naweglania
-     5 dla azotowania
-  }
-  if ((intTypObrobki>1) and (intTypObrobki<5)) then  //przelicza z HB na HRC
-  begin
-  end;
+  if (cbxMaterial1.ItemIndex or cbxMaterial2.ItemIndex)=-1 then
+    raise Exception.Create('Aby dalej prowadziæ obliczenia nale¿y wybraæ materia³');
+
+  tshEtap2.TabVisible:= true;
+  pgcMain.TabIndex:=1;  //Odblokowuje i prze³¹cz na 2 zak³adke
+
+  {Podstawa próby zmêczeniowej}
+  PodstawaProbyZmecz();
+
+  {Równowa¿na liczba cykli}
+  WspolczynnikZmianyObciarzenia;
+  RownowaznaLiczbaCykli;
+
+  {Wspo³czynnik trwa³oœæi pracy}
+  WspolczynnikTrwalosciPracy;
+
 end;
-procedure TfrmMain.sedCzas2Change(Sender: TObject); //Procedury odpowedzialne za automatyczn¹ zmiane wartosci pozosta³ych sedCzas
+
+{$Region 'Ogolna'}
+procedure TfrmMain.btnHelpClick(Sender: TObject);
+{Odpowada za otwarcie helpa na odpowiedniej zak³adce,
+tag przycisku musi byc taki sam jak index zak³adki w frmPomoc}
+begin
+   frmPomoc.Show;
+   frmPomoc.pgcPomoc.TabIndex:=Tcontrol(Sender).Tag;
+end;
+
+procedure TfrmMain.ShowHint(ASender: TObject); //Procedura przenosz¹ca hinty na pasek stanu
+begin
+  stbPasekStanu.Panels[0].Text:=Application.Hint;
+end;
+
+function TfrmMain.AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
+{Funkcja wyliczaj¹ca wartosc z "wykresu" na podstawie pliku .ini z punktami i argumetu
+Plik z danymi musi znajdowaæ sie w katalogu z plikiem .exe
+a jego nazwa podana w formacie ###.ini.}
+var
+  iniDane: TIniFile;
+  intDlugosc, I: Integer;
+  tabDane: array of array of Double; //Deklaracja 2wymiarowej dynamicznej tablicy
+begin
+  iniDane:=TIniFile.Create(ExtractFilePath(Application.ExeName)+ strNazwaDokumentu);
+  //Otwiera plik o nazwie z podanej w wywo³aniu, który znajduje sie w tym samym katalogu co plik.exe
+  intDlugosc:=0;
+  while iniDane.SectionExists(IntToStr(intDlugosc)) do intDlugosc:=intDlugosc+1;
+  //Sprawdzamy ile punktów jest zawartych w pliku, aby zadeklarowac tablice odpowiedniej d³ugosci
+  SetLength(tabDane,2,intDlugosc);
+  for I := 0 to intDlugosc-1 do //Wczytujemy dane z pliku do tablicy
+  begin
+    tabDane[0,I] := iniDane.ReadFloat(IntToStr(I),'x',0);
+    tabDane[1,I] := iniDane.ReadFloat(IntToStr(I),'y',0);
+  end;
+  I:=0;
+  while douWejscie>tabDane[0,I+1] do i:=i+1; //Sukamy przedzia³u zawieraj¹cego nasz argument
+  Result:=tabDane[1,I] + (tabDane[1,I+1] - tabDane[1,I]) * (douWejscie - tabDane[0,I]) / (tabDane[0,I+1] - tabDane[0,I]);
+  // Zwraca wartoœæ aproksymacji liniowej obliczonej na podstawie 2 skrajnych punktów przedzia³u
+end;
+
+{$ENDREGION}
+
+{$Region 'Etap 1'}
+procedure TfrmMain.cbxMaterial1Change(Sender: TObject);
+//Wczytanie pozosta³ych parametrów materia³u po zmianie
+var
+  iniMaterialy: TIniFile;
+begin
+  if cbxMaterial1.ItemIndex=-1 then
+    raise Exception.Create('Aby dalej prowadziæ obliczenia nale¿y wybraæ materia³');
+  iniMaterialy:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+  edtObrobkaCieplna1.Text:= iniMaterialy.ReadString(IntToStr(cbxMaterial1.ItemIndex),'Obrobka','');
+  edtTwardosc1.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'Twardosc',0);
+  edtRm1.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'Rm',0);
+  edtRe1.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'Re',0);
+  iniMaterialy.Free;
+end;
+
+procedure TfrmMain.cbxMaterial2Change(Sender: TObject);
+//Dzia³a tak samo jak dla cbxMaterial1
+var
+  iniMaterialy: TIniFile;
+begin
+   if cbxMaterial2.ItemIndex=-1 then
+    raise Exception.Create('Aby dalej prowadziæ obliczenia nale¿y wybraæ materia³');
+  iniMaterialy:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+  edtObrobkaCieplna2.Text:= iniMaterialy.ReadString(IntToStr(cbxMaterial2.ItemIndex),'Obrobka','');
+  edtTwardosc2.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'Twardosc',0);
+  edtRm2.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'Rm',0);
+  edtRe2.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'Re',0);
+  iniMaterialy.Free;
+end;
+
+procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
+begin
+  edtPredObr2.AsDouble :=RoundTo(edtPredObr1.AsDouble/strtofloat(cbxPrzelozenie.text),-2);
+  edtMoment2.AsDouble :=RoundTo(edtMoment1.AsDouble*strtofloat(cbxPrzelozenie.text),-2);
+end;
+
+procedure TfrmMain.edtMoment1Exit(Sender: TObject);
+//Oblicza moment wyjsciowy przy zmianie momentu wejsciowego + sprawdza czy jest liczb¹
+begin
+  if not edtMoment1.IsValid then
+    raise Exception.Create('Podana wartoœæ momentu nie reprezentuje liczby');
+   edtMoment2.AsDouble :=RoundTo(edtMoment1.AsDouble*strtofloat(cbxPrzelozenie.text),-2);
+end;
+
+procedure TfrmMain.edtPredObr1Exit(Sender: TObject);
+//Oblicza wyjœciow¹ predkoœc obrotow¹ przy zmiania prêdkosci wejsciowej
+begin
+  if not edtPredObr1.IsValid then
+    raise Exception.Create('Podana wartoœæ prêdkoœci nie reprezentuje liczby');
+  edtPredObr2.AsDouble :=RoundTo(edtPredObr1.AsDouble/strtofloat(cbxPrzelozenie.text),-2);;
+end;
+
+{Procedury odpowedzialne za automatyczn¹ zmiane wartosci pozosta³ych sedCzas
+Jeszcze do poprawki}
+procedure TfrmMain.sedCzas2Change(Sender: TObject);
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
 end;
@@ -284,22 +359,19 @@ procedure TfrmMain.sedCzas3Change(Sender: TObject);
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
 end;
-procedure TfrmMain.ShowHint(ASender: TObject);  //Procedura przenosz¹ca hinty na pasek stanu
+
+{$ENDREGION}
+
+{$Region 'Etap 2'}
+procedure TfrmMain.PodstawaProbyZmecz;
+//Okreœla podstawy próby zmêczeniowej na podstawie twardosci materia³u
 begin
-  stbPasekStanu.Panels[0].Text:=Application.Hint;
+  edtPodProbZmeczZebnika.AsInteger:=Round(AproksymacjaLiniowa('PodstawaProbyZmeczeniowej.ini',
+                                              edtTwardosc1.AsInteger)*1000000);
+  edtPodProbZmeczKola.AsInteger:=Round(AproksymacjaLiniowa('PodstawaProbyZmeczeniowej.ini',
+                                              edtTwardosc2.AsInteger)*1000000);
 end;
-function TfrmMain.PodstawaProbyZmecz(intTwartosc: Integer): Integer; //Podajemy twardoœæ a zwraca bazow¹ liczbe cykli
-begin
-  if intTwartosc<200 then Result:=Round((IntPower(10,6)))
-  else Result:=Round(20*(IntPower(10,6))) ; //Trzeba tutaj wymyslic jakis sposób zeby zwraca³a tak¹ wartoœc jak na wykresie
-end;
-function TfrmMain.WspolczynnikTrwalosciPracy(douPodstawaProbyZmecz,douRownowaznaLiczbaCykli: double): Double;
-begin
-   if douPodstawaProbyZmecz>douRownowaznaLiczbaCykli then
-    Result:=Power(douPodstawaProbyZmecz/douRownowaznaLiczbaCykli,1/6)
-   else
-    Result:=Power(douPodstawaProbyZmecz/douRownowaznaLiczbaCykli,1/20)
-end;
+
 procedure TfrmMain.WspolczynnikZmianyObciarzenia; //Wylicza wspo³czynnik od zmiany obcia¿enia w czasie pracy
 var
   kHE,O1,O2,O3,t1,t2,t3: Double;
@@ -310,13 +382,49 @@ begin
   t1:=sedCzas1.Value/100;
   t2:=sedCzas2.Value/100;
   t3:=sedCzas3.Value/100;
-  kHE:=(Power(O1,3)*t1)+(Power(O2,3)*t2)+(Power(O3,3)*t3);
-  edtRownowaznaWspol.text:=floattostr(kHE);
+  edtRownowaznaWspol.AsDouble:=RoundTo((Power(O1,3)*t1)+(Power(O2,3)*t2)+(Power(O3,3)*t3),-4);
 end;
-function TfrmMain.RownowaznaLiczbaCykli(douPredObrtowa: Double): Integer;
+
+procedure TfrmMain.RownowaznaLiczbaCykli;
 begin
-  Result:=Round(60*douPredObrtowa*strtoint(edtCzasPracy.text)*strtofloat(edtRownowaznaWspol.text));
+  edtRownowaznaZebnik.AsInteger:=Round(60*edtPredObr1.AsDouble*edtCzasPracy.AsInteger*edtRownowaznaWspol.AsDouble);
+  edtRownowaznaKolo.AsInteger:=Round(60*edtPredObr2.AsDouble*edtCzasPracy.AsInteger*edtRownowaznaWspol.AsDouble);
 end;
+
+procedure TfrmMain.WspolczynnikTrwalosciPracy;
+begin
+  //Obliczenia dla zêbnika
+   if edtPodProbZmeczZebnika.AsInteger>edtRownowaznaZebnik.AsDouble then
+    edtWspolTrwalosciPracyZebnik.AsDouble:=RoundTo(Power(edtPodProbZmeczZebnika.AsInteger/edtRownowaznaZebnik.AsDouble,1/6),-2)
+   else
+    edtWspolTrwalosciPracyZebnik.AsDouble:=RoundTo(Power(edtPodProbZmeczZebnika.AsInteger/edtRownowaznaZebnik.AsDouble,1/20),-2);
+  //Obliczenia dla ko³a zêbatego
+  if edtPodProbZmeczKola.AsInteger>edtRownowaznaKolo.AsDouble then
+    edtWspolTrwalosciPracyKolo.AsDouble:=RoundTo(Power(edtPodProbZmeczKola.AsInteger/edtRownowaznaKolo.AsDouble,1/6),-2)
+  else
+    edtWspolTrwalosciPracyKolo.AsDouble:=RoundTo(Power(edtPodProbZmeczKola.AsInteger/edtRownowaznaKolo.AsDouble,1/20),-2)
+end;
+
+//To ni¿ej jest do poprawki
+function TfrmMain.NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
+var
+  intTypObrobki: Integer;
+  douTwardoscHRC: Double;
+begin
+  intTypObrobki:= strtoint(Copy(strObrobkaCieplna,1,1));
+  if ((intTypObrobki>1) and (intTypObrobki<5)) then  //przelicza z HB na HRC
+  begin
+  end;
+end;
+
+
+
+
+
+
+
+
+{$ENDREGION}
 
 {$REGION 'TEdit'}
 

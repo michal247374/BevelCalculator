@@ -46,7 +46,7 @@ object frmPomoc: TfrmPomoc
     Top = 0
     Width = 612
     Height = 405
-    ActivePage = tshMaterial
+    ActivePage = tshWarPracy
     TabOrder = 3
     object tshPrzelozenie: TTabSheet
       Caption = 'Prze'#322'o'#380'enie'
@@ -54,6 +54,22 @@ object frmPomoc: TfrmPomoc
     object tshMaterial: TTabSheet
       Caption = 'Materia'#322
       ImageIndex = 1
+    end
+    object tshZmienneObcia: TTabSheet
+      Caption = 'Zmienne obci'#261#380'enie'
+      ImageIndex = 2
+    end
+    object tshWspolPrzeciaz: TTabSheet
+      Caption = 'Wsp'#243#322'. przeci'#261#380'enia'
+      ImageIndex = 3
+    end
+    object tshSchemat: TTabSheet
+      Caption = 'Schemat przek'#322'.'
+      ImageIndex = 4
+    end
+    object tshWarPracy: TTabSheet
+      Caption = 'Warunki pracy'
+      ImageIndex = 5
     end
   end
 end
