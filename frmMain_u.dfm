@@ -1310,11 +1310,11 @@
           TabOrder = 1
         end
       end
-      object bntDalej2: TButton
-        Left = 961
-        Top = 490
+      object btnDalej2: TButton
+        Left = 958
+        Top = 486
         Width = 106
-        Height = 112
+        Height = 113
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1394,6 +1394,10 @@
           Top = 34
           Width = 130
           Height = 21
+          Hint = 
+            'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
+            'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
+            'a powierzchniowego, naweglania i azotowania'
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -1518,7 +1522,7 @@
           Caption = 'Z'#281'bnik'
           Layout = tlCenter
         end
-        object lblMPa5: TLabel
+        object lblMPa2_1: TLabel
           Left = 266
           Top = 34
           Width = 20
@@ -1527,7 +1531,7 @@
           Caption = 'MPa'
           Layout = tlCenter
         end
-        object lblMPa6: TLabel
+        object lblMPa2_2: TLabel
           Left = 266
           Top = 64
           Width = 20
@@ -1606,10 +1610,15 @@
           Top = 34
           Width = 145
           Height = 21
+          Hint = 
+            'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
+            'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
+            'a powierzchniowego, naweglania i azotowania'
           Style = csDropDownList
           ItemIndex = 1
           TabOrder = 0
           Text = '1,1'
+          OnChange = cbxShChange
           Items.Strings = (
             '1,0'
             '1,1'
@@ -1620,10 +1629,15 @@
           Top = 68
           Width = 145
           Height = 21
+          Hint = 
+            'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
+            'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
+            'a powierzchniowego, naweglania i azotowania'
           Style = csDropDownList
           ItemIndex = 1
           TabOrder = 1
           Text = '1,1'
+          OnChange = cbxShChange
           Items.Strings = (
             '1,0'
             '1,1'
@@ -1672,6 +1686,24 @@
           Caption = 'Z'#281'bnik'
           Layout = tlCenter
         end
+        object lblMPa2_3: TLabel
+          Left = 268
+          Top = 34
+          Width = 20
+          Height = 21
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblMPa2_4: TLabel
+          Left = 268
+          Top = 67
+          Width = 20
+          Height = 21
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
         object edtDopNapreStykKolo: TEdit
           Tag = 2
           Left = 122
@@ -1717,16 +1749,52 @@
           Font.Style = [fsBold]
           ParentFont = False
         end
+        object lblMPa2_5: TLabel
+          Left = 268
+          Top = 25
+          Width = 20
+          Height = 21
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblOstrzeżenie2_1: TLabel
+          Left = 8
+          Top = 52
+          Width = 433
+          Height = 26
+          Caption = 
+            'Przekroczona warto'#347#263' obliczeniowych dopuszczalnych napr'#281#380'e'#324' styk' +
+            'owych. Nale'#380'y zmieni'#263' parametry wej'#347'ciowe, np. zmieni'#263' materia'#322
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Visible = False
+          WordWrap = True
+        end
         object edtOblDopNapreStyk: TEdit
           Tag = 2
           Left = 122
-          Top = 34
+          Top = 26
           Width = 130
           Height = 21
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
           TabOrder = 0
+        end
+        object Button1: TButton
+          Tag = 6
+          Left = 361
+          Top = 8
+          Width = 75
+          Height = 33
+          Caption = 'Pomoc'
+          TabOrder = 1
+          OnClick = btnHelpClick
         end
       end
       object pnlMaxNapr: TPanel
@@ -1775,14 +1843,14 @@
           Left = 128
           Top = 34
           Width = 117
-          Height = 16
+          Height = 13
           Caption = 'Dla napr'#281#380'e'#324' stykowych'
         end
         object lblMaxNaprGnac: TLabel
           Left = 304
           Top = 34
           Width = 106
-          Height = 16
+          Height = 13
           Caption = 'Dla napr'#281#380'e'#324' gn'#261'cych'
         end
         object edtMaxNaprStykKolo: TEdit
@@ -1790,7 +1858,7 @@
           Left = 122
           Top = 96
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -1801,7 +1869,7 @@
           Left = 122
           Top = 62
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -1812,7 +1880,7 @@
           Left = 290
           Top = 62
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -1823,7 +1891,7 @@
           Left = 290
           Top = 96
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True

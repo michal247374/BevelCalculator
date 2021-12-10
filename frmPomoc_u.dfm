@@ -46,7 +46,7 @@ object frmPomoc: TfrmPomoc
     Top = 0
     Width = 612
     Height = 405
-    ActivePage = tshWarPracy
+    ActivePage = tshNapreStyk
     TabOrder = 3
     object tshPrzelozenie: TTabSheet
       Caption = 'Prze'#322'o'#380'enie'
@@ -70,6 +70,10 @@ object frmPomoc: TfrmPomoc
     object tshWarPracy: TTabSheet
       Caption = 'Warunki pracy'
       ImageIndex = 5
+    end
+    object tshNapreStyk: TTabSheet
+      Caption = 'Napr'#281#380'enia stykowe'
+      ImageIndex = 6
     end
   end
 end

@@ -19,6 +19,7 @@ type
     tshWspolPrzeciaz: TTabSheet;
     tshSchemat: TTabSheet;
     tshWarPracy: TTabSheet;
+    tshNapreStyk: TTabSheet;
     procedure btnPoprzedniClick(Sender: TObject);
     procedure btnNastepnaClick(Sender: TObject);
   private

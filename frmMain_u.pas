@@ -137,7 +137,7 @@ type
     lblPodProbZmeczZebnika: TLabel;
     edtPodProbZmeczKola: TEdit;
     edtPodProbZmeczZebnika: TEdit;
-    bntDalej2: TButton;
+    btnDalej2: TButton;
     pnlRownowazna: TPanel;
     lblRownowazna: TLabel;
     lblRownowaznaKolo: TLabel;
@@ -183,8 +183,13 @@ type
     edtMaxNaprGnacKolo: TEdit;
     lblMaxNaprStyk: TLabel;
     lblMaxNaprGnac: TLabel;
-    lblMPa5: TLabel;
-    lblMPa6: TLabel;
+    lblMPa2_1: TLabel;
+    lblMPa2_2: TLabel;
+    lblMPa2_3: TLabel;
+    lblMPa2_4: TLabel;
+    lblMPa2_5: TLabel;
+    lblOstrze¿enie2_1: TLabel;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -195,14 +200,20 @@ type
     procedure sedCzas3Change(Sender: TObject);
     procedure cbxMaterial1Change(Sender: TObject);
     procedure cbxMaterial2Change(Sender: TObject);
+    procedure cbxShChange(Sender: TObject);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
     procedure PodstawaProbyZmecz();
     procedure RownowaznaLiczbaCykli();
     procedure WspolczynnikTrwalosciPracy();
-    function NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
+    procedure NaprezeniaKrytyczne();
+    procedure DopNaprezStyk;
+    procedure OblDopNaprezStyk;
+    procedure NaprPrzyPrzeciaz;
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
+    function HBnaHRC(intTwardoscWHB:  Integer): Double;
+    function HBnaHV(intTwardoscWHB:  Integer): Double;
     { Private declarations }
   public
     { Public declarations }
@@ -252,6 +263,18 @@ begin
   {Wspo³czynnik trwa³oœæi pracy}
   WspolczynnikTrwalosciPracy;
 
+  {Naprê¿enia krytyczne przy bazowej liczbie cykli}
+  NaprezeniaKrytyczne;
+
+  {Dopuszczalne naprê¿enia stykowe}
+  DopNaprezStyk;
+
+  {Obliczeniowe dopuszczalne naprê¿enia stykowe}
+  OblDopNaprezStyk;
+
+  {Graniczne naprê¿enia dopuszczalne przy przeci¹¿eniach}
+  NaprPrzyPrzeciaz;
+
 end;
 
 {$Region 'Ogolna'}
@@ -292,6 +315,18 @@ begin
   while douWejscie>tabDane[0,I+1] do i:=i+1; //Sukamy przedzia³u zawieraj¹cego nasz argument
   Result:=tabDane[1,I] + (tabDane[1,I+1] - tabDane[1,I]) * (douWejscie - tabDane[0,I]) / (tabDane[0,I+1] - tabDane[0,I]);
   // Zwraca wartoœæ aproksymacji liniowej obliczonej na podstawie 2 skrajnych punktów przedzia³u
+end;
+
+function TfrmMain.HBnaHRC(intTwardoscWHB: Integer): Double;
+//Przelicza twardosc z HB na HRC wg wykresu
+begin
+  Result:=  AproksymacjaLiniowa('HBnaHRC.ini', intTwardoscWHB);
+end;
+
+function TfrmMain.HBnaHV(intTwardoscWHB: Integer): Double;
+//Przelicza twardosc z HB na HRC wg wykresu
+begin
+  Result:=  AproksymacjaLiniowa('HBnaHV.ini', intTwardoscWHB);
 end;
 
 {$ENDREGION}
@@ -393,37 +428,137 @@ end;
 
 procedure TfrmMain.WspolczynnikTrwalosciPracy;
 begin
-  //Obliczenia dla zêbnika
+//Obliczenia dla zêbnika
    if edtPodProbZmeczZebnika.AsInteger>edtRownowaznaZebnik.AsDouble then
     edtWspolTrwalosciPracyZebnik.AsDouble:=RoundTo(Power(edtPodProbZmeczZebnika.AsInteger/edtRownowaznaZebnik.AsDouble,1/6),-2)
    else
     edtWspolTrwalosciPracyZebnik.AsDouble:=RoundTo(Power(edtPodProbZmeczZebnika.AsInteger/edtRownowaznaZebnik.AsDouble,1/20),-2);
-  //Obliczenia dla ko³a zêbatego
+
+//Obliczenia dla ko³a zêbatego
   if edtPodProbZmeczKola.AsInteger>edtRownowaznaKolo.AsDouble then
     edtWspolTrwalosciPracyKolo.AsDouble:=RoundTo(Power(edtPodProbZmeczKola.AsInteger/edtRownowaznaKolo.AsDouble,1/6),-2)
   else
     edtWspolTrwalosciPracyKolo.AsDouble:=RoundTo(Power(edtPodProbZmeczKola.AsInteger/edtRownowaznaKolo.AsDouble,1/20),-2)
 end;
 
-//To ni¿ej jest do poprawki
-function TfrmMain.NaprezeniaKrytyczne(intTwardosc: Integer; strObrobkaCieplna: String): Double;
+procedure TfrmMain.NaprezeniaKrytyczne;
 var
-  intTypObrobki: Integer;
-  douTwardoscHRC: Double;
+  intObrobkaIndeks1, intObrobkaIndeks2: Integer;
+  iniDane: TIniFile;
 begin
-  intTypObrobki:= strtoint(Copy(strObrobkaCieplna,1,1));
-  if ((intTypObrobki>1) and (intTypObrobki<5)) then  //przelicza z HB na HRC
-  begin
+  //Wczytanie indeksu obrobki cieplnej
+  iniDane:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+  intObrobkaIndeks1:= iniDane.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'ObrobkaIndeks',-1);
+  intObrobkaIndeks2:= iniDane.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'ObrobkaIndeks',-1);
+  iniDane.Free;
+
+  //Obliczenia dla zêbnika
+  case intObrobkaIndeks1 of
+    -1 :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1 :  edtNapreKrytyczneZebnik.AsDouble:= 2*edtTwardosc1.AsInteger+70;
+     2 :  edtNapreKrytyczneZebnik.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc1.AsInteger)+200,-2);
+     3 :  edtNapreKrytyczneZebnik.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc1.AsInteger)+200,-2);
+     4 :  edtNapreKrytyczneZebnik.AsDouble:= RoundTo(23*HBnaHRC(edtTwardosc1.AsInteger),-2);
+     5 :  edtNapreKrytyczneZebnik.AsDouble:= 1050;
+  end;
+
+  //Obliczenia dla ko³a zêbatego
+   case intObrobkaIndeks2 of
+    -1 :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1 :  edtNapreKrytyczneKolo.AsDouble:= 2*edtTwardosc2.AsInteger+70;
+     2 :  edtNapreKrytyczneKolo.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc2.AsInteger)+200,-2);
+     3 :  edtNapreKrytyczneKolo.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc2.AsInteger)+200,-2);
+     4 :  edtNapreKrytyczneKolo.AsDouble:= RoundTo(23*HBnaHRC(edtTwardosc2.AsInteger),-2);
+     5 :  edtNapreKrytyczneKolo.AsDouble:= 1050;
   end;
 end;
 
+procedure TfrmMain.DopNaprezStyk;
+begin
+  //Obliczenia dla zebnika
+  edtDopNapreStykZebnik.AsDouble:= RoundTo(0.9*edtNapreKrytyczneZebnik.AsDouble*
+    edtWspolTrwalosciPracyZebnik.AsDouble/StrToFloat(cbxShZebnik.text),-2);
+  //Obliczenia dla ko³a zêbatego
+  edtDopNapreStykKolo.AsDouble:= RoundTo(0.9*edtNapreKrytyczneKolo.AsDouble*
+    edtWspolTrwalosciPracyKolo.AsDouble/StrToFloat(cbxShKolo.text),-2);
+end;
 
+procedure TfrmMain.cbxShChange(Sender: TObject);
+begin
+   DopNaprezStyk;
+   OblDopNaprezStyk;
+end;
 
+procedure TfrmMain.OblDopNaprezStyk;
+var
+  douMinDopNapreStyk: Double;
+begin
+  //Oblicza wartoœæ Obliczeniowych dopuszcalnych napre¿eñ stykowych i wpisuje do Edita
+  edtOblDopNapreStyk.AsDouble:=RoundTo(0.45*(edtDopNapreStykZebnik.AsDouble+edtDopNapreStykKolo.AsDouble),-2);
+  //Sprawdzamy które napre¿enia stykowe s¹ mniejsze
+  if edtDopNapreStykZebnik.AsDouble > edtDopNapreStykKolo.AsDouble then
+    douMinDopNapreStyk:= edtDopNapreStykKolo.AsDouble
+  else douMinDopNapreStyk:= edtDopNapreStykZebnik.AsDouble;
+  //Sprawdza czy zosta³ spe³niowny warunek
+  if edtOblDopNapreStyk.AsDouble> 1.15* douMinDopNapreStyk then //Przekroczone napre¿enia, potrzeba poprawek
+    begin
+      btnDalej2.Enabled:=false;
+      lblOstrze¿enie2_1.Visible:=true;
+    end
+  else
+    begin
+      btnDalej2.Enabled:=true;
+      lblOstrze¿enie2_1.Visible:=false;
+    end;
 
+end;
 
+procedure TfrmMain.NaprPrzyPrzeciaz;
+var
+  intObrobkaIndeks1, intObrobkaIndeks2: Integer;
+  iniDane: TIniFile;
+begin
+  //Wczytanie indeksu obrobki cieplnej
+  iniDane:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+  intObrobkaIndeks1:= iniDane.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'ObrobkaIndeks',-1);
+  intObrobkaIndeks2:= iniDane.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'ObrobkaIndeks',-1);
+  iniDane.Free;
 
+  //Obliczenia napre¿en stykowych dla zêbnika
+  case intObrobkaIndeks1 of
+    -1   :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1,2 :  edtMaxNaprStykZebnik.AsDouble:= RoundTo(2.8*edtRe1.AsInteger,-2);
+     3,4 :  edtMaxNaprStykZebnik.AsDouble:= RoundTo(44*HBnaHRC(edtTwardosc1.AsInteger),-2);
+     5   :  edtMaxNaprStykZebnik.AsDouble:= RoundTo(3*HBnaHV(edtTwardosc1.AsInteger),-2);
+  end;
 
+  //Obliczenia napre¿en stykowych dla ko³a
+  case intObrobkaIndeks2 of
+    -1   :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1,2 :  edtMaxNaprStykKolo.AsDouble:= RoundTo(2.8*edtRe2.AsInteger,-2);
+     3,4 :  edtMaxNaprStykKolo.AsDouble:= RoundTo(44*HBnaHRC(edtTwardosc2.AsInteger),-2);
+     5   :  edtMaxNaprStykKolo.AsDouble:= RoundTo(3*HBnaHV(edtTwardosc2.AsInteger),-2);
+  end;
 
+  //Obliczenia napre¿en gn¹cych dla zêbnika
+  case intObrobkaIndeks1 of
+    -1   :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1   :  edtMaxNaprGnacZebnik.AsDouble:= RoundTo(3.7*edtTwardosc1.AsInteger,-2);
+     2,3 :  edtMaxNaprGnacZebnik.AsDouble:= 1030;
+     4   :  edtMaxNaprGnacZebnik.AsDouble:= 1140;
+     5   :  edtMaxNaprGnacZebnik.AsDouble:= 1030;
+  end;
+
+  //Obliczenia napre¿en gn¹cych dla ko³a
+  case intObrobkaIndeks2 of
+    -1   :  raise Exception.Create('Nie uda³o sie wczytac indeksu materia³u');
+     1   :  edtMaxNaprGnacKolo.AsDouble:= RoundTo(3.7*edtTwardosc2.AsInteger,-2);
+     2,3 :  edtMaxNaprGnacKolo.AsDouble:= 1030;
+     4   :  edtMaxNaprGnacKolo.AsDouble:= 1140;
+     5   :  edtMaxNaprGnacKolo.AsDouble:= 1030;
+  end;
+
+end;
 {$ENDREGION}
 
 {$REGION 'TEdit'}
