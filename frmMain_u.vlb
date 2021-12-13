@@ -403,9 +403,6 @@ Coordinates=1025,348,90,58
 [edtMaxNaprStykKolo]
 Coordinates=10,620,135,58
 
-[cbxZmianaKierunku]
-Coordinates=1205,552,128,58
-
 [lblTwardosc1]
 Coordinates=613,212,90,58
 
@@ -493,9 +490,6 @@ Coordinates=823,10,101,124
 [lblObcOdSilnika]
 Coordinates=543,688,106,58
 
-[lblOstrzeżenie2_1]
-Coordinates=1364,212,118,58
-
 [edtZewnOblSredZebnika]
 Coordinates=1501,144,157,58
 
@@ -554,7 +548,7 @@ Coordinates=746,280,75,58
 Coordinates=716,144,75,58
 
 []
-Coordinates=443,212,55,58
+Coordinates=1364,212,118,58
 
 [lblKa]
 Coordinates=614,280,53,58
@@ -571,4 +565,7 @@ Coordinates=1180,212,44,58
 
 [imgWymiary]
 Coordinates=547,280,57,58
+
+[chbZmianaKierunku]
+Coordinates=1205,552,128,58
 

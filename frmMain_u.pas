@@ -43,7 +43,7 @@ type
     lblZmianaObciazenia: TLabel;
     pnlZmianaKierunku: TPanel;
     lblZmianaKierunku: TLabel;
-    cbxZmianaKierunku: TCheckBox;
+    chbZmianaKierunku: TCheckBox;
     lblOkres1: TLabel;
     lblOkres2: TLabel;
     lblOkres3: TLabel;
@@ -188,7 +188,6 @@ type
     lblMPa2_3: TLabel;
     lblMPa2_4: TLabel;
     lblMPa2_5: TLabel;
-    lblOstrze¿enie2_1: TLabel;
     Button1: TButton;
     tshEtap3: TTabSheet;
     pnlNaglowek3: TPanel;
@@ -273,6 +272,114 @@ type
     lblMM3_10: TLabel;
     edtModulSredni: TEdit;
     updKbe: TUpDown;
+    Label2: TLabel;
+    tshEtap4: TTabSheet;
+    pnlNaglowek4: TPanel;
+    lblNaglowek4: TLabel;
+    lblNaglowke4Tresc: TLabel;
+    pnlSilaObwodowa: TPanel;
+    lblSilaObwodowa: TLabel;
+    lblFT: TLabel;
+    lblN4_1: TLabel;
+    edtSilaObwodowa: TEdit;
+    pnlPredObwodowa: TPanel;
+    lblPredObwodowa: TLabel;
+    lblV: TLabel;
+    lblMS: TLabel;
+    edtPredObwodowa: TEdit;
+    pnlKlasaDokladnosci: TPanel;
+    lblKlasaDokladnosci: TLabel;
+    edtKlasaDokladnosci: TEdit;
+    pnlWspolKHV: TPanel;
+    lblWspolKHV: TLabel;
+    edtKHV: TEdit;
+    lblKHV: TLabel;
+    pnlWspolKHA: TPanel;
+    lblWspolKHA: TLabel;
+    lblKHA: TLabel;
+    edtKHA: TEdit;
+    pnlJedObliczSilaObwodowa: TPanel;
+    lblJedObliczSilaObwodowa: TLabel;
+    edtJedObliczSilaObwodowa: TEdit;
+    pnlWspolZH: TPanel;
+    lblWspolZH: TLabel;
+    edtZH: TEdit;
+    lblWHT: TLabel;
+    lblNMM: TLabel;
+    lblZH: TLabel;
+    pnlWspolZE: TPanel;
+    lblWspolZE: TLabel;
+    lblZE: TLabel;
+    edtZE: TEdit;
+    pnlWspolZEpsilo: TPanel;
+    lblWspolZEpsilo: TLabel;
+    lblZEpsilo: TLabel;
+    edtZEpsilon: TEdit;
+    lblOstrze¿enie2_1: TLabel;
+    lblEpsilonAlpha: TLabel;
+    edtCzolowyWskaznikPrzyporu: TEdit;
+    pnlOblNapreStyk: TPanel;
+    lblOblNapreStyk: TLabel;
+    lblSigmaH: TLabel;
+    edtOblNaprezStyk: TEdit;
+    lblMPa4_1: TLabel;
+    pnlWspolZR: TPanel;
+    lblWspolZR: TLabel;
+    lblRa: TLabel;
+    lblZR: TLabel;
+    edtRa: TEdit;
+    edtZR: TEdit;
+    pnlWspolZV: TPanel;
+    lblWspolZV: TLabel;
+    lblZV: TLabel;
+    edtZV: TEdit;
+    pnlWspolZX: TPanel;
+    lblWspolZX: TLabel;
+    lblZX: TLabel;
+    edtZX: TEdit;
+    pnlNaprezeniaDop: TPanel;
+    lblNaprezeniaDop: TLabel;
+    lblSigmaHPrim1: TLabel;
+    lblMPa4_2: TLabel;
+    edtNaprDopStykSprawdzenie1: TEdit;
+    lblSigmaHPrim2: TLabel;
+    edtNaprDopStykSprawdzenie2: TEdit;
+    lblMPa4_3: TLabel;
+    pnlWarWytrzStykowej: TPanel;
+    lblWarWytrzStykowej: TLabel;
+    lblSigmaH1: TLabel;
+    Label4: TLabel;
+    lblSigmaHmin: TLabel;
+    Label6: TLabel;
+    edtWarOblNaprezStyk: TEdit;
+    edtNaprezStykDop: TEdit;
+    lblWarunek: TLabel;
+    pnlObciazeniePrzekladni: TPanel;
+    lblObciazeniePrzekladni: TLabel;
+    edtObciazeniePrzekladni: TEdit;
+    lblProcent: TLabel;
+    btnDalej4: TButton;
+    lblOstrzezenie4_1: TLabel;
+    lblOstrzezenie4_2: TLabel;
+    tshEtap4_1: TTabSheet;
+    pnlNaglowek4_1: TPanel;
+    lblNaglowek4_1: TLabel;
+    lblNaglowek4_1Tresc: TLabel;
+    pnlKorekta: TPanel;
+    lblModyfikajcaSzerokosci: TLabel;
+    lblNowaJedOblSilaObwodowa: TLabel;
+    lblNowaSzerokoscWienca: TLabel;
+    lblNoweSigmaH: TLabel;
+    lblNiedoobciazenie: TLabel;
+    Label10: TLabel;
+    edtNowaJedObliczSilaObwodowa: TEdit;
+    edtNowaSzerokosciWienca: TEdit;
+    edtNoweOblNaprezStyk: TEdit;
+    Edit4: TEdit;
+    updSzerokosc: TUpDown;
+    Label1: TLabel;
+    Label3: TLabel;
+    btnPrzelicz4_1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -286,6 +393,9 @@ type
     procedure cbxShChange(Sender: TObject);
     procedure btnDalej2Click(Sender: TObject);
     procedure updKbeClick(Sender: TObject; Button: TUDBtnType);
+    procedure btnDalej3Click(Sender: TObject);
+    procedure btnDalej4Click(Sender: TObject);
+    procedure updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
@@ -309,6 +419,20 @@ type
     procedure SredniceZewnetrzne;
     procedure ModulSredni;
     procedure SrednieSrednice;
+    procedure SilaObwodowa;
+    procedure PredObwodowa;
+    procedure KlasaDokladnosci;
+    procedure WspolKHV;
+    procedure JedObliczSilaObwodowa;
+    procedure WspolPrzyporu;
+    procedure ObliczNaprezStykowe;
+    procedure WspolZR;
+    procedure WspolZv;
+    procedure WspolZx;
+    procedure NaprezStykoweSprawdz;
+    procedure WarunekWytrzStykowej;
+    procedure ObciazeniePrzekladni;
+    procedure Uzupelnienie;
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     function HBnaHRC(intTwardoscWHB:  Integer): Double;
     function HBnaHV(intTwardoscWHB:  Integer): Double;
@@ -342,6 +466,7 @@ begin
    pgcMain.TabIndex:=0;
    tshEtap2.TabVisible:= false;
    tshEtap3.TabVisible:= false;
+   tshEtap4.TabVisible:= false;
 end;
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
@@ -421,6 +546,60 @@ begin
 
 end;
 
+procedure TfrmMain.btnDalej3Click(Sender: TObject);  //Przejœcie do Etapu4, obliczenia dla Etap4
+begin
+  tshEtap4.TabVisible:= true;
+  pgcMain.TabIndex:=3;  //Odblokowuje i prze³¹cz na 4 zak³adke
+
+  {Si³a obwodowa w zazêbieniu}
+  SilaObwodowa;
+
+  {Predkoœæ obwodowa kó³}
+  PredObwodowa;
+
+  {Klasa dok³adnoœci}
+  KlasaDokladnosci;
+
+  {Wspo³czynnik miedzyzêbnego obci¹¿enia dynamicznego}
+  WspolKHV;
+
+  {Jednostkowa obliczeniowa si³a obwodowa}
+  JedObliczSilaObwodowa;
+
+  {Wspo³czynnik przyporu}
+  WspolPrzyporu;
+
+  {Obliczeniowe naprê¿enia stykowe}
+  ObliczNaprezStykowe;
+
+  {Wspo³czynnik uwzgledniaj¹cy chropowatoœæ powierzchni roboczej zêbów}
+  WspolZR;
+
+  {Wspo³czynnik uwzglêdniaj¹cy prêdkoœæ obwodow¹}
+  WspolZv;
+
+  {Wspo³czynnik uwzglêdniaj¹cy wymiary kó³ zebatych}
+  WspolZx;
+
+  {Naprê¿enia dopusczalne dla obliczeñ sprawdzajaych}
+  NaprezStykoweSprawdz;
+
+  {Warunek wytrzyma³oœci stykowej zêbów}
+  WarunekWytrzStykowej;
+
+  {Obci¹¿enie przek³adni}
+  ObciazeniePrzekladni;
+end;
+
+procedure TfrmMain.btnDalej4Click(Sender: TObject);
+begin
+  tshEtap4_1.TabVisible:= true;
+  pgcMain.TabIndex:=4;  //Odblokowuje i prze³¹cz na 4_1 zak³adke
+
+  {Uzupe³nienie pierwszego panelu obliczonymi wczesniej wartosciami w celu mo¿liwosci wprowadzenia korekty}
+  Uzupelnienie;
+end;
+
 {$Region 'Ogolna'}
 procedure TfrmMain.btnHelpClick(Sender: TObject);
 {Odpowada za otwarcie helpa na odpowiedniej zak³adce,
@@ -434,8 +613,6 @@ procedure TfrmMain.ShowHint(ASender: TObject); //Procedura przenosz¹ca hinty na 
 begin
   stbPasekStanu.Panels[0].Text:=Application.Hint;
 end;
-
-
 
 function TfrmMain.AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
 {Funkcja wyliczaj¹ca wartosc z "wykresu" na podstawie pliku .ini z punktami i argumetu
@@ -557,7 +734,7 @@ end;
 
 procedure TfrmMain.WspolczynnikZmianyObciarzenia; //Wylicza wspo³czynnik od zmiany obcia¿enia w czasie pracy
 var
-  kHE,O1,O2,O3,t1,t2,t3: Double;
+  O1,O2,O3,t1,t2,t3: Double;
 begin
   O1:=sedObciazenie1.Value/100;
   O2:=sedObciazenie2.Value/100;
@@ -568,14 +745,11 @@ begin
   edtRownowaznaWspol.AsDouble:=RoundTo((Power(O1,3)*t1)+(Power(O2,3)*t2)+(Power(O3,3)*t3),-4);
 end;
 
-
-
 procedure TfrmMain.RownowaznaLiczbaCykli;
 begin
   edtRownowaznaZebnik.AsDouble:=Round(60*edtPredObr1.AsDouble*edtCzasPracy.AsInteger*edtRownowaznaWspol.AsDouble);
   edtRownowaznaKolo.AsDouble:=Round(60*edtPredObr2.AsDouble*edtCzasPracy.AsInteger*edtRownowaznaWspol.AsDouble);
 end;
-
 
 procedure TfrmMain.WspolczynnikTrwalosciPracy;
 begin
@@ -664,6 +838,7 @@ begin
 
 end;
 
+
 procedure TfrmMain.NaprPrzyPrzeciaz;
 var
   intObrobkaIndeks1, intObrobkaIndeks2: Integer;
@@ -712,12 +887,13 @@ begin
 end;
 {$ENDREGION}
 
-{$REGION 'Etap3'}
+{$REGION 'Etap 3'}
 procedure TfrmMain.updKbeClick(Sender: TObject; Button: TUDBtnType); //Zmiana wartosci wspo³czynnika kbe
 begin
   edtKbe.AsDouble:= updKbe.Position*0.01;
   btnDalej2Click(sender);
 end;
+
 
 procedure TfrmMain.WspolKHB; //Wylicza wartoœæ wspolczynnika na podstawie wspo³czynnika kbe i wykresów
 var
@@ -770,49 +946,48 @@ end;
 
 procedure TfrmMain.ModulZewnetrzny; //Oblicza modu³ obwodowy zewnetrzny i zaokr¹gla do wartosci z norm
 var
-tabModulyWgPN: array[0..28] of Double;  //Tablica na znormalizowane wartosci modu³u
-douModul, intMax, intMin: Double;
-intI: Integer;
+  tabModulyWgPN: array[0..28] of Double;  //Tablica na znormalizowane wartosci modu³u
+  douModul, intMax, intMin: Double;
+  intI: Integer;
 begin
-//Uzupe³nienie tablicy
-tabModulyWgPN[0]:=1.0;  tabModulyWgPN[1]:=1.125;
-tabModulyWgPN[2]:=1.25; tabModulyWgPN[3]:=1.375;
-tabModulyWgPN[4]:=1.5;  tabModulyWgPN[5]:=1.75;
-tabModulyWgPN[6]:=2.0;  tabModulyWgPN[7]:=2.25;
-tabModulyWgPN[8]:=2.5;  tabModulyWgPN[9]:=2.75;
-tabModulyWgPN[10]:=3.0; tabModulyWgPN[11]:=3.5;
-tabModulyWgPN[12]:=4.0; tabModulyWgPN[13]:=4.5;
-tabModulyWgPN[14]:=5.0; tabModulyWgPN[15]:=5.5;
-tabModulyWgPN[16]:=6;   tabModulyWgPN[17]:=7.5;
-tabModulyWgPN[18]:=8;   tabModulyWgPN[19]:=9;
-tabModulyWgPN[20]:=10;  tabModulyWgPN[21]:=11;
-tabModulyWgPN[22]:=12;  tabModulyWgPN[23]:=14;
-tabModulyWgPN[24]:=16;  tabModulyWgPN[25]:=18;
-tabModulyWgPN[26]:=20;  tabModulyWgPN[27]:=22;
-tabModulyWgPN[28]:=25;
+  //Uzupe³nienie tablicy
+  tabModulyWgPN[0]:=1.0;  tabModulyWgPN[1]:=1.125;
+  tabModulyWgPN[2]:=1.25; tabModulyWgPN[3]:=1.375;
+  tabModulyWgPN[4]:=1.5;  tabModulyWgPN[5]:=1.75;
+  tabModulyWgPN[6]:=2.0;  tabModulyWgPN[7]:=2.25;
+  tabModulyWgPN[8]:=2.5;  tabModulyWgPN[9]:=2.75;
+  tabModulyWgPN[10]:=3.0; tabModulyWgPN[11]:=3.5;
+  tabModulyWgPN[12]:=4.0; tabModulyWgPN[13]:=4.5;
+  tabModulyWgPN[14]:=5.0; tabModulyWgPN[15]:=5.5;
+  tabModulyWgPN[16]:=6;   tabModulyWgPN[17]:=7.5;
+  tabModulyWgPN[18]:=8;   tabModulyWgPN[19]:=9;
+  tabModulyWgPN[20]:=10;  tabModulyWgPN[21]:=11;
+  tabModulyWgPN[22]:=12;  tabModulyWgPN[23]:=14;
+  tabModulyWgPN[24]:=16;  tabModulyWgPN[25]:=18;
+  tabModulyWgPN[26]:=20;  tabModulyWgPN[27]:=22;
+  tabModulyWgPN[28]:=25;
 
-//Obliczenie wartosci modu³u
-douModul:= edtZewnOblSredZebnika.AsDouble/17; //17 jest wstepn¹ liczb¹ zêbów
+  //Obliczenie wartosci modu³u
+  douModul:= edtZewnOblSredZebnika.AsDouble/17; //17 jest wstepn¹ liczb¹ zêbów
 
-//Zaokroglenie do wartosci z normy
-intI:=0;
-while douModul>tabModulyWgPN[intI+1] do intI:=intI+1;
-intMin:=douModul- tabModulyWgPN[intI];
-intMax:=tabModulyWgPN[intI+1]- douModul;
-if intMin<intMax then edtModulZewnetrzny.AsDouble:=tabModulyWgPN[intI]
-else edtModulZewnetrzny.AsDouble:=tabModulyWgPN[intI+1];
-
+  //Zaokroglenie do wartosci z normy
+  intI:=0;
+  while douModul>tabModulyWgPN[intI+1] do intI:=intI+1;
+  intMin:=douModul- tabModulyWgPN[intI];
+  intMax:=tabModulyWgPN[intI+1]- douModul;
+  if intMin<intMax then edtModulZewnetrzny.AsDouble:=tabModulyWgPN[intI]
+  else edtModulZewnetrzny.AsDouble:=tabModulyWgPN[intI+1];
 end;
 
 procedure TfrmMain.LiczbaZebow;
 begin
-edtLiczbaZebowZebnik.AsInteger:= Ceil(edtZewnOblSredZebnika.AsDouble/edtModulZewnetrzny.AsDouble);
-edtLiczbaZebowKolo.AsInteger:= Round(edtLiczbaZebowZebnik.AsInteger*StrToFloat(cbxPrzelozenie.Text));
+  edtLiczbaZebowZebnik.AsInteger:= Ceil(edtZewnOblSredZebnika.AsDouble/edtModulZewnetrzny.AsDouble);
+  edtLiczbaZebowKolo.AsInteger:= Round(edtLiczbaZebowZebnik.AsInteger*StrToFloat(cbxPrzelozenie.Text));
 end;
 
 procedure TfrmMain.RzeczywistePrzelozenie;
 begin
-edtPrzelozenieRzecz.AsDouble:=RoundTo(edtLiczbaZebowKolo.AsInteger/edtLiczbaZebowZebnik.AsInteger,-2);
+  edtPrzelozenieRzecz.AsDouble:=RoundTo(edtLiczbaZebowKolo.AsInteger/edtLiczbaZebowZebnik.AsInteger,-2);
 end;
 
 procedure TfrmMain.ZewnTworzaca;
@@ -864,6 +1039,176 @@ procedure TfrmMain.SrednieSrednice;
 begin
   edtSredSredniaZebnik.AsDouble:= RoundTo(edtModulSredni.AsDouble*edtLiczbaZebowZebnik.AsDouble,-2);
   edtSredSredniaKolo.AsDouble:= RoundTo(edtModulSredni.AsDouble*edtLiczbaZebowKolo.AsDouble,-2);
+end;
+
+{$ENDREGION}
+
+{$REGION 'Etap4'}
+procedure TfrmMain.SilaObwodowa;
+begin
+  edtSilaObwodowa.AsDouble:= RoundTo(2*edtMoment1.AsDouble*1000/edtSredSredniaZebnik.AsDouble,-2);
+end;
+
+procedure TfrmMain.PredObwodowa;
+begin
+  edtPredObwodowa.AsDouble:= RoundTo(PI*edtSredSredniaZebnik.AsDouble*edtPredObr1.AsDouble/60000,-2);
+end;
+
+procedure TfrmMain.KlasaDokladnosci;
+begin
+  if edtPredObwodowa.AsDouble<=2 then edtKlasaDokladnosci.AsInteger:= 9
+  else if edtPredObwodowa.AsDouble<=6 then edtKlasaDokladnosci.AsInteger:= 8
+  else if edtPredObwodowa.AsDouble<=10 then edtKlasaDokladnosci.AsInteger:= 7
+  else edtKlasaDokladnosci.AsInteger:= 6;
+end;
+
+procedure TfrmMain.WspolKHV; //Oblicza wspo³czynnik miedzyzêbnego obci¹¿enia dynamicznego
+var
+  intI: Integer; //Indeks okreslany na podstawie predkosci
+  tabPonizej350: array[6..9,0..4] of Double; //Tablica wspo³czynników dla twardosci poni¿ej 350HB
+  tabPowyzej350: array[6..9,0..4] of Double; //Tablica wspo³czynników dla twardosci powy¿ej 350HB
+begin
+  //Tablica poni¿ej 350HB
+  tabPonizej350[6,0]:= 1.03; tabPonizej350[6,1]:= 1.09; tabPonizej350[6,2]:= 1.16; tabPonizej350[6,3]:= 1.25; tabPonizej350[6,4]:= 1.32;
+  tabPonizej350[7,0]:= 1.04; tabPonizej350[7,1]:= 1.12; tabPonizej350[7,2]:= 1.2;  tabPonizej350[7,3]:= 1.32; tabPonizej350[7,4]:= 1.4;
+  tabPonizej350[8,0]:= 1.05; tabPonizej350[8,1]:= 1.15; tabPonizej350[8,2]:= 1.24; tabPonizej350[8,3]:= 1.38; tabPonizej350[8,4]:= 1.48;
+  tabPonizej350[9,0]:= 1.06; tabPonizej350[9,1]:= 1.12; tabPonizej350[9,2]:= 1.28; tabPonizej350[9,3]:= 1.45; tabPonizej350[9,4]:= 1.56;
+
+  //Tablica powy¿ej 350HB
+  tabPowyzej350[6,0]:= 1.02; tabPowyzej350[6,1]:= 1.06; tabPowyzej350[6,2]:= 1.1;  tabPowyzej350[6,3]:= 1.16; tabPowyzej350[6,4]:= 1.2;
+  tabPowyzej350[7,0]:= 1.02; tabPowyzej350[7,1]:= 1.06; tabPowyzej350[7,2]:= 1.12; tabPowyzej350[7,3]:= 1.19; tabPowyzej350[7,4]:= 1.25;
+  tabPowyzej350[8,0]:= 1.03; tabPowyzej350[8,1]:= 1.09; tabPowyzej350[8,2]:= 1.15; tabPowyzej350[8,3]:= 1.24; tabPowyzej350[8,4]:= 1.3;
+  tabPowyzej350[9,0]:= 1.03; tabPowyzej350[9,1]:= 1.09; tabPowyzej350[9,2]:= 1.17; tabPowyzej350[9,3]:= 1.28; tabPowyzej350[9,4]:= 1.35;
+
+  //Okreœlenie drugiego argumentu do tablicy na podstawie prêdkoœci obwodowej
+  if edtPredObwodowa.AsDouble<=1 then intI:= 0
+  else if edtPredObwodowa.AsDouble<=3 then intI:= 1
+  else if edtPredObwodowa.AsDouble<=5 then intI:= 2
+  else if edtPredObwodowa.AsDouble<=8 then intI:= 3
+  else intI:= 4;
+
+  if edtTwardosc2.AsInteger<=350 then edtKHV.AsDouble:= tabPonizej350[edtKlasaDokladnosci.AsInteger,intI]
+  else edtKHV.AsDouble:= tabPowyzej350[edtKlasaDokladnosci.AsInteger,intI];
+end;
+
+procedure TfrmMain.WspolPrzyporu;
+begin
+  edtCzolowyWskaznikPrzyporu.AsDouble:= RoundTo(1.88-3.2*(1/edtLiczbaZebowZebnik.AsInteger+ 1/edtLiczbaZebowKolo.AsInteger),-2);
+  edtZEpsilon.AsDouble:= RoundTo(Power((4- edtCzolowyWskaznikPrzyporu.AsDouble)/3,1/2),-2);
+end;
+
+procedure TfrmMain.JedObliczSilaObwodowa;
+begin
+  edtJedObliczSilaObwodowa.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKhb.AsDouble*edtKHV.AsDouble*edtKHA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsDouble,-3);
+end;
+
+procedure TfrmMain.ObliczNaprezStykowe;
+begin
+  edtOblNaprezStyk.AsDouble:= RoundTo(edtZH.AsDouble*edtZE.AsDouble*edtZEpsilon.AsDouble*
+   Sqrt((edtJedObliczSilaObwodowa.AsDouble*Sqrt(Sqr(StrToFloat(cbxPrzelozenie.Text))+1))
+   /(0.85*edtSredSredniaZebnik.AsDouble*StrToFloat(cbxPrzelozenie.Text))),-2);
+end;
+
+procedure TfrmMain.WspolZR;
+begin
+  if (edtKlasaDokladnosci.AsInteger= 6 or 7) then
+  begin
+     edtRa.Text:= '0,8 - 1,6';
+     edtZR.AsDouble:= 1.00;
+  end
+  else if edtKlasaDokladnosci.AsInteger= 8 then
+  begin
+     edtRa.Text:= '1,6 - 3,2';
+     edtZR.AsDouble:= 0.95;
+  end
+  else if edtKlasaDokladnosci.AsInteger= 9 then
+  begin
+     edtRa.Text:= '3,2 - 6,3';
+     edtZR.AsDouble:= 0.90;
+  end
+end;
+
+procedure TfrmMain.WspolZv;
+var
+douCzv: Double;
+begin
+  if edtPredObwodowa.AsDouble<=4 then edtZV.AsDouble:=1
+  else if edtPredObwodowa.AsDouble<22 then //Na wykresie podana by³a wartoœæ wspo³czynnika tylko do wartosci 22
+  begin
+    if edtTwardosc2.AsInteger<=350 then edtZV.AsDouble:= RoundTo(AproksymacjaLiniowa('Zv_a.ini',edtPredObwodowa.AsDouble),-3)
+    else edtZV.AsDouble:= RoundTo(AproksymacjaLiniowa('Zv_b.ini',edtPredObwodowa.AsDouble),-3);
+  end
+  else
+  begin
+    douCzv:= 0.85+ (edtNapreKrytyczneKolo.AsDouble-850)/350*0.08;
+    edtZV.AsDouble:= RoundTo(douCzv+ (2*(1-douCzv)/sqrt(0.8+32/edtPredObwodowa.AsDouble)),-3);
+  end;
+
+
+end;
+
+procedure TfrmMain.WspolZx;
+begin
+  if edtSredPodzialowaKolo.AsDouble<700 then edtZX.AsDouble:=1
+  else edtZX.AsDouble:= RoundTo(AproksymacjaLiniowa('Zx.ini',edtSredPodzialowaKolo.AsDouble),-3);
+
+end;
+
+procedure TfrmMain.NaprezStykoweSprawdz;
+begin
+//Napre¿enia dla zêbnika
+ edtNaprDopStykSprawdzenie1.AsDouble:= RoundTo(edtNapreKrytyczneZebnik.AsDouble*edtWspolTrwalosciPracyZebnik.AsDouble*
+  edtZR.AsDouble*edtZV.AsDouble*edtZX.AsDouble/StrToFloat(cbxShZebnik.Text),-3);
+//Naprezenia dla ko³a zêbatego
+ edtNaprDopStykSprawdzenie2.AsDouble:= RoundTo(edtNapreKrytyczneKolo.AsDouble*edtWspolTrwalosciPracyKolo.AsDouble*
+  edtZR.AsDouble*edtZV.AsDouble*edtZX.AsDouble/StrToFloat(cbxShKolo.Text),-3);
+end;
+
+procedure TfrmMain.WarunekWytrzStykowej;
+begin
+  edtWarOblNaprezStyk.AsDouble:= edtOblNaprezStyk.AsDouble;
+  //Do warunku przyjmuje sie ni¿sze napre¿enia dopuszczalne
+  if edtNaprDopStykSprawdzenie1.AsDouble<edtNaprDopStykSprawdzenie2.AsDouble
+    then edtNaprezStykDop.AsDouble:= edtNaprDopStykSprawdzenie1.AsDouble
+  else edtNaprezStykDop.AsDouble:= edtNaprDopStykSprawdzenie2.AsDouble;
+
+  //Sprawdzenie czy warunek zosta³ spe³niony
+  if edtWarOblNaprezStyk.AsDouble>= edtNaprezStykDop.AsDouble then
+  begin
+    lblOstrzezenie4_2.Visible:=True;
+    btnDalej4.Enabled:=False;
+  end
+  else
+  begin
+    lblOstrzezenie4_2.Visible:=False;
+    btnDalej4.Enabled:=True;
+  end;
+
+end;
+
+procedure TfrmMain.ObciazeniePrzekladni;
+var
+douNiedoobciazenie: Double;
+begin
+  douNiedoobciazenie:= RoundTo(Abs(edtWarOblNaprezStyk.AsDouble- edtNaprezStykDop.AsDouble)*100/edtNaprezStykDop.AsDouble,-2);
+  edtObciazeniePrzekladni.AsDouble:= 100- douNiedoobciazenie;
+  if douNiedoobciazenie>5 then lblOstrzezenie4_1.Visible:=True
+  else lblOstrzezenie4_1.Visible:=True;
+end;
+{$ENDREGION}
+
+{$REGION 'Etap4.1'}
+procedure TfrmMain.Uzupelnienie;
+begin
+ updSzerokosc.Position:= edtSzerokoscWienca.AsInteger;
+ edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
+ edtNowaJedObliczSilaObwodowa.AsDouble:= edtJedObliczSilaObwodowa.AsDouble;
+ edtNoweOblNaprezStyk.AsDouble:= edtOblNaprezStyk.AsDouble;
+end;
+
+procedure TfrmMain.updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
+begin
+  edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
 end;
 
 {$ENDREGION}

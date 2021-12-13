@@ -26,18 +26,30 @@ object frmPomoc: TfrmPomoc
   object btnPoprzedni: TButton
     Left = 8
     Top = 410
-    Width = 150
+    Width = 65
     Height = 25
-    Caption = 'Poprzednia zak'#322'adka'
+    Caption = #9668
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnClick = btnPoprzedniClick
   end
   object btnNastepna: TButton
-    Left = 243
+    Left = 79
     Top = 410
-    Width = 150
+    Width = 65
     Height = 25
-    Caption = 'Nast'#281'pna zak'#322'adka'
+    Caption = #9658
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     OnClick = btnNastepnaClick
   end
