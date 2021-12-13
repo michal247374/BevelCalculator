@@ -8,7 +8,7 @@ type
   // od teraz TEdit bêd¹ wspiera³y wprowadzanie danych liczbowych. Typ danych liczbowych okreœlany jest za pomoc¹ pola Tag.
   // Tag = 1 pozwala na wprowadzanie liczb ca³kowitych, a Tag = 2 liczb zmiennoprzecinkowych.
   TEdit =  class(Vcl.StdCtrls.TEdit)
-  private
+  strict private
     function GetAsInteger: Integer;
     function GetAsDouble: Double;
     procedure SetAsInteger(AValue: Integer);
@@ -361,25 +361,8 @@ type
     btnDalej4: TButton;
     lblOstrzezenie4_1: TLabel;
     lblOstrzezenie4_2: TLabel;
-    tshEtap4_1: TTabSheet;
-    pnlNaglowek4_1: TPanel;
-    lblNaglowek4_1: TLabel;
-    lblNaglowek4_1Tresc: TLabel;
-    pnlKorekta: TPanel;
-    lblModyfikajcaSzerokosci: TLabel;
-    lblNowaJedOblSilaObwodowa: TLabel;
-    lblNowaSzerokoscWienca: TLabel;
-    lblNoweSigmaH: TLabel;
-    lblNiedoobciazenie: TLabel;
-    Label10: TLabel;
-    edtNowaJedObliczSilaObwodowa: TEdit;
-    edtNowaSzerokosciWienca: TEdit;
-    edtNoweOblNaprezStyk: TEdit;
-    Edit4: TEdit;
-    updSzerokosc: TUpDown;
-    Label1: TLabel;
-    Label3: TLabel;
-    btnPrzelicz4_1: TButton;
+    edtNowaSzerokoscWienca: TEdit;
+    updNowaSzerokoscWienca: TUpDown;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -395,7 +378,11 @@ type
     procedure updKbeClick(Sender: TObject; Button: TUDBtnType);
     procedure btnDalej3Click(Sender: TObject);
     procedure btnDalej4Click(Sender: TObject);
-    procedure updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
+    //procedure updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edtMocKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure SpinEdit1Change(Sender: TObject);
+    procedure updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
@@ -432,7 +419,8 @@ type
     procedure NaprezStykoweSprawdz;
     procedure WarunekWytrzStykowej;
     procedure ObciazeniePrzekladni;
-    procedure Uzupelnienie;
+    //procedure Uzupelnienie;
+    procedure ObliczeniaEtap2(b: Integer=0);
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     function HBnaHRC(intTwardoscWHB:  Integer): Double;
     function HBnaHV(intTwardoscWHB:  Integer): Double;
@@ -467,6 +455,12 @@ begin
    tshEtap2.TabVisible:= false;
    tshEtap3.TabVisible:= false;
    tshEtap4.TabVisible:= false;
+end;
+
+procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+//
 end;
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
@@ -505,45 +499,45 @@ procedure TfrmMain.btnDalej2Click(Sender: TObject); //Przejœcie do Etapu3, oblic
 begin
   tshEtap3.TabVisible:= true;
   pgcMain.TabIndex:=2;  //Odblokowuje i prze³¹cz na 3 zak³adke
-
-  {Zewnetrzna obliczeniowa œrednica zêbnika:}
-  {Wspo³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzd³u¿ lini styku kHB}
-  WspolKHB;
-  {Wspo³czynnik uwzglêdniaj¹cy zewnetrzne obci¹zenie dynamiczne}
-  WspolKA;
-  {Œrednica}
-  ZewnOblSredZebnika;
-
-  {Modu³ obwodowy zewnetrzny}
-  ModulZewnetrzny;
-
-  {Liczby zêbów}
-  LiczbaZebow;
-
-  {Rzeczywiste prze³o¿enie}
-  RzeczywistePrzelozenie;
-
-  {D³ugoœæ zewnetrzna tworz¹cej ko³a sto¿kowego}
-  ZewnTworzaca;
-
-  {Szerokoœæ wieñca kó³ zêbatych}
-  SzerokoscWienca;
-
-  {D³ugoœæ œrednia tworz¹cej ko³a sto¿kowego}
-  SredniaTworzaca;
-
-  {K¹ty sto¿ków podzia³owych}
-  KatyStozkow;
-
-  {Œrednice zewnetrzne kó³ sto¿kowych}
-  SredniceZewnetrzne;
-
-  {Modu³ w œrednim przekroju zêba}
-   ModulSredni;
-
-  {Œrednice œrednie kó³ zêbatych}
-  SrednieSrednice;
-
+  ObliczeniaEtap2;
+//
+//  {Zewnetrzna obliczeniowa œrednica zêbnika:}
+//  {Wspo³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzd³u¿ lini styku kHB}
+//  WspolKHB;
+//  {Wspo³czynnik uwzglêdniaj¹cy zewnetrzne obci¹zenie dynamiczne}
+//  WspolKA;
+//  {Œrednica}
+//  ZewnOblSredZebnika;
+//
+//  {Modu³ obwodowy zewnetrzny}
+//  ModulZewnetrzny;
+//
+//  {Liczby zêbów}
+//  LiczbaZebow;
+//
+//  {Rzeczywiste prze³o¿enie}
+//  RzeczywistePrzelozenie;
+//
+//  {D³ugoœæ zewnetrzna tworz¹cej ko³a sto¿kowego}
+//  ZewnTworzaca;
+//
+//  {Szerokoœæ wieñca kó³ zêbatych}
+//  SzerokoscWienca;
+//
+//  {D³ugoœæ œrednia tworz¹cej ko³a sto¿kowego}
+//  SredniaTworzaca;
+//
+//  {K¹ty sto¿ków podzia³owych}
+//  KatyStozkow;
+//
+//  {Œrednice zewnetrzne kó³ sto¿kowych}
+//  SredniceZewnetrzne;
+//
+//  {Modu³ w œrednim przekroju zêba}
+//   ModulSredni;
+//
+//  {Œrednice œrednie kó³ zêbatych}
+//  SrednieSrednice;
 end;
 
 procedure TfrmMain.btnDalej3Click(Sender: TObject);  //Przejœcie do Etapu4, obliczenia dla Etap4
@@ -597,7 +591,7 @@ begin
   pgcMain.TabIndex:=4;  //Odblokowuje i prze³¹cz na 4_1 zak³adke
 
   {Uzupe³nienie pierwszego panelu obliczonymi wczesniej wartosciami w celu mo¿liwosci wprowadzenia korekty}
-  Uzupelnienie;
+  //Uzupelnienie;
 end;
 
 {$Region 'Ogolna'}
@@ -691,6 +685,12 @@ procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
 begin
   edtPredObr2.AsDouble :=RoundTo(edtPredObr1.AsDouble/strtofloat(cbxPrzelozenie.text),-2);
   edtMoment2.AsDouble :=RoundTo(edtMoment1.AsDouble*strtofloat(cbxPrzelozenie.text),-2);
+end;
+
+procedure TfrmMain.edtMocKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+//
 end;
 
 procedure TfrmMain.edtMoment1Exit(Sender: TObject);
@@ -838,7 +838,6 @@ begin
 
 end;
 
-
 procedure TfrmMain.NaprPrzyPrzeciaz;
 var
   intObrobkaIndeks1, intObrobkaIndeks2: Integer;
@@ -893,7 +892,6 @@ begin
   edtKbe.AsDouble:= updKbe.Position*0.01;
   btnDalej2Click(sender);
 end;
-
 
 procedure TfrmMain.WspolKHB; //Wylicza wartoœæ wspolczynnika na podstawie wspo³czynnika kbe i wykresów
 var
@@ -999,12 +997,15 @@ end;
 
 procedure TfrmMain.SzerokoscWienca;
 begin
-  edtSzerokoscWienca.AsDouble:= Round(edtTworzaca.AsDouble*edtKbe.AsDouble);
+  edtSzerokoscWienca.AsInteger:= Round(edtTworzaca.AsDouble*edtKbe.AsDouble);
+  //Wpisanie wartosc do Editów na Etap4
+  edtNowaSzerokoscWienca.AsInteger:= edtSzerokoscWienca.AsInteger;
+  updNowaSzerokoscWienca.Position:= edtNowaSzerokoscWienca.AsInteger;
 end;
 
 procedure TfrmMain.SredniaTworzaca;
 begin
-  edtSredTworzaca.AsDouble:= edtTworzaca.AsDouble- 0.5* edtSzerokoscWienca.AsDouble;
+  edtSredTworzaca.AsDouble:= edtTworzaca.AsDouble- 0.5* edtSzerokoscWienca.AsInteger;
 end;
 
 procedure TfrmMain.KatyStozkow;
@@ -1041,12 +1042,59 @@ begin
   edtSredSredniaKolo.AsDouble:= RoundTo(edtModulSredni.AsDouble*edtLiczbaZebowKolo.AsDouble,-2);
 end;
 
+procedure TfrmMain.ObliczeniaEtap2(b: Integer); //Wartosc domyslna dla b = 0
+begin
+  {Zewnetrzna obliczeniowa œrednica zêbnika:}
+  {Wspo³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzd³u¿ lini styku kHB}
+  WspolKHB;
+  {Wspo³czynnik uwzglêdniaj¹cy zewnetrzne obci¹zenie dynamiczne}
+  WspolKA;
+  {Œrednica}
+  ZewnOblSredZebnika;
+
+  {Modu³ obwodowy zewnetrzny}
+  ModulZewnetrzny;
+
+  {Liczby zêbów}
+  LiczbaZebow;
+
+  {Rzeczywiste prze³o¿enie}
+  RzeczywistePrzelozenie;
+
+  {D³ugoœæ zewnetrzna tworz¹cej ko³a sto¿kowego}
+  ZewnTworzaca;
+
+  {Szerokoœæ wieñca kó³ zêbatych}
+  if b=0 then SzerokoscWienca
+  else edtSzerokoscWienca.AsInteger:=b;
+
+  {D³ugoœæ œrednia tworz¹cej ko³a sto¿kowego}
+  SredniaTworzaca;
+
+  {K¹ty sto¿ków podzia³owych}
+  KatyStozkow;
+
+  {Œrednice zewnetrzne kó³ sto¿kowych}
+  SredniceZewnetrzne;
+
+  {Modu³ w œrednim przekroju zêba}
+   ModulSredni;
+
+  {Œrednice œrednie kó³ zêbatych}
+  SrednieSrednice;
+end;
 {$ENDREGION}
 
 {$REGION 'Etap4'}
 procedure TfrmMain.SilaObwodowa;
 begin
   edtSilaObwodowa.AsDouble:= RoundTo(2*edtMoment1.AsDouble*1000/edtSredSredniaZebnik.AsDouble,-2);
+end;
+
+procedure TfrmMain.SpinEdit1Change(Sender: TObject);
+begin
+  ObliczeniaEtap2(edtSzerokoscWienca.AsInteger);
+  //btnDalej3Click(Sender);
 end;
 
 procedure TfrmMain.PredObwodowa;
@@ -1099,7 +1147,7 @@ end;
 
 procedure TfrmMain.JedObliczSilaObwodowa;
 begin
-  edtJedObliczSilaObwodowa.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKhb.AsDouble*edtKHV.AsDouble*edtKHA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsDouble,-3);
+  edtJedObliczSilaObwodowa.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKhb.AsDouble*edtKHV.AsDouble*edtKHA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsInteger,-3);
 end;
 
 procedure TfrmMain.ObliczNaprezStykowe;
@@ -1143,8 +1191,6 @@ begin
     douCzv:= 0.85+ (edtNapreKrytyczneKolo.AsDouble-850)/350*0.08;
     edtZV.AsDouble:= RoundTo(douCzv+ (2*(1-douCzv)/sqrt(0.8+32/edtPredObwodowa.AsDouble)),-3);
   end;
-
-
 end;
 
 procedure TfrmMain.WspolZx;
@@ -1195,21 +1241,30 @@ begin
   if douNiedoobciazenie>5 then lblOstrzezenie4_1.Visible:=True
   else lblOstrzezenie4_1.Visible:=True;
 end;
+
+procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject;
+  Button: TUDBtnType);
+begin
+ edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position;
+ ObliczeniaEtap2(edtNowaSzerokoscWienca.AsInteger);
+ btnDalej3Click(Sender);
+end;
+
 {$ENDREGION}
 
 {$REGION 'Etap4.1'}
-procedure TfrmMain.Uzupelnienie;
-begin
- updSzerokosc.Position:= edtSzerokoscWienca.AsInteger;
- edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
- edtNowaJedObliczSilaObwodowa.AsDouble:= edtJedObliczSilaObwodowa.AsDouble;
- edtNoweOblNaprezStyk.AsDouble:= edtOblNaprezStyk.AsDouble;
-end;
-
-procedure TfrmMain.updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
-begin
-  edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
-end;
+//procedure TfrmMain.Uzupelnienie;
+//begin
+// updSzerokosc.Position:= edtSzerokoscWienca.AsInteger;
+// edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
+// edtNowaJedObliczSilaObwodowa.AsDouble:= edtJedObliczSilaObwodowa.AsDouble;
+// edtNoweOblNaprezStyk.AsDouble:= edtOblNaprezStyk.AsDouble;
+//end;
+//
+//procedure TfrmMain.updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
+//begin
+//  edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
+//end;
 
 {$ENDREGION}
 

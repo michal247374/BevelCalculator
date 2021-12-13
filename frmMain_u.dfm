@@ -11,11 +11,13 @@
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   ShowHint = True
   TipMode = tipOpen
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object pgcMain: TPageControl
@@ -26,7 +28,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap4_1
+    ActivePage = tshEtap4
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -181,6 +183,7 @@
           MaxLength = 10
           TabOrder = 1
           Text = '5,0'
+          OnKeyDown = edtMocKeyDown
         end
         object edtMoment1: TEdit
           Tag = 2
@@ -2954,7 +2957,7 @@
           Layout = tlCenter
         end
         object edtSzerokoscWienca: TEdit
-          Tag = 2
+          Tag = 1
           Left = 115
           Top = 26
           Width = 130
@@ -4236,7 +4239,7 @@
         Left = 703
         Top = 282
         Width = 361
-        Height = 137
+        Height = 112
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4282,7 +4285,7 @@
         end
         object lblSigmaHmin: TLabel
           Left = 24
-          Top = 91
+          Top = 73
           Width = 64
           Height = 21
           Alignment = taRightJustify
@@ -4298,7 +4301,7 @@
         end
         object Label6: TLabel
           Left = 261
-          Top = 91
+          Top = 73
           Width = 28
           Height = 20
           AutoSize = False
@@ -4307,7 +4310,7 @@
         end
         object lblWarunek: TLabel
           Left = 169
-          Top = 58
+          Top = 49
           Width = 13
           Height = 23
           Caption = #10877
@@ -4332,7 +4335,7 @@
         object edtNaprezStykDop: TEdit
           Tag = 2
           Left = 113
-          Top = 91
+          Top = 73
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -4343,9 +4346,9 @@
       end
       object pnlObciazeniePrzekladni: TPanel
         Left = 703
-        Top = 425
+        Top = 400
         Width = 361
-        Height = 67
+        Height = 90
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4387,6 +4390,23 @@
           ReadOnly = True
           TabOrder = 0
         end
+        object edtNowaSzerokoscWienca: TEdit
+          Tag = 2
+          Left = 64
+          Top = 54
+          Width = 121
+          Height = 21
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object updNowaSzerokoscWienca: TUpDown
+          Left = 191
+          Top = 53
+          Width = 17
+          Height = 25
+          TabOrder = 2
+          OnClick = updNowaSzerokoscWiencaClick
+        end
       end
       object btnDalej4: TButton
         Left = 949
@@ -4402,203 +4422,6 @@
         ParentFont = False
         TabOrder = 17
         OnClick = btnDalej4Click
-      end
-    end
-    object tshEtap4_1: TTabSheet
-      Caption = 'Etap IV.I'
-      ImageIndex = 4
-      object pnlNaglowek4_1: TPanel
-        Left = 4
-        Top = 3
-        Width = 1060
-        Height = 74
-        BevelOuter = bvNone
-        Color = clSkyBlue
-        ParentBackground = False
-        TabOrder = 0
-        object lblNaglowek4_1: TLabel
-          Left = 8
-          Top = 3
-          Width = 92
-          Height = 23
-          Caption = 'ETAP IV.I'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -19
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblNaglowek4_1Tresc: TLabel
-          Left = 8
-          Top = 30
-          Width = 1041
-          Height = 32
-          AutoSize = False
-          BiDiMode = bdLeftToRight
-          Caption = 'Korekta szeroko'#347'ci z'#281'bnika dla niedoobci'#261#380'onej przek'#322'adni.'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentBiDiMode = False
-          ParentFont = False
-          WordWrap = True
-        end
-      end
-      object pnlKorekta: TPanel
-        Left = 3
-        Top = 83
-        Width = 382
-        Height = 254
-        BevelOuter = bvNone
-        Color = clGradientInactiveCaption
-        ParentBackground = False
-        TabOrder = 1
-        object lblModyfikajcaSzerokosci: TLabel
-          Left = 8
-          Top = 4
-          Width = 228
-          Height = 16
-          Caption = 'MODYFIKACJA SZEROKO'#346'CI WIE'#323'CA'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblNowaJedOblSilaObwodowa: TLabel
-          Left = 114
-          Top = 73
-          Width = 35
-          Height = 21
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'WHt ='
-          Layout = tlCenter
-        end
-        object lblNowaSzerokoscWienca: TLabel
-          Left = 110
-          Top = 34
-          Width = 39
-          Height = 21
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'b ='
-          Layout = tlCenter
-        end
-        object lblNoweSigmaH: TLabel
-          Left = 114
-          Top = 114
-          Width = 35
-          Height = 21
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = #963'H ='
-          Layout = tlCenter
-        end
-        object lblNiedoobciazenie: TLabel
-          Left = -5
-          Top = 157
-          Width = 154
-          Height = 21
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Niedoobci'#261#380'enie przek'#322'adni ='
-          Layout = tlCenter
-        end
-        object Label10: TLabel
-          Left = 320
-          Top = 34
-          Width = 23
-          Height = 20
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'mm'
-          Layout = tlCenter
-        end
-        object Label1: TLabel
-          Left = 306
-          Top = 74
-          Width = 28
-          Height = 20
-          AutoSize = False
-          Caption = 'N/mm'
-          Layout = tlCenter
-        end
-        object Label3: TLabel
-          Left = 306
-          Top = 115
-          Width = 28
-          Height = 20
-          AutoSize = False
-          Caption = 'MPa'
-          Layout = tlCenter
-        end
-        object edtNowaJedObliczSilaObwodowa: TEdit
-          Tag = 2
-          Left = 159
-          Top = 74
-          Width = 130
-          Height = 21
-          Alignment = taRightJustify
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object edtNowaSzerokosciWienca: TEdit
-          Tag = 1
-          Left = 159
-          Top = 34
-          Width = 130
-          Height = 21
-          Alignment = taRightJustify
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object edtNoweOblNaprezStyk: TEdit
-          Tag = 2
-          Left = 159
-          Top = 115
-          Width = 130
-          Height = 21
-          Alignment = taRightJustify
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 2
-        end
-        object Edit4: TEdit
-          Tag = 2
-          Left = 159
-          Top = 157
-          Width = 130
-          Height = 21
-          Alignment = taRightJustify
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 3
-        end
-        object updSzerokosc: TUpDown
-          Left = 295
-          Top = 34
-          Width = 19
-          Height = 21
-          Max = 1000
-          Position = 25
-          TabOrder = 4
-          OnClick = updSzerokoscClick
-        end
-        object btnPrzelicz4_1: TButton
-          Left = 280
-          Top = 192
-          Width = 90
-          Height = 49
-          Caption = 'Oblicz'
-          TabOrder = 5
-        end
       end
     end
   end
