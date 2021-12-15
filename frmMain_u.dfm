@@ -17,7 +17,6 @@
   ShowHint = True
   TipMode = tipOpen
   OnCreate = FormCreate
-  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object pgcMain: TPageControl
@@ -2661,7 +2660,7 @@
           Enabled = False
           ReadOnly = True
           TabOrder = 2
-          Text = '0,25'
+          Text = '0,30'
         end
         object edtKhb: TEdit
           Tag = 2
@@ -2692,7 +2691,7 @@
           Height = 21
           Min = 20
           Max = 30
-          Position = 25
+          Position = 30
           TabOrder = 5
           OnClick = updKbeClick
         end
@@ -3383,27 +3382,9 @@
     object tshEtap4: TTabSheet
       Caption = 'Etap IV'
       ImageIndex = 3
-      object lblOstrzezenie4_1: TLabel
-        Left = 704
-        Top = 498
-        Width = 228
-        Height = 56
-        Alignment = taCenter
-        Caption = 
-          'Przek'#322'adnia niedoobci'#261#380'ona powy'#380'ej 5%. Zalecane jest zmniejszeni' +
-          'e szerokosci wie'#324'ca poprzez zmiane warto'#347'ci wspo'#322'czynnika kbe.'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clHotLight
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Visible = False
-        WordWrap = True
-      end
       object lblOstrzezenie4_2: TLabel
-        Left = 250
-        Top = 569
+        Left = 4
+        Top = 583
         Width = 693
         Height = 16
         Alignment = taRightJustify
@@ -3703,7 +3684,7 @@
         Left = 3
         Top = 496
         Width = 342
-        Height = 67
+        Height = 81
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3919,7 +3900,7 @@
       end
       object pnlOblNapreStyk: TPanel
         Left = 351
-        Top = 327
+        Top = 326
         Width = 346
         Height = 67
         BevelOuter = bvNone
@@ -4050,7 +4031,7 @@
         Left = 351
         Top = 496
         Width = 346
-        Height = 67
+        Height = 81
         Hint = 
           'Wsp'#243#322'czynnik uwzgl'#281'dniaj'#261'cy obwodow'#261' pr'#281'dko'#347#263' k'#243#322' z'#281'batych|Na je' +
           'go warto'#347#263' poza pr'#281'dko'#347'ci'#261' odwodow'#261' wp'#322'ywa r'#243'wnie'#380' twardo'#347#263' mate' +
@@ -4348,7 +4329,7 @@
         Left = 703
         Top = 400
         Width = 361
-        Height = 90
+        Height = 69
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4390,29 +4371,12 @@
           ReadOnly = True
           TabOrder = 0
         end
-        object edtNowaSzerokoscWienca: TEdit
-          Tag = 2
-          Left = 64
-          Top = 54
-          Width = 121
-          Height = 21
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object updNowaSzerokoscWienca: TUpDown
-          Left = 191
-          Top = 53
-          Width = 17
-          Height = 25
-          TabOrder = 2
-          OnClick = updNowaSzerokoscWiencaClick
-        end
       end
       object btnDalej4: TButton
-        Left = 949
-        Top = 498
-        Width = 115
-        Height = 101
+        Left = 964
+        Top = 475
+        Width = 100
+        Height = 124
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4422,6 +4386,86 @@
         ParentFont = False
         TabOrder = 17
         OnClick = btnDalej4Click
+      end
+      object pnlNowaSzerokoscWienca: TPanel
+        Left = 703
+        Top = 475
+        Width = 255
+        Height = 102
+        BevelOuter = bvNone
+        Color = clMenu
+        ParentBackground = False
+        TabOrder = 18
+        object lblNowaSzerokoscWienca: TLabel
+          Left = 8
+          Top = 4
+          Width = 195
+          Height = 16
+          Caption = 'KOREKTA SZEROKO'#346'CI WIE'#323'CA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblOstrzezenie4_1: TLabel
+          Left = 7
+          Top = 62
+          Width = 243
+          Height = 42
+          Alignment = taCenter
+          Caption = 
+            'Przek'#322'adnia niedoobci'#261#380'ona powy'#380'ej 5%. Zalecane jest zmniejszeni' +
+            'e szeroko'#347'ci wie'#324'ca'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHotLight
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+          WordWrap = True
+        end
+        object lblNoweB: TLabel
+          Left = 12
+          Top = 29
+          Width = 39
+          Height = 22
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'b ='
+          Layout = tlCenter
+        end
+        object lblMM4_1: TLabel
+          Left = 207
+          Top = 30
+          Width = 23
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'mm'
+          Layout = tlCenter
+        end
+        object edtNowaSzerokoscWienca: TEdit
+          Tag = 2
+          Left = 60
+          Top = 30
+          Width = 121
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object updNowaSzerokoscWienca: TUpDown
+          Left = 187
+          Top = 30
+          Width = 17
+          Height = 21
+          TabOrder = 1
+          OnClick = updNowaSzerokoscWiencaClick
+        end
       end
     end
   end

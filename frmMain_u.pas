@@ -363,6 +363,10 @@ type
     lblOstrzezenie4_2: TLabel;
     edtNowaSzerokoscWienca: TEdit;
     updNowaSzerokoscWienca: TUpDown;
+    pnlNowaSzerokoscWienca: TPanel;
+    lblNowaSzerokoscWienca: TLabel;
+    lblNoweB: TLabel;
+    lblMM4_1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -378,10 +382,7 @@ type
     procedure updKbeClick(Sender: TObject; Button: TUDBtnType);
     procedure btnDalej3Click(Sender: TObject);
     procedure btnDalej4Click(Sender: TObject);
-    //procedure updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edtMocKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure SpinEdit1Change(Sender: TObject);
     procedure updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
   private
     procedure ShowHint(ASender: TObject);
@@ -419,8 +420,8 @@ type
     procedure NaprezStykoweSprawdz;
     procedure WarunekWytrzStykowej;
     procedure ObciazeniePrzekladni;
-    //procedure Uzupelnienie;
-    procedure ObliczeniaEtap2(b: Integer=0);
+    procedure KorektaSzerokosciWienca(bActive: Boolean);
+    procedure ObliczeniaEtap3(b: Integer=0);
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     function HBnaHRC(intTwardoscWHB:  Integer): Double;
     function HBnaHV(intTwardoscWHB:  Integer): Double;
@@ -457,11 +458,6 @@ begin
    tshEtap4.TabVisible:= false;
 end;
 
-procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-//
-end;
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
 begin
@@ -499,45 +495,7 @@ procedure TfrmMain.btnDalej2Click(Sender: TObject); //Przejœcie do Etapu3, oblic
 begin
   tshEtap3.TabVisible:= true;
   pgcMain.TabIndex:=2;  //Odblokowuje i prze³¹cz na 3 zak³adke
-  ObliczeniaEtap2;
-//
-//  {Zewnetrzna obliczeniowa œrednica zêbnika:}
-//  {Wspo³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzd³u¿ lini styku kHB}
-//  WspolKHB;
-//  {Wspo³czynnik uwzglêdniaj¹cy zewnetrzne obci¹zenie dynamiczne}
-//  WspolKA;
-//  {Œrednica}
-//  ZewnOblSredZebnika;
-//
-//  {Modu³ obwodowy zewnetrzny}
-//  ModulZewnetrzny;
-//
-//  {Liczby zêbów}
-//  LiczbaZebow;
-//
-//  {Rzeczywiste prze³o¿enie}
-//  RzeczywistePrzelozenie;
-//
-//  {D³ugoœæ zewnetrzna tworz¹cej ko³a sto¿kowego}
-//  ZewnTworzaca;
-//
-//  {Szerokoœæ wieñca kó³ zêbatych}
-//  SzerokoscWienca;
-//
-//  {D³ugoœæ œrednia tworz¹cej ko³a sto¿kowego}
-//  SredniaTworzaca;
-//
-//  {K¹ty sto¿ków podzia³owych}
-//  KatyStozkow;
-//
-//  {Œrednice zewnetrzne kó³ sto¿kowych}
-//  SredniceZewnetrzne;
-//
-//  {Modu³ w œrednim przekroju zêba}
-//   ModulSredni;
-//
-//  {Œrednice œrednie kó³ zêbatych}
-//  SrednieSrednice;
+  ObliczeniaEtap3; //Wywo³anie wszytkich procedur zwi¹zanych z obliczeniami i uzupe³nianiem editów
 end;
 
 procedure TfrmMain.btnDalej3Click(Sender: TObject);  //Przejœcie do Etapu4, obliczenia dla Etap4
@@ -587,10 +545,6 @@ end;
 
 procedure TfrmMain.btnDalej4Click(Sender: TObject);
 begin
-  tshEtap4_1.TabVisible:= true;
-  pgcMain.TabIndex:=4;  //Odblokowuje i prze³¹cz na 4_1 zak³adke
-
-  {Uzupe³nienie pierwszego panelu obliczonymi wczesniej wartosciami w celu mo¿liwosci wprowadzenia korekty}
   //Uzupelnienie;
 end;
 
@@ -1042,7 +996,7 @@ begin
   edtSredSredniaKolo.AsDouble:= RoundTo(edtModulSredni.AsDouble*edtLiczbaZebowKolo.AsDouble,-2);
 end;
 
-procedure TfrmMain.ObliczeniaEtap2(b: Integer); //Wartosc domyslna dla b = 0
+procedure TfrmMain.ObliczeniaEtap3(b: Integer); //Wartosc domyslna dla b = 0
 begin
   {Zewnetrzna obliczeniowa œrednica zêbnika:}
   {Wspo³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzd³u¿ lini styku kHB}
@@ -1085,16 +1039,10 @@ begin
 end;
 {$ENDREGION}
 
-{$REGION 'Etap4'}
+{$REGION 'Etap 4'}
 procedure TfrmMain.SilaObwodowa;
 begin
   edtSilaObwodowa.AsDouble:= RoundTo(2*edtMoment1.AsDouble*1000/edtSredSredniaZebnik.AsDouble,-2);
-end;
-
-procedure TfrmMain.SpinEdit1Change(Sender: TObject);
-begin
-  ObliczeniaEtap2(edtSzerokoscWienca.AsInteger);
-  //btnDalej3Click(Sender);
 end;
 
 procedure TfrmMain.PredObwodowa;
@@ -1157,7 +1105,7 @@ begin
    /(0.85*edtSredSredniaZebnik.AsDouble*StrToFloat(cbxPrzelozenie.Text))),-2);
 end;
 
-procedure TfrmMain.WspolZR;
+procedure TfrmMain.WspolZR; //Wspolczynnik od chropowatoœci powierzchni
 begin
   if (edtKlasaDokladnosci.AsInteger= 6 or 7) then
   begin
@@ -1238,33 +1186,49 @@ douNiedoobciazenie: Double;
 begin
   douNiedoobciazenie:= RoundTo(Abs(edtWarOblNaprezStyk.AsDouble- edtNaprezStykDop.AsDouble)*100/edtNaprezStykDop.AsDouble,-2);
   edtObciazeniePrzekladni.AsDouble:= 100- douNiedoobciazenie;
-  if douNiedoobciazenie>5 then lblOstrzezenie4_1.Visible:=True
-  else lblOstrzezenie4_1.Visible:=True;
+  {Je¿eli wartoœcæ niedoobci¹¿enia przekroczy 5% wyswietlany jest komunikat o potrzenje korekcie}
+  if douNiedoobciazenie>5 then KorektaSzerokosciWienca(true)
+  else KorektaSzerokosciWienca(false);
 end;
 
-procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject;
-  Button: TUDBtnType);
+procedure TfrmMain.KorektaSzerokosciWienca(bActive: Boolean);
 begin
- edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position;
- ObliczeniaEtap2(edtNowaSzerokoscWienca.AsInteger);
- btnDalej3Click(Sender);
+  if bActive then //aktywowanie mo¿liwosci wprowadzenia korekty
+  begin
+    lblOstrzezenie4_1.Visible:=True;
+    pnlNowaSzerokoscWienca.Color:= clGradientInactiveCaption;
+    lblNowaSzerokoscWienca.Font.Color:= clWindowText;
+    lblNoweB.Font.Color:= clWindowText;
+    lblMM4_1.Font.Color:= clWindowText;
+    edtNowaSzerokoscWienca.Font.Color:= clWindowText;
+    updNowaSzerokoscWienca.Enabled:= True;
+  end
+  else
+  begin //deaktywowanie mo¿liwosci korekty
+    lblOstrzezenie4_1.Visible:=False;
+    pnlNowaSzerokoscWienca.Color:= clMenu;
+    lblNowaSzerokoscWienca.Font.Color:= clWindowFrame;
+    lblNoweB.Font.Color:= clWindowFrame;
+    lblMM4_1.Font.Color:= clWindowFrame;
+    edtNowaSzerokoscWienca.Font.Color:= clWindowFrame;
+    updNowaSzerokoscWienca.Enabled:= False;
+  end;
+
+end;
+
+
+procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
+begin
+ edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position; //Naciœniêcie przycisku zmienia wartoœæ szerokoœæi wienca
+
+ ObliczeniaEtap3(edtNowaSzerokoscWienca.AsInteger); //Wywo³anie obliczen dla etapu 3 z pominieciem obliczen srednicy wienca
+ btnDalej3Click(Sender); // Wywo³anie obliczen dla etapu 4 przy nowych wartosciach etapu 3
 end;
 
 {$ENDREGION}
 
-{$REGION 'Etap4.1'}
-//procedure TfrmMain.Uzupelnienie;
-//begin
-// updSzerokosc.Position:= edtSzerokoscWienca.AsInteger;
-// edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
-// edtNowaJedObliczSilaObwodowa.AsDouble:= edtJedObliczSilaObwodowa.AsDouble;
-// edtNoweOblNaprezStyk.AsDouble:= edtOblNaprezStyk.AsDouble;
-//end;
-//
-//procedure TfrmMain.updSzerokoscClick(Sender: TObject; Button: TUDBtnType);
-//begin
-//  edtNowaSzerokosciWienca.AsDouble:= updSzerokosc.Position;
-//end;
+{$REGION 'Etap5'}
+//Jeszcze tu cos bedzie
 
 {$ENDREGION}
 
