@@ -27,7 +27,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap4
+    ActivePage = tshEtap5
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -104,9 +104,9 @@
           ParentFont = False
         end
         object lblPredObr1: TLabel
-          Left = 37
+          Left = 8
           Top = 56
-          Width = 157
+          Width = 186
           Height = 21
           Alignment = taRightJustify
           AutoSize = False
@@ -114,9 +114,9 @@
           Layout = tlCenter
         end
         object lblObrMin1: TLabel
-          Left = 350
+          Left = 349
           Top = 56
-          Width = 36
+          Width = 55
           Height = 21
           AutoSize = False
           Caption = 'obr/min'
@@ -133,18 +133,18 @@
           Layout = tlCenter
         end
         object lblKW1: TLabel
-          Left = 350
+          Left = 349
           Top = 26
-          Width = 15
+          Width = 55
           Height = 21
           AutoSize = False
           Caption = 'kW'
           Layout = tlCenter
         end
         object lblMoment1: TLabel
-          Left = 23
+          Left = 8
           Top = 85
-          Width = 171
+          Width = 186
           Height = 21
           Alignment = taRightJustify
           AutoSize = False
@@ -152,9 +152,9 @@
           Layout = tlCenter
         end
         object lblNm1: TLabel
-          Left = 350
-          Top = 85
-          Width = 15
+          Left = 349
+          Top = 83
+          Width = 31
           Height = 21
           AutoSize = False
           Caption = 'Nm'
@@ -182,7 +182,6 @@
           MaxLength = 10
           TabOrder = 1
           Text = '5,0'
-          OnKeyDown = edtMocKeyDown
         end
         object edtMoment1: TEdit
           Tag = 2
@@ -529,12 +528,14 @@
           Layout = tlCenter
         end
         object lblObrobkaCieplna1: TLabel
-          Left = 15
+          Left = 0
           Top = 58
-          Width = 77
+          Width = 92
           Height = 21
           AutoSize = False
+          BiDiMode = bdRightToLeft
           Caption = 'Obr'#243'bka cieplna'
+          ParentBiDiMode = False
           Layout = tlCenter
         end
         object lblTwardosc1: TLabel
@@ -547,24 +548,24 @@
           Layout = tlCenter
         end
         object lblRm1: TLabel
-          Left = 15
+          Left = 0
           Top = 86
-          Width = 158
+          Width = 173
           Height = 21
           AutoSize = False
-          BiDiMode = bdLeftToRight
+          BiDiMode = bdRightToLeft
           Caption = 'Wytrzyma'#322'o'#347#263' na rozci'#261'ganie Rm'
           ParentBiDiMode = False
           Layout = tlCenter
           WordWrap = True
         end
         object lblRe1: TLabel
-          Left = 335
+          Left = 312
           Top = 86
-          Width = 118
+          Width = 141
           Height = 21
           AutoSize = False
-          BiDiMode = bdLeftToRight
+          BiDiMode = bdRightToLeft
           Caption = 'Granica plastyczno'#347'ci Re'
           ParentBiDiMode = False
           Layout = tlCenter
@@ -687,45 +688,54 @@
           ParentFont = False
         end
         object lblPredObr2: TLabel
-          Left = 26
+          Left = 1
           Top = 56
-          Width = 189
-          Height = 21
+          Width = 215
+          Height = 23
+          Alignment = taRightJustify
           AutoSize = False
+          BiDiMode = bdLeftToRight
           Caption = 'Pr'#281'dko'#347#263' obrotowa ko'#322'a z'#281'batego n2 ='
+          ParentBiDiMode = False
           Layout = tlCenter
         end
         object lblObrMin2: TLabel
           Left = 371
           Top = 56
-          Width = 36
+          Width = 62
           Height = 21
           AutoSize = False
           Caption = 'obr/min'
           Layout = tlCenter
         end
         object lblPrzelozenie: TLabel
-          Left = 144
+          Left = 120
           Top = 26
-          Width = 71
+          Width = 95
           Height = 21
+          Alignment = taRightJustify
           AutoSize = False
+          BiDiMode = bdLeftToRight
           Caption = 'Prze'#322'o'#380'enie i ='
+          ParentBiDiMode = False
           Layout = tlCenter
         end
         object lblMoment2: TLabel
-          Left = 45
+          Left = 8
           Top = 85
-          Width = 171
+          Width = 208
           Height = 21
+          Alignment = taRightJustify
           AutoSize = False
+          BiDiMode = bdLeftToRight
           Caption = 'Moment skr'#281'caj'#261'cy na wej'#347'ciu T1 ='
+          ParentBiDiMode = False
           Layout = tlCenter
         end
         object lblNm2: TLabel
           Left = 371
           Top = 85
-          Width = 15
+          Width = 38
           Height = 21
           AutoSize = False
           Caption = 'Nm'
@@ -848,12 +858,14 @@
           Layout = tlCenter
         end
         object lblObrobkaCieplna2: TLabel
-          Left = 15
+          Left = 0
           Top = 58
-          Width = 77
+          Width = 92
           Height = 21
           AutoSize = False
+          BiDiMode = bdRightToLeft
           Caption = 'Obr'#243'bka cieplna'
+          ParentBiDiMode = False
           Layout = tlCenter
         end
         object lblTwardosc2: TLabel
@@ -866,24 +878,24 @@
           Layout = tlCenter
         end
         object lblRm2: TLabel
-          Left = 15
+          Left = 0
           Top = 86
-          Width = 158
+          Width = 173
           Height = 21
           AutoSize = False
-          BiDiMode = bdLeftToRight
+          BiDiMode = bdRightToLeft
           Caption = 'Wytrzyma'#322'o'#347#263' na rozci'#261'ganie Rm'
           ParentBiDiMode = False
           Layout = tlCenter
           WordWrap = True
         end
         object lblRe2: TLabel
-          Left = 335
+          Left = 312
           Top = 86
-          Width = 118
+          Width = 141
           Height = 21
           AutoSize = False
-          BiDiMode = bdLeftToRight
+          BiDiMode = bdRightToLeft
           Caption = 'Granica plastyczno'#347'ci Re'
           ParentBiDiMode = False
           Layout = tlCenter
@@ -1138,9 +1150,9 @@
           Layout = tlCenter
         end
         object lblObcOdMaszyny: TLabel
-          Left = 428
+          Left = 407
           Top = 33
-          Width = 156
+          Width = 177
           Height = 21
           Alignment = taRightJustify
           AutoSize = False
@@ -1602,9 +1614,9 @@
         object lblWspolBezpieczenstwa: TLabel
           Left = 8
           Top = 4
-          Width = 209
+          Width = 217
           Height = 16
-          Caption = 'WSP'#211'CZYNNIK BEZPIECZENSTWA '
+          Caption = 'WSP'#211#321'CZYNNIK BEZPIECZE'#323'STWA '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1636,12 +1648,12 @@
           Left = 120
           Top = 34
           Width = 145
-          Height = 21
+          Height = 22
           Hint = 
             'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
             'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
             'a powierzchniowego, naweglania i azotowania'
-          Style = csDropDownList
+          Style = csOwnerDrawFixed
           ItemIndex = 1
           TabOrder = 0
           Text = '1,1'
@@ -1655,12 +1667,12 @@
           Left = 120
           Top = 68
           Width = 145
-          Height = 21
+          Height = 22
           Hint = 
             'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
             'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
             'a powierzchniowego, naweglania i azotowania'
-          Style = csDropDownList
+          Style = csOwnerDrawFixed
           ItemIndex = 1
           TabOrder = 1
           Text = '1,1'
@@ -1947,7 +1959,7 @@
         Left = 639
         Top = 117
         Width = 426
-        Height = 384
+        Height = 383
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000001A90000
           017F0800000000D62069B500000002624B474400FF878FCCBF0000000774494D
@@ -3399,6 +3411,23 @@
         ParentFont = False
         Visible = False
       end
+      object lblOstrzezenie4_3: TLabel
+        Left = 703
+        Top = 583
+        Width = 225
+        Height = 16
+        Hint = 
+          '|Zalecane jest zwi'#281'kszenie jego warto'#347'ci przed przyst'#261'pieniem do' +
+          ' korekcji szeroko'#347'ci wie'#324'ca'
+        Caption = 'Wspo'#322'czynnik kbe poza zakresem: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+      end
       object pnlNaglowek4: TPanel
         Left = 4
         Top = 3
@@ -3704,7 +3733,7 @@
         end
         object lblWHT: TLabel
           Left = 57
-          Top = 26
+          Top = 31
           Width = 39
           Height = 21
           Alignment = taRightJustify
@@ -3714,7 +3743,7 @@
         end
         object lblNMM: TLabel
           Left = 258
-          Top = 26
+          Top = 31
           Width = 28
           Height = 20
           AutoSize = False
@@ -3724,7 +3753,7 @@
         object edtJedObliczSilaObwodowa: TEdit
           Tag = 2
           Left = 113
-          Top = 26
+          Top = 31
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -4055,7 +4084,7 @@
         end
         object lblZV: TLabel
           Left = 49
-          Top = 26
+          Top = 31
           Width = 39
           Height = 21
           Alignment = taRightJustify
@@ -4066,7 +4095,7 @@
         object edtZV: TEdit
           Tag = 2
           Left = 113
-          Top = 26
+          Top = 31
           Width = 130
           Height = 21
           Alignment = taRightJustify
@@ -4373,9 +4402,9 @@
         end
       end
       object btnDalej4: TButton
-        Left = 964
-        Top = 475
-        Width = 100
+        Left = 968
+        Top = 472
+        Width = 96
         Height = 124
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
@@ -4390,10 +4419,10 @@
       object pnlNowaSzerokoscWienca: TPanel
         Left = 703
         Top = 475
-        Width = 255
+        Width = 259
         Height = 102
         BevelOuter = bvNone
-        Color = clMenu
+        Color = clGradientInactiveCaption
         ParentBackground = False
         TabOrder = 18
         object lblNowaSzerokoscWienca: TLabel
@@ -4410,16 +4439,16 @@
           ParentFont = False
         end
         object lblOstrzezenie4_1: TLabel
-          Left = 7
-          Top = 62
-          Width = 243
-          Height = 42
+          Left = 9
+          Top = 60
+          Width = 247
+          Height = 28
           Alignment = taCenter
           Caption = 
             'Przek'#322'adnia niedoobci'#261#380'ona powy'#380'ej 5%. Zalecane jest zmniejszeni' +
-            'e szeroko'#347'ci wie'#324'ca'
+            'e szeroko'#347'ci wie'#324'ca.'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clHotLight
+          Font.Color = clMaroon
           Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
@@ -4435,6 +4464,14 @@
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'b ='
+          Color = clGrayText
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
           Layout = tlCenter
         end
         object lblMM4_1: TLabel
@@ -4445,6 +4482,12 @@
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'mm'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           Layout = tlCenter
         end
         object edtNowaSzerokoscWienca: TEdit
@@ -4466,6 +4509,1197 @@
           TabOrder = 1
           OnClick = updNowaSzerokoscWiencaClick
         end
+      end
+    end
+    object tshEtap5: TTabSheet
+      Caption = 'Etap V'
+      ImageIndex = 4
+      object lblOstrzezenie5_1: TLabel
+        Left = 3
+        Top = 582
+        Width = 792
+        Height = 16
+        Caption = 
+          'Warunek wytrzyma'#322'o'#347'ci gn'#261'cej z'#281'b'#243'w nie zosta'#322' spe'#322'niony. Nale'#380'y ' +
+          'wprowadzi'#263' poprawki w obliczeniach.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+      end
+      object pnlNaglowek5: TPanel
+        Left = 4
+        Top = 3
+        Width = 1060
+        Height = 74
+        BevelOuter = bvNone
+        Color = clSkyBlue
+        ParentBackground = False
+        TabOrder = 0
+        object lblNaglowek5: TLabel
+          Left = 8
+          Top = 3
+          Width = 68
+          Height = 23
+          Caption = 'ETAP V'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblNaglowek5Tresc: TLabel
+          Left = 8
+          Top = 30
+          Width = 1041
+          Height = 32
+          AutoSize = False
+          BiDiMode = bdLeftToRight
+          Caption = 
+            'Wyliczenie i sprawdzenie gn'#261'cej wytrzyma'#322'o'#347'ci z'#281'b'#243'w. Podczas pra' +
+            'cy przek'#322'adni si'#322'a normalna wywo'#322'uje r'#243'wnie'#380' napr'#281#380'enia zginaj'#261'c' +
+            'e w przekroju z'#281'ba,  s'#261' one zmienne w czasie i przyczyniaja sie ' +
+            'do z'#322'amania zm'#281'czeniowego z'#281'b'#243'w.'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentFont = False
+          WordWrap = True
+        end
+      end
+      object pnlWspolKFV: TPanel
+        Left = 3
+        Top = 83
+        Width = 342
+        Height = 78
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 1
+        object lblWspolKFV: TLabel
+          Left = 8
+          Top = 4
+          Width = 290
+          Height = 32
+          Caption = 'WSP'#211#321'CZYNNIK MI'#280'DZYZ'#280'BNEGO OBCI'#260#379'ENIA DYNAMICZNEGO PRZY ZGINANIU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblKFV: TLabel
+          Left = 49
+          Top = 44
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'kFv ='
+          Layout = tlCenter
+        end
+        object edtKFV: TEdit
+          Tag = 2
+          Left = 113
+          Top = 45
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlEkwiLiczZebow: TPanel
+        Left = 3
+        Top = 448
+        Width = 342
+        Height = 57
+        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 2
+        object lblEkwiLiczZebow: TLabel
+          Left = 8
+          Top = 4
+          Width = 334
+          Height = 16
+          Caption = 'EKWIWALENTNA LICZBA Z'#280'B'#211'W'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblZeq1: TLabel
+          Left = 25
+          Top = 26
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Z1eq ='
+          Layout = tlCenter
+        end
+        object lblZeq2: TLabel
+          Left = 177
+          Top = 26
+          Width = 39
+          Height = 20
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Z2eq ='
+          Layout = tlCenter
+        end
+        object edtZeq1: TEdit
+          Tag = 2
+          Left = 78
+          Top = 26
+          Width = 75
+          Height = 21
+          Hint = 
+            'Wsp'#243#322'czynnik przyporu, uwzgl'#281'dniaj'#261'cy wp'#322'yw czynnej d'#322'ugo'#347'ci lin' +
+            'i styku|'
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtZeq2: TEdit
+          Tag = 2
+          Left = 230
+          Top = 26
+          Width = 75
+          Height = 21
+          Hint = 'Czo'#322'owy wska'#380'nik przyporu'
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlWspolKFB: TPanel
+        Left = 3
+        Top = 167
+        Width = 342
+        Height = 83
+        Hint = 
+          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
+          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 3
+        object lblWspolKFB: TLabel
+          Left = 8
+          Top = 4
+          Width = 317
+          Height = 32
+          Caption = 
+            'WSP'#211#321'CZYNNIK NIER'#211'WNOMIERNO'#346'CI ROZK'#321'ADU OBCI'#260#379'ENIA WZGL'#280'DEM LINI' +
+            ' STYKU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblKFB: TLabel
+          Left = 50
+          Top = 49
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'kF'#946' ='
+          Layout = tlCenter
+        end
+        object edtKFB: TEdit
+          Tag = 2
+          Left = 113
+          Top = 49
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlWspolKFA: TPanel
+        Left = 3
+        Top = 256
+        Width = 342
+        Height = 95
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 4
+        object lblWspolKFA: TLabel
+          Left = 8
+          Top = 4
+          Width = 334
+          Height = 48
+          Caption = 
+            'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY NIER'#211'WNOMIERNO'#346#262' ROZK'#321'ADU OBCI'#260#379'ENIA' +
+            ' MI'#280'DZY PARAMI Z'#280'B'#211'W'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblKFA: TLabel
+          Left = 50
+          Top = 62
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'kF'#55349#57084' ='
+          Layout = tlCenter
+        end
+        object edtKFA: TEdit
+          Tag = 2
+          Left = 113
+          Top = 62
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+          Text = '1,0'
+        end
+      end
+      object pnlJedObwdSilaPrzyZgin: TPanel
+        Left = 3
+        Top = 357
+        Width = 342
+        Height = 85
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 5
+        object lblJedObwdSilaPrzyZgin: TLabel
+          Left = 8
+          Top = 4
+          Width = 317
+          Height = 32
+          Caption = 'JEDNOSTKOWA OBWODOWA SI'#321'A OBLICZENIOWA PRZY ZGINANIU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblWFt: TLabel
+          Left = 57
+          Top = 49
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'WFt ='
+          Layout = tlCenter
+        end
+        object lblNMM5_1: TLabel
+          Left = 258
+          Top = 49
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'N/mm'
+          Layout = tlCenter
+        end
+        object edtJedObwdSilaPrzyZgin: TEdit
+          Tag = 2
+          Left = 113
+          Top = 49
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlWspolYFS: TPanel
+        Left = 3
+        Top = 511
+        Width = 342
+        Height = 65
+        Hint = 
+          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
+          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 6
+        object lblWspolYFS: TLabel
+          Left = 8
+          Top = 4
+          Width = 214
+          Height = 16
+          Caption = 'WSP'#211#321'CZYNNIK KSZTA'#321'TU Z'#280'B'#211'W'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblYFS1: TLabel
+          Left = 25
+          Top = 26
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YFS1 ='
+          Layout = tlCenter
+        end
+        object lblYFS2: TLabel
+          Left = 177
+          Top = 26
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YFS2 ='
+          Layout = tlCenter
+        end
+        object edtYFS1: TEdit
+          Tag = 2
+          Left = 78
+          Top = 26
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtYFS2: TEdit
+          Tag = 2
+          Left = 230
+          Top = 26
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlObliczNaprezGnace: TPanel
+        Left = 351
+        Top = 84
+        Width = 350
+        Height = 65
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 7
+        object lblObliczNaprezGnace: TLabel
+          Left = 8
+          Top = 4
+          Width = 221
+          Height = 16
+          Caption = 'OBLICZENIOWE NAPR'#280#379'ENIA GN'#260'CE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSigmaF1: TLabel
+          Left = 25
+          Top = 26
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F1 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_1: TLabel
+          Left = 310
+          Top = 26
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblSigmaF2: TLabel
+          Left = 173
+          Top = 26
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F2 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object edtOblNaprezGnace1: TEdit
+          Tag = 2
+          Left = 78
+          Top = 26
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtOblNaprezGnace2: TEdit
+          Tag = 2
+          Left = 223
+          Top = 26
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlNaprezKrytyczneZginanie: TPanel
+        Left = 351
+        Top = 155
+        Width = 350
+        Height = 95
+        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 8
+        object lblNaprezKrytyczneZginanie: TLabel
+          Left = 8
+          Top = 4
+          Width = 255
+          Height = 16
+          Caption = 'NAPR'#280#379'ENIA KRYTYCZNE PRZY ZGINANIU'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSigmaFlim1: TLabel
+          Left = 28
+          Top = 29
+          Width = 67
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F lim1 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblSigmaFlim2: TLabel
+          Left = 31
+          Top = 61
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F lim2 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_3: TLabel
+          Left = 268
+          Top = 26
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblMPa5_4: TLabel
+          Left = 268
+          Top = 59
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object edtNaprezKrytyczneZginanie1: TEdit
+          Tag = 2
+          Left = 120
+          Top = 29
+          Width = 130
+          Height = 21
+          Hint = 
+            'Wsp'#243#322'czynnik przyporu, uwzgl'#281'dniaj'#261'cy wp'#322'yw czynnej d'#322'ugo'#347'ci lin' +
+            'i styku|'
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtNaprezKrytyczneZginanie2: TEdit
+          Tag = 2
+          Left = 120
+          Top = 61
+          Width = 130
+          Height = 21
+          Hint = 'Czo'#322'owy wska'#380'nik przyporu'
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlWspolTrwalosc: TPanel
+        Left = 351
+        Top = 256
+        Width = 350
+        Height = 162
+        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 9
+        object lblWspolTrwalosci: TLabel
+          Left = 8
+          Top = 4
+          Width = 180
+          Height = 16
+          Caption = 'WSP'#211#321'CZYNNIK TRWA'#321'O'#346'CI'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblKolo5_1: TLabel
+          Left = 192
+          Top = 20
+          Width = 65
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Ko'#322'o z'#281'bate'
+          Layout = tlCenter
+        end
+        object lblZebnik5_1: TLabel
+          Left = 112
+          Top = 20
+          Width = 38
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Z'#281'bnik'
+          Layout = tlCenter
+        end
+        object lblNFlim: TLabel
+          Left = 7
+          Top = 42
+          Width = 69
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'NF lim ='
+          Layout = tlCenter
+        end
+        object lblNFE: TLabel
+          Left = 7
+          Top = 71
+          Width = 69
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'NFE ='
+          Layout = tlCenter
+        end
+        object lblYN: TLabel
+          Left = 7
+          Top = 129
+          Width = 69
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YN ='
+          Layout = tlCenter
+        end
+        object lblKFE: TLabel
+          Left = 7
+          Top = 102
+          Width = 69
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'kFE ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object edtNFLim1: TEdit
+          Tag = 2
+          Left = 94
+          Top = 43
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtNFLim2: TEdit
+          Tag = 2
+          Left = 190
+          Top = 43
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object edtNFE2: TEdit
+          Tag = 2
+          Left = 190
+          Top = 72
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object edtNFE1: TEdit
+          Tag = 2
+          Left = 94
+          Top = 72
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 3
+        end
+        object edtYN2: TEdit
+          Tag = 2
+          Left = 190
+          Top = 130
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 4
+        end
+        object edtYN1: TEdit
+          Tag = 2
+          Left = 94
+          Top = 130
+          Width = 78
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 5
+        end
+        object edtKFE: TEdit
+          Tag = 2
+          Left = 120
+          Top = 102
+          Width = 130
+          Height = 21
+          Hint = 'Czo'#322'owy wska'#380'nik przyporu'
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 6
+        end
+      end
+      object pnlWspolYA: TPanel
+        Left = 351
+        Top = 424
+        Width = 350
+        Height = 65
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 10
+        object lblWspolYA: TLabel
+          Left = 8
+          Top = 4
+          Width = 346
+          Height = 32
+          Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY KIERUNEK OBROTU '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblYA: TLabel
+          Left = 49
+          Top = 28
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YA ='
+          Layout = tlCenter
+        end
+        object edtYA: TEdit
+          Tag = 2
+          Left = 113
+          Top = 29
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlWspolYR: TPanel
+        Left = 351
+        Top = 495
+        Width = 350
+        Height = 83
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 11
+        object lblWspolYR: TLabel
+          Left = 8
+          Top = 4
+          Width = 329
+          Height = 32
+          Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY CHROPOWATO'#346#262' I OBROBK'#280' CIEPLN'#260' Z'#280'BA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblYR: TLabel
+          Left = 49
+          Top = 46
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YR ='
+          Layout = tlCenter
+        end
+        object edtYR: TEdit
+          Tag = 2
+          Left = 113
+          Top = 47
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object chbSzlifowane: TCheckBox
+          Left = 264
+          Top = 28
+          Width = 73
+          Height = 43
+          Caption = 'Z'#281'by szlifowane'
+          TabOrder = 1
+          WordWrap = True
+        end
+      end
+      object pnlWspolYX: TPanel
+        Left = 707
+        Top = 83
+        Width = 357
+        Height = 95
+        Hint = 
+          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
+          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 12
+        object lblWspolYX: TLabel
+          Left = 8
+          Top = 4
+          Width = 345
+          Height = 32
+          Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY WYMIARY K'#211#321
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblYX1: TLabel
+          Left = 57
+          Top = 29
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YX1 ='
+          Layout = tlCenter
+        end
+        object lblYX2: TLabel
+          Left = 57
+          Top = 61
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'YX2 ='
+          Layout = tlCenter
+        end
+        object edtYX1: TEdit
+          Tag = 2
+          Left = 120
+          Top = 29
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtYX2: TEdit
+          Tag = 2
+          Left = 120
+          Top = 61
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlWspolSF: TPanel
+        Left = 707
+        Top = 184
+        Width = 357
+        Height = 65
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 13
+        object lblWspolSF: TLabel
+          Left = 8
+          Top = 4
+          Width = 213
+          Height = 16
+          Caption = 'WSP'#211#321'CZYNNIK BEZPIECZE'#323'STWA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblSF: TLabel
+          Left = 57
+          Top = 28
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'SF ='
+          Layout = tlCenter
+        end
+        object cbxSF: TComboBox
+          Left = 120
+          Top = 28
+          Width = 130
+          Height = 21
+          ItemIndex = 0
+          TabOrder = 0
+          Text = '1,7'
+          Items.Strings = (
+            '1,7'
+            '1,8'
+            '1,9'
+            '2,0'
+            '2,1'
+            '2,2')
+        end
+      end
+      object pnlWarunekWytrzymGnacy: TPanel
+        Left = 707
+        Top = 375
+        Width = 357
+        Height = 114
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 14
+        object lblWarunekWytrzyGnacy: TLabel
+          Left = 8
+          Top = 4
+          Width = 279
+          Height = 16
+          Caption = 'WARUNEK WYTRZYMA'#321'O'#346'CI GN'#260'CEJ Z'#280'B'#211'W'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblSigmaF: TLabel
+          Left = 49
+          Top = 30
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_7: TLabel
+          Left = 261
+          Top = 31
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblSigmaFP: TLabel
+          Left = 24
+          Top = 78
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963#39'FP ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_8: TLabel
+          Left = 261
+          Top = 78
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblWarunekGnacy: TLabel
+          Left = 169
+          Top = 53
+          Width = 13
+          Height = 23
+          Caption = #10877
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object edtNaprezGnace: TEdit
+          Tag = 2
+          Left = 113
+          Top = 31
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtDopNaprezGnace: TEdit
+          Tag = 2
+          Left = 113
+          Top = 78
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlNaprezDopGnace: TPanel
+        Left = 707
+        Top = 256
+        Width = 357
+        Height = 113
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 15
+        object lblNaprezDopGnace: TLabel
+          Left = 8
+          Top = 4
+          Width = 276
+          Height = 32
+          Caption = 'NAPR'#280#379'ENIA DOPUSZCZALNE DLA OBLICZE'#323' SPRAWDZAJ'#260'CYCH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblSigmaFP1: TLabel
+          Left = 24
+          Top = 42
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963#39'FP1 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_5: TLabel
+          Left = 261
+          Top = 43
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblSigmaFP2: TLabel
+          Left = 16
+          Top = 80
+          Width = 72
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963#39'FP2 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa5_6: TLabel
+          Left = 261
+          Top = 80
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object edtNaprDopGnace1: TEdit
+          Tag = 2
+          Left = 113
+          Top = 42
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtNaprDopGnace2: TEdit
+          Tag = 2
+          Left = 113
+          Top = 80
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object btnDalej5: TButton
+        Left = 968
+        Top = 492
+        Width = 96
+        Height = 107
+        Caption = 'Kolejny Etap'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 16
       end
     end
   end

@@ -367,6 +367,108 @@ type
     lblNowaSzerokoscWienca: TLabel;
     lblNoweB: TLabel;
     lblMM4_1: TLabel;
+    lblOstrzezenie4_3: TLabel;
+    tshEtap5: TTabSheet;
+    pnlNaglowek5: TPanel;
+    lblNaglowek5: TLabel;
+    lblNaglowek5Tresc: TLabel;
+    pnlWspolKFV: TPanel;
+    lblWspolKFV: TLabel;
+    lblKFV: TLabel;
+    edtKFV: TEdit;
+    pnlEkwiLiczZebow: TPanel;
+    lblEkwiLiczZebow: TLabel;
+    lblZeq1: TLabel;
+    lblZeq2: TLabel;
+    edtZeq1: TEdit;
+    edtZeq2: TEdit;
+    pnlWspolKFB: TPanel;
+    lblWspolKFB: TLabel;
+    lblKFB: TLabel;
+    edtKFB: TEdit;
+    pnlWspolKFA: TPanel;
+    lblWspolKFA: TLabel;
+    lblKFA: TLabel;
+    edtKFA: TEdit;
+    pnlJedObwdSilaPrzyZgin: TPanel;
+    lblJedObwdSilaPrzyZgin: TLabel;
+    lblWFt: TLabel;
+    lblNMM5_1: TLabel;
+    edtJedObwdSilaPrzyZgin: TEdit;
+    pnlWspolYFS: TPanel;
+    lblWspolYFS: TLabel;
+    lblYFS1: TLabel;
+    edtYFS1: TEdit;
+    pnlObliczNaprezGnace: TPanel;
+    lblObliczNaprezGnace: TLabel;
+    lblSigmaF1: TLabel;
+    lblMPa5_1: TLabel;
+    edtOblNaprezGnace1: TEdit;
+    edtOblNaprezGnace2: TEdit;
+    lblSigmaF2: TLabel;
+    edtYFS2: TEdit;
+    lblYFS2: TLabel;
+    pnlNaprezKrytyczneZginanie: TPanel;
+    lblNaprezKrytyczneZginanie: TLabel;
+    lblSigmaFlim1: TLabel;
+    lblSigmaFlim2: TLabel;
+    edtNaprezKrytyczneZginanie1: TEdit;
+    edtNaprezKrytyczneZginanie2: TEdit;
+    lblMPa5_3: TLabel;
+    lblMPa5_4: TLabel;
+    pnlWspolTrwalosc: TPanel;
+    lblWspolTrwalosci: TLabel;
+    edtNFLim1: TEdit;
+    edtNFLim2: TEdit;
+    lblKolo5_1: TLabel;
+    lblZebnik5_1: TLabel;
+    lblNFlim: TLabel;
+    edtNFE2: TEdit;
+    edtNFE1: TEdit;
+    lblNFE: TLabel;
+    edtYN2: TEdit;
+    edtYN1: TEdit;
+    lblYN: TLabel;
+    edtKFE: TEdit;
+    lblKFE: TLabel;
+    pnlWspolYA: TPanel;
+    lblWspolYA: TLabel;
+    lblYA: TLabel;
+    edtYA: TEdit;
+    pnlWspolYR: TPanel;
+    lblWspolYR: TLabel;
+    lblYR: TLabel;
+    edtYR: TEdit;
+    chbSzlifowane: TCheckBox;
+    pnlWspolYX: TPanel;
+    lblWspolYX: TLabel;
+    lblYX1: TLabel;
+    lblYX2: TLabel;
+    edtYX1: TEdit;
+    edtYX2: TEdit;
+    pnlWspolSF: TPanel;
+    lblWspolSF: TLabel;
+    lblSF: TLabel;
+    cbxSF: TComboBox;
+    pnlWarunekWytrzymGnacy: TPanel;
+    lblWarunekWytrzyGnacy: TLabel;
+    lblSigmaF: TLabel;
+    lblMPa5_7: TLabel;
+    lblSigmaFP: TLabel;
+    lblMPa5_8: TLabel;
+    lblWarunekGnacy: TLabel;
+    edtNaprezGnace: TEdit;
+    edtDopNaprezGnace: TEdit;
+    pnlNaprezDopGnace: TPanel;
+    lblNaprezDopGnace: TLabel;
+    lblSigmaFP1: TLabel;
+    lblMPa5_5: TLabel;
+    lblSigmaFP2: TLabel;
+    lblMPa5_6: TLabel;
+    edtNaprDopGnace1: TEdit;
+    edtNaprDopGnace2: TEdit;
+    btnDalej5: TButton;
+    lblOstrzezenie5_1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -382,7 +484,6 @@ type
     procedure updKbeClick(Sender: TObject; Button: TUDBtnType);
     procedure btnDalej3Click(Sender: TObject);
     procedure btnDalej4Click(Sender: TObject);
-    procedure edtMocKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
   private
     procedure ShowHint(ASender: TObject);
@@ -457,7 +558,6 @@ begin
    tshEtap3.TabVisible:= false;
    tshEtap4.TabVisible:= false;
 end;
-
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
 begin
@@ -639,12 +739,6 @@ procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
 begin
   edtPredObr2.AsDouble :=RoundTo(edtPredObr1.AsDouble/strtofloat(cbxPrzelozenie.text),-2);
   edtMoment2.AsDouble :=RoundTo(edtMoment1.AsDouble*strtofloat(cbxPrzelozenie.text),-2);
-end;
-
-procedure TfrmMain.edtMocKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-//
 end;
 
 procedure TfrmMain.edtMoment1Exit(Sender: TObject);
@@ -1107,12 +1201,7 @@ end;
 
 procedure TfrmMain.WspolZR; //Wspolczynnik od chropowatoœci powierzchni
 begin
-  if (edtKlasaDokladnosci.AsInteger= 6 or 7) then
-  begin
-     edtRa.Text:= '0,8 - 1,6';
-     edtZR.AsDouble:= 1.00;
-  end
-  else if edtKlasaDokladnosci.AsInteger= 8 then
+  if edtKlasaDokladnosci.AsInteger= 8 then
   begin
      edtRa.Text:= '1,6 - 3,2';
      edtZR.AsDouble:= 0.95;
@@ -1121,6 +1210,11 @@ begin
   begin
      edtRa.Text:= '3,2 - 6,3';
      edtZR.AsDouble:= 0.90;
+  end
+  else
+  begin
+     edtRa.Text:= '0,8 - 1,6';
+     edtZR.AsDouble:= 1.00;
   end
 end;
 
@@ -1192,37 +1286,40 @@ begin
 end;
 
 procedure TfrmMain.KorektaSzerokosciWienca(bActive: Boolean);
+type
+  ELEMENT=(BackgroundColor, TextColor);
+const
+COLORS: Array [ELEMENT] of  array [boolean] of TColor =
+  ((clGradientInactiveCaption,$00DFDFFF),
+  (clWindowText, clMaroon));
 begin
-  if bActive then //aktywowanie mo¿liwosci wprowadzenia korekty
-  begin
-    lblOstrzezenie4_1.Visible:=True;
-    pnlNowaSzerokoscWienca.Color:= clGradientInactiveCaption;
-    lblNowaSzerokoscWienca.Font.Color:= clWindowText;
-    lblNoweB.Font.Color:= clWindowText;
-    lblMM4_1.Font.Color:= clWindowText;
-    edtNowaSzerokoscWienca.Font.Color:= clWindowText;
-    updNowaSzerokoscWienca.Enabled:= True;
-  end
-  else
-  begin //deaktywowanie mo¿liwosci korekty
-    lblOstrzezenie4_1.Visible:=False;
-    pnlNowaSzerokoscWienca.Color:= clMenu;
-    lblNowaSzerokoscWienca.Font.Color:= clWindowFrame;
-    lblNoweB.Font.Color:= clWindowFrame;
-    lblMM4_1.Font.Color:= clWindowFrame;
-    edtNowaSzerokoscWienca.Font.Color:= clWindowFrame;
-    updNowaSzerokoscWienca.Enabled:= False;
-  end;
-
+  lblOstrzezenie4_1.Visible:=bActive;
+  pnlNowaSzerokoscWienca.Color:= COLORS[BackgroundColor,bActive];
+  lblNowaSzerokoscWienca.Font.Color:= COLORS[TextColor,bActive];
+  lblNoweB.Font.Color:= COLORS[TextColor,bActive];
+  lblMM4_1.Font.Color:= COLORS[TextColor,bActive];
+  edtNowaSzerokoscWienca.Font.Color:= COLORS[TextColor,bActive];
+  //updNowaSzerokoscWienca.Enabled:= bActive;
 end;
 
 
+
+
 procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
+var
+  dNoweKbe: Double;
 begin
  edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position; //Naciœniêcie przycisku zmienia wartoœæ szerokoœæi wienca
-
  ObliczeniaEtap3(edtNowaSzerokoscWienca.AsInteger); //Wywo³anie obliczen dla etapu 3 z pominieciem obliczen srednicy wienca
  btnDalej3Click(Sender); // Wywo³anie obliczen dla etapu 4 przy nowych wartosciach etapu 3
+ dNoweKbe:= edtNowaSzerokoscWienca.AsInteger/edtTworzaca.AsDouble;
+ if dNoweKbe<0.2 then
+ begin
+  lblOstrzezenie4_3.Visible:=true;
+  lblOstrzezenie4_3.Caption:='Wspo³czynnik kbe poza zakresem: ' + FloatToStr(RoundTo(dNoweKbe,-3));
+ end
+ else lblOstrzezenie4_3.Visible:= false;
+
 end;
 
 {$ENDREGION}
