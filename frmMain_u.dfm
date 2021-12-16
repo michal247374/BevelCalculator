@@ -3087,6 +3087,20 @@
           ParentFont = False
           Layout = tlCenter
         end
+        object lblStopnie1: TLabel
+          Left = 243
+          Top = 25
+          Width = 23
+          Height = 17
+          Caption = #9675
+        end
+        object lblStopnie2: TLabel
+          Left = 243
+          Top = 57
+          Width = 14
+          Height = 24
+          Caption = #9675
+        end
         object edtKatyZebnik: TEdit
           Tag = 2
           Left = 104
@@ -4517,7 +4531,7 @@
       object lblOstrzezenie5_1: TLabel
         Left = 3
         Top = 582
-        Width = 792
+        Width = 677
         Height = 16
         Caption = 
           'Warunek wytrzyma'#322'o'#347'ci gn'#261'cej z'#281'b'#243'w nie zosta'#322' spe'#322'niony. Nale'#380'y ' +
@@ -4632,7 +4646,7 @@
         object lblEkwiLiczZebow: TLabel
           Left = 8
           Top = 4
-          Width = 334
+          Width = 200
           Height = 16
           Caption = 'EKWIWALENTNA LICZBA Z'#280'B'#211'W'
           Font.Charset = DEFAULT_CHARSET
@@ -4751,7 +4765,7 @@
         object lblWspolKFA: TLabel
           Left = 8
           Top = 4
-          Width = 334
+          Width = 290
           Height = 48
           Caption = 
             'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY NIER'#211'WNOMIERNO'#346#262' ROZK'#321'ADU OBCI'#260#379'ENIA' +
@@ -5195,6 +5209,7 @@
           Enabled = False
           ReadOnly = True
           TabOrder = 0
+          Text = '4000000'
         end
         object edtNFLim2: TEdit
           Tag = 2
@@ -5206,6 +5221,7 @@
           Enabled = False
           ReadOnly = True
           TabOrder = 1
+          Text = '4000000'
         end
         object edtNFE2: TEdit
           Tag = 2
@@ -5276,8 +5292,8 @@
         object lblWspolYA: TLabel
           Left = 8
           Top = 4
-          Width = 346
-          Height = 32
+          Width = 340
+          Height = 16
           Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY KIERUNEK OBROTU '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -5378,8 +5394,8 @@
         object lblWspolYX: TLabel
           Left = 8
           Top = 4
-          Width = 345
-          Height = 32
+          Width = 317
+          Height = 16
           Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY WYMIARY K'#211#321
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText

@@ -469,6 +469,8 @@ type
     edtNaprDopGnace2: TEdit;
     btnDalej5: TButton;
     lblOstrzezenie5_1: TLabel;
+    lblStopnie1: TLabel;
+    lblStopnie2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -523,6 +525,12 @@ type
     procedure ObciazeniePrzekladni;
     procedure KorektaSzerokosciWienca(bActive: Boolean);
     procedure ObliczeniaEtap3(b: Integer=0);
+    procedure WspolKFV;
+    procedure WspolKFB;
+    procedure JedObwdSilaPrzyZgin;
+    procedure EqLiczbaZebow;
+    procedure WspolYFS;
+    procedure ObliczNaprezGnace;
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     function HBnaHRC(intTwardoscWHB:  Integer): Double;
     function HBnaHV(intTwardoscWHB:  Integer): Double;
@@ -557,6 +565,7 @@ begin
    tshEtap2.TabVisible:= false;
    tshEtap3.TabVisible:= false;
    tshEtap4.TabVisible:= false;
+   tshEtap5.TabVisible:= false;
 end;
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, obliczenia dla Etap2
@@ -643,9 +652,29 @@ begin
   ObciazeniePrzekladni;
 end;
 
-procedure TfrmMain.btnDalej4Click(Sender: TObject);
+procedure TfrmMain.btnDalej4Click(Sender: TObject);  //Przejœcie do Etapu5, obliczenia dla Etap5
 begin
-  //Uzupelnienie;
+  tshEtap5.TabVisible:= true;
+  pgcMain.TabIndex:=4;  //Odblokowuje i prze³¹cz na 2 zak³adke
+
+  {Wspó³czynnik miêdzyzêbnego obci¹¿enia dynamicznego przy zginaniu zêba}
+  WspolKFV;
+
+  {Wspó³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzglêdem lini styku}
+  WspolKFB;
+
+  {Jednostkowa obwodowa si³a obliczeniowa przy zginaniu}
+  JedObwdSilaPrzyZgin;
+
+  {Ekwiwalentna licza zêbów}
+  EqLiczbaZebow;
+
+  {Wspo³czynnik kszta³tu zêbów zêbniak i ko³a zebatego}
+  WspolYFS;
+
+  {Oblicza Obliczeniowa naprê¿enia gn¹ce}
+  ObliczNaprezGnace;
+
 end;
 
 {$Region 'Ogolna'}
@@ -1292,7 +1321,10 @@ const
 COLORS: Array [ELEMENT] of  array [boolean] of TColor =
   ((clGradientInactiveCaption,$00DFDFFF),
   (clWindowText, clMaroon));
+var
+  dNoweKbe: Double;
 begin
+  //Zmiana wygl¹du panelu do korekty
   lblOstrzezenie4_1.Visible:=bActive;
   pnlNowaSzerokoscWienca.Color:= COLORS[BackgroundColor,bActive];
   lblNowaSzerokoscWienca.Font.Color:= COLORS[TextColor,bActive];
@@ -1300,32 +1332,88 @@ begin
   lblMM4_1.Font.Color:= COLORS[TextColor,bActive];
   edtNowaSzerokoscWienca.Font.Color:= COLORS[TextColor,bActive];
   //updNowaSzerokoscWienca.Enabled:= bActive;
+
+  //Obliczenia i wyœwietlanie komunikatu o wartoœci wspo³czynnik kbe
+  dNoweKbe:= edtNowaSzerokoscWienca.AsInteger/edtTworzaca.AsDouble;
+  if dNoweKbe<0.2 then
+  begin
+    lblOstrzezenie4_3.Visible:=true;
+    lblOstrzezenie4_3.Caption:='Wspo³czynnik kbe poza zakresem: ' + FloatToStr(RoundTo(dNoweKbe,-3));
+  end
+  else lblOstrzezenie4_3.Visible:= false;
 end;
 
-
-
-
 procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
-var
-  dNoweKbe: Double;
 begin
  edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position; //Naciœniêcie przycisku zmienia wartoœæ szerokoœæi wienca
  ObliczeniaEtap3(edtNowaSzerokoscWienca.AsInteger); //Wywo³anie obliczen dla etapu 3 z pominieciem obliczen srednicy wienca
  btnDalej3Click(Sender); // Wywo³anie obliczen dla etapu 4 przy nowych wartosciach etapu 3
- dNoweKbe:= edtNowaSzerokoscWienca.AsInteger/edtTworzaca.AsDouble;
- if dNoweKbe<0.2 then
- begin
-  lblOstrzezenie4_3.Visible:=true;
-  lblOstrzezenie4_3.Caption:='Wspo³czynnik kbe poza zakresem: ' + FloatToStr(RoundTo(dNoweKbe,-3));
- end
- else lblOstrzezenie4_3.Visible:= false;
-
 end;
 
 {$ENDREGION}
 
-{$REGION 'Etap5'}
-//Jeszcze tu cos bedzie
+{$REGION 'Etap 5'}
+procedure TfrmMain.WspolKFV;  //Oblicza wspo³czynnik miedzyzêbnego obci¹¿enia dynamicznego przy zginaniu
+var
+  intI: Integer; //Indeks okreslany na podstawie predkosci
+  tabPonizej350: array[6..9,0..4] of Double; //Tablica wspo³czynników dla twardosci poni¿ej 350HB
+  tabPowyzej350: array[6..9,0..4] of Double; //Tablica wspo³czynników dla twardosci powy¿ej 350HB
+begin
+  //Tablica poni¿ej 350HB
+  tabPonizej350[6,0]:= 1.06; tabPonizej350[6,1]:= 1.18; tabPonizej350[6,2]:= 1.32; tabPonizej350[6,3]:= 1.50; tabPonizej350[6,4]:= 1.64;
+  tabPonizej350[7,0]:= 1.08; tabPonizej350[7,1]:= 1.24; tabPonizej350[7,2]:= 1.40; tabPonizej350[7,3]:= 1.64; tabPonizej350[7,4]:= 1.80;
+  tabPonizej350[8,0]:= 1.10; tabPonizej350[8,1]:= 1.30; tabPonizej350[8,2]:= 1.48; tabPonizej350[8,3]:= 1.77; tabPonizej350[8,4]:= 1.96;
+  tabPonizej350[9,0]:= 1.11; tabPonizej350[9,1]:= 1.33; tabPonizej350[9,2]:= 1.56; tabPonizej350[9,3]:= 1.90; tabPonizej350[9,4]:= 2.25;
+
+  //Tablica powy¿ej 350HB
+  tabPowyzej350[6,0]:= 1.02; tabPowyzej350[6,1]:= 1.06; tabPowyzej350[6,2]:= 1.1;  tabPowyzej350[6,3]:= 1.16; tabPowyzej350[6,4]:= 1.2;
+  tabPowyzej350[7,0]:= 1.02; tabPowyzej350[7,1]:= 1.06; tabPowyzej350[7,2]:= 1.12; tabPowyzej350[7,3]:= 1.19; tabPowyzej350[7,4]:= 1.25;
+  tabPowyzej350[8,0]:= 1.03; tabPowyzej350[8,1]:= 1.09; tabPowyzej350[8,2]:= 1.15; tabPowyzej350[8,3]:= 1.24; tabPowyzej350[8,4]:= 1.3;
+  tabPowyzej350[9,0]:= 1.03; tabPowyzej350[9,1]:= 1.09; tabPowyzej350[9,2]:= 1.17; tabPowyzej350[9,3]:= 1.28; tabPowyzej350[9,4]:= 1.35;
+
+  //Okreœlenie drugiego argumentu do tablicy na podstawie prêdkoœci obwodowej
+  if edtPredObwodowa.AsDouble<=1 then intI:= 0
+  else if edtPredObwodowa.AsDouble<=3 then intI:= 1
+  else if edtPredObwodowa.AsDouble<=5 then intI:= 2
+  else if edtPredObwodowa.AsDouble<=8 then intI:= 3
+  else intI:= 4;
+
+  if edtTwardosc2.AsInteger<=350 then edtKFV.AsDouble:= tabPonizej350[edtKlasaDokladnosci.AsInteger,intI]
+  else edtKFV.AsDouble:= tabPowyzej350[edtKlasaDokladnosci.AsInteger,intI];
+end;
+
+procedure TfrmMain.WspolKFB; //Oblicza wspó³czynnik nierównomiernoœci rozk³adu obci¹¿enia wzglêdem lini styku
+begin
+  edtKFB.AsDouble:= RoundTo(1+1.5*(edtKhb.AsDouble-1),-3);
+end;
+
+procedure TfrmMain.JedObwdSilaPrzyZgin; //Oblicza jednostkow¹ si³e obliczeniowa przy zginaniu
+begin
+  edtJedObwdSilaPrzyZgin.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKFB.AsDouble*edtKFV.AsDouble*edtKFA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsDouble,-2);
+end;
+
+procedure TfrmMain.EqLiczbaZebow; //Ekwiwalenta liczna zêbów
+begin
+  //Dla zêbnika
+  edtZeq1.AsDouble:= RoundTo(edtLiczbaZebowZebnik.AsDouble/Cos(DegToRad(edtKatyZebnik.AsDouble)),-2);
+  //Dla ko³a zêbatego
+  edtZeq2.AsDouble:= RoundTo(edtLiczbaZebowKolo.AsDouble/Cos(DegToRad(edtKatyKolo.AsDouble)),-2);
+end;
+
+procedure TfrmMain.WspolYFS;  //Oblicza wspo³czynnik kszta³tu zêbów zebnika i ko³a zêbatego
+begin
+  if edtZeq1.AsDouble<17 then edtYFS1.AsDouble:=4.3
+  else edtYFS1.AsDouble:= RoundTo(AproksymacjaLiniowa('YFS.ini',edtZeq1.AsDouble),-2);
+
+  if edtZeq2.AsDouble<17 then edtYFS2.AsDouble:=4.3
+  else edtYFS2.AsDouble:= RoundTo(AproksymacjaLiniowa('YFS.ini',edtZeq2.AsDouble),-2);
+end;
+
+procedure TfrmMain.ObliczNaprezGnace; //Oblicza Obliczeniowa naprê¿enia gn¹ce
+begin
+  edtOblNaprezGnace1.AsDouble:= RoundTo(edtYFS1.AsDouble*edtJedObwdSilaPrzyZgin.AsDouble/(0.85*edtModulSredni.AsDouble),-2);
+  edtOblNaprezGnace2.AsDouble:= RoundTo(edtYFS2.AsDouble*edtJedObwdSilaPrzyZgin.AsDouble/(0.85*edtModulSredni.AsDouble),-2);
+end;
 
 {$ENDREGION}
 
