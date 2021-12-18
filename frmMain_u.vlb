@@ -818,9 +818,6 @@ Coordinates=21,269,81,58
 [lblZR]
 Coordinates=1489,765,49,58
 
-[pnlSilaObwodowa]
-Coordinates=0,0,117,58
-
 [lblWspolZEpsilo]
 Coordinates=1696,540,106,58
 
@@ -907,9 +904,6 @@ Coordinates=278,1117,103,58
 
 [lblSredSrednia]
 Coordinates=1921,309,99,58
-
-[lblSilaObwodowa]
-Coordinates=2374,78,113,58
 
 [lblKatyStozkow]
 Coordinates=1587,852,102,58
@@ -1015,9 +1009,6 @@ Coordinates=2166,463,119,58
 
 [lblSigmaHPrim1]
 Coordinates=2166,694,107,58
-
-[edtSilaObwodowa]
-Coordinates=1410,629,118,58
 
 [pnlDluZewnTworzacej]
 Coordinates=1696,232,141,58
@@ -1344,4 +1335,13 @@ Coordinates=887,1271,60,58
 
 [lblWarunekGnacy]
 Coordinates=818,1271,60,58
+
+[pnlSilaObwodowaWZazeb]
+Coordinates=0,0,117,58
+
+[edtSilaObwodowaWZazeb]
+Coordinates=1410,629,118,58
+
+[lblSilaObwodowaWZazeb]
+Coordinates=2374,78,113,58
 

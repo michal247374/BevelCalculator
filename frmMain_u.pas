@@ -277,11 +277,11 @@ type
     pnlNaglowek4: TPanel;
     lblNaglowek4: TLabel;
     lblNaglowke4Tresc: TLabel;
-    pnlSilaObwodowa: TPanel;
-    lblSilaObwodowa: TLabel;
+    pnlSilaObwodowaWZazeb: TPanel;
+    lblSilaObwodowaWZazeb: TLabel;
     lblFT: TLabel;
     lblN4_1: TLabel;
-    edtSilaObwodowa: TEdit;
+    edtSilaObwodowaWZazeb: TEdit;
     pnlPredObwodowa: TPanel;
     lblPredObwodowa: TLabel;
     lblV: TLabel;
@@ -471,6 +471,63 @@ type
     lblOstrzezenie5_1: TLabel;
     lblStopnie1: TLabel;
     lblStopnie2: TLabel;
+    tshEtap6: TTabSheet;
+    pnlNaprezStykPrzyPrzeciaz: TPanel;
+    lblNaprezStykPrzyPrzeciaz: TLabel;
+    edtNaprezStykPrzyPrzeciaz: TEdit;
+    pnlNaglowek6: TPanel;
+    lblNaglowek6: TLabel;
+    lblNaglowek6Tresc: TLabel;
+    pnlMomentRzecz: TPanel;
+    lblMomentRzecz: TLabel;
+    lblT2RZ: TLabel;
+    edtMomentRzecz: TEdit;
+    pnlSilaObwodowa: TPanel;
+    lblSilyObwodowe: TLabel;
+    lblFt1: TLabel;
+    edtSilaObwodowa1: TEdit;
+    edtNaprezStykMax: TEdit;
+    lblWarunekStykowyPrzeciaz: TLabel;
+    lblSigmaHMax: TLabel;
+    lblSigmaHPMax: TLabel;
+    lblMPa6_1: TLabel;
+    pnlNaprezGnacPrzyPrzeciaz: TPanel;
+    lblNaprezGnacPrzyPrzeciaz: TLabel;
+    lblWarunekGnacyPrzeciaz1: TLabel;
+    lblSigmaFMax1: TLabel;
+    lblSigmaFPmax1: TLabel;
+    lblMPa6_2: TLabel;
+    edtNaprezGnacPrzyPrzeciaz1: TEdit;
+    edtNaprezGnacMax1: TEdit;
+    lblSigmaFMax2: TLabel;
+    edtNaprezGnacPrzyPrzeciaz2: TEdit;
+    lblWarunekGnacyPrzeciaz2: TLabel;
+    lblSigmaFPMax2: TLabel;
+    edtNaprezGnacMax2: TEdit;
+    lblMPa6_3: TLabel;
+    lblNm6_1: TLabel;
+    lblN6_1: TLabel;
+    edtSilaObwodowa2: TEdit;
+    lblN6_2: TLabel;
+    lblFt2: TLabel;
+    pnlSilyPromeniowe: TPanel;
+    lblSilyPromeniowe: TLabel;
+    lblFr1: TLabel;
+    lblN6_3: TLabel;
+    lblN6_4: TLabel;
+    lblFr2: TLabel;
+    edtSilaPromeniowa1: TEdit;
+    edtSilaPromeniowa2: TEdit;
+    pnlSilyPoosiowe: TPanel;
+    lblSilyPoosiowe: TLabel;
+    lblFa1: TLabel;
+    lblN6_5: TLabel;
+    lblN6_6: TLabel;
+    lblFa2: TLabel;
+    edtSilaPoosiowa1: TEdit;
+    edtSilaPoosiowa2: TEdit;
+    lblOstrzezenie6_1: TLabel;
+    lblOstrzezenie6_2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -487,6 +544,9 @@ type
     procedure btnDalej3Click(Sender: TObject);
     procedure btnDalej4Click(Sender: TObject);
     procedure updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
+    procedure chbSzlifowaneClick(Sender: TObject);
+    procedure cbxSFChange(Sender: TObject);
+    procedure btnDalej5Click(Sender: TObject);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
@@ -531,6 +591,19 @@ type
     procedure EqLiczbaZebow;
     procedure WspolYFS;
     procedure ObliczNaprezGnace;
+    procedure NaprezKrytycznePrzyZginaniu;
+    procedure WspolTrwalosci;
+    procedure WspolYA;
+    procedure WspolYR;
+    procedure WspolYX;
+    procedure NaprezGnaceSprawdz;
+    procedure WarunekWytrzGnacej;
+    procedure NaprezStykPrzyPrzeciaz;
+    procedure NaprezGnacePrzyPrzeciaz;
+    procedure MomentRzecz;
+    procedure SilyObwodowe;
+    procedure SilyPromieniowe;
+    procedure SilyPoosiowe;
     function AproksymacjaLiniowa(strNazwaDokumentu: String; douWejscie: Double): Double;
     function HBnaHRC(intTwardoscWHB:  Integer): Double;
     function HBnaHV(intTwardoscWHB:  Integer): Double;
@@ -566,6 +639,7 @@ begin
    tshEtap3.TabVisible:= false;
    tshEtap4.TabVisible:= false;
    tshEtap5.TabVisible:= false;
+   tshEtap6.TabVisible:= false;
 end;
 
 procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejúcie do Etapu2, obliczenia dla Etap2
@@ -655,7 +729,7 @@ end;
 procedure TfrmMain.btnDalej4Click(Sender: TObject);  //Przejúcie do Etapu5, obliczenia dla Etap5
 begin
   tshEtap5.TabVisible:= true;
-  pgcMain.TabIndex:=4;  //Odblokowuje i prze≥πcz na 2 zak≥adke
+  pgcMain.TabIndex:=4;  //Odblokowuje i prze≥πcz na 5 zak≥adke
 
   {WspÛ≥czynnik miÍdzyzÍbnego obciπøenia dynamicznego przy zginaniu zÍba}
   WspolKFV;
@@ -672,8 +746,54 @@ begin
   {Wspo≥czynnik kszta≥tu zÍbÛw zÍbniak i ko≥a zebatego}
   WspolYFS;
 
-  {Oblicza Obliczeniowa naprÍøenia gnπce}
+  {Obliczeniowe naprÍøenia gnπce}
   ObliczNaprezGnace;
+
+  {Napreøenia krytyczne przy zginaniu}
+  NaprezKrytycznePrzyZginaniu;
+
+  {Wspo≥czynnik trwa≥oúci}
+  WspolTrwalosci;
+
+  {Wspo≥czynnik uwzglÍdniajπcy wp≥yw dwustronego przek≥adania obciπøenia na zπb}
+  WspolYA;
+
+  {Wspo≥czynnik uwzglÍdniajπcy chropowatoúÊ powierzchni przejsciowej zÍba i jej obrÛbke cieplnπ}
+  WspolYR;
+
+  {WspÛ≥czynnik uwzglÍdajπcy wymiary kÛ≥}
+  WspolYX;
+
+  {NaprÍøenia dopuszczalne dla obliczeÒ sprawdzajπcych}
+  NaprezGnaceSprawdz;
+
+  {Warunek wytrzyma≥oúci gnπcej zÍbÛw}
+  WarunekWytrzGnacej;
+
+end;
+
+procedure TfrmMain.btnDalej5Click(Sender: TObject); //Przejúcie do Etapu5, obliczenia dla Etap6
+begin
+  tshEtap6.TabVisible:= true;
+  pgcMain.TabIndex:=5;  //Odblokowuje i prze≥πcz na 5 zak≥adke
+
+  {NaprÍøenia stykowe przy przeciπøeniach}
+  NaprezStykPrzyPrzeciaz;
+
+  {NaprÍøenia gnπce przy przeciπøeniach}
+  NaprezGnacePrzyPrzeciaz;
+
+  {Moment rzeczywisty na wyjúciu}
+  MomentRzecz;
+
+  {Si≥y obwodowe}
+  SilyObwodowe;
+
+  {Si≥a promieniowa}
+  SilyPromieniowe;
+
+  {Si≥y poosiowe}
+  SilyPoosiowe;
 
 end;
 
@@ -862,6 +982,7 @@ begin
      3 :  edtNapreKrytyczneZebnik.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc1.AsInteger)+200,-2);
      4 :  edtNapreKrytyczneZebnik.AsDouble:= RoundTo(23*HBnaHRC(edtTwardosc1.AsInteger),-2);
      5 :  edtNapreKrytyczneZebnik.AsDouble:= 1050;
+     else raise Exception.Create('èle zdefiniowana obrÛbka cieplna materia≥u');
   end;
 
   //Obliczenia dla ko≥a zÍbatego
@@ -872,6 +993,7 @@ begin
      3 :  edtNapreKrytyczneKolo.AsDouble:= RoundTo(17*HBnaHRC(edtTwardosc2.AsInteger)+200,-2);
      4 :  edtNapreKrytyczneKolo.AsDouble:= RoundTo(23*HBnaHRC(edtTwardosc2.AsInteger),-2);
      5 :  edtNapreKrytyczneKolo.AsDouble:= 1050;
+     else raise Exception.Create('èle zdefiniowana obrÛbka cieplna materia≥u');
   end;
 end;
 
@@ -1165,7 +1287,7 @@ end;
 {$REGION 'Etap 4'}
 procedure TfrmMain.SilaObwodowa;
 begin
-  edtSilaObwodowa.AsDouble:= RoundTo(2*edtMoment1.AsDouble*1000/edtSredSredniaZebnik.AsDouble,-2);
+  edtSilaObwodowaWZazeb.AsDouble:= RoundTo(2*edtMoment1.AsDouble*1000/edtSredSredniaZebnik.AsDouble,-2);
 end;
 
 procedure TfrmMain.PredObwodowa;
@@ -1218,7 +1340,7 @@ end;
 
 procedure TfrmMain.JedObliczSilaObwodowa;
 begin
-  edtJedObliczSilaObwodowa.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKhb.AsDouble*edtKHV.AsDouble*edtKHA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsInteger,-3);
+  edtJedObliczSilaObwodowa.AsDouble:= RoundTo(edtSilaObwodowaWZazeb.AsDouble*edtKhb.AsDouble*edtKHV.AsDouble*edtKHA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsInteger,-3);
 end;
 
 procedure TfrmMain.ObliczNaprezStykowe;
@@ -1389,7 +1511,7 @@ end;
 
 procedure TfrmMain.JedObwdSilaPrzyZgin; //Oblicza jednostkowπ si≥e obliczeniowa przy zginaniu
 begin
-  edtJedObwdSilaPrzyZgin.AsDouble:= RoundTo(edtSilaObwodowa.AsDouble*edtKFB.AsDouble*edtKFV.AsDouble*edtKFA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsDouble,-2);
+  edtJedObwdSilaPrzyZgin.AsDouble:= RoundTo(edtSilaObwodowaWZazeb.AsDouble*edtKFB.AsDouble*edtKFV.AsDouble*edtKFA.AsDouble*edtKa.AsDouble/edtSzerokoscWienca.AsDouble,-2);
 end;
 
 procedure TfrmMain.EqLiczbaZebow; //Ekwiwalenta liczna zÍbÛw
@@ -1413,6 +1535,191 @@ procedure TfrmMain.ObliczNaprezGnace; //Oblicza Obliczeniowa naprÍøenia gnπce
 begin
   edtOblNaprezGnace1.AsDouble:= RoundTo(edtYFS1.AsDouble*edtJedObwdSilaPrzyZgin.AsDouble/(0.85*edtModulSredni.AsDouble),-2);
   edtOblNaprezGnace2.AsDouble:= RoundTo(edtYFS2.AsDouble*edtJedObwdSilaPrzyZgin.AsDouble/(0.85*edtModulSredni.AsDouble),-2);
+end;
+
+procedure TfrmMain.NaprezKrytycznePrzyZginaniu;  //Okreúla napreøenia krytyczne przy zginaniu na podstawie obÛbki cieplnej materia≥u
+var
+  intObrobkaIndeks1, intObrobkaIndeks2: Integer;
+  iniDane: TIniFile;
+begin
+  //Wczytanie indeksu obrobki cieplnej
+  iniDane:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+  intObrobkaIndeks1:= iniDane.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'ObrobkaIndeks',-1);
+  intObrobkaIndeks2:= iniDane.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'ObrobkaIndeks',-1);
+  iniDane.Free;
+
+  //Obliczenia dla zÍbnika
+  case intObrobkaIndeks1 of
+    -1 :  raise Exception.Create('Nie uda≥o sie wczytac indeksu materia≥u');
+     1 :  edtNaprezKrytyczneZginanie1.AsDouble:= 1.75*edtTwardosc1.AsInteger;
+     2 :  edtNaprezKrytyczneZginanie1.AsDouble:= 550;
+     3 :  edtNaprezKrytyczneZginanie1.AsDouble:= 800;
+     4 :  edtNaprezKrytyczneZginanie1.AsDouble:= 900;
+     5 :  edtNaprezKrytyczneZginanie1.AsDouble:= RoundTo(112*HBnaHRC(edtTwardosc1.AsInteger)+290,-2);
+     else raise Exception.Create('èle zdefiniowana obrÛbka cieplna materia≥u');
+  end;
+
+  //Obliczenia dla ko≥a zÍbatego
+   case intObrobkaIndeks2 of
+    -1 :  raise Exception.Create('Nie uda≥o sie wczytac indeksu materia≥u');
+     1 :  edtNaprezKrytyczneZginanie2.AsDouble:= 1.75*edtTwardosc2.AsInteger;
+     2 :  edtNaprezKrytyczneZginanie2.AsDouble:= 550;
+     3 :  edtNaprezKrytyczneZginanie2.AsDouble:= 800;
+     4 :  edtNaprezKrytyczneZginanie2.AsDouble:= 900;
+     5 :  edtNaprezKrytyczneZginanie2.AsDouble:= RoundTo(112*HBnaHRC(edtTwardosc2.AsInteger)+290,-2);
+     else raise Exception.Create('èle zdefiniowana obrÛbka cieplna materia≥u');
+  end;
+end;
+
+procedure TfrmMain.WspolTrwalosci;
+var
+  O1,O2,O3,t1,t2,t3: Double;
+  mf: Integer;
+begin
+  //Obliczenie wspo≥czynnika KFE uwglednajπcego zmiane obciπøenia napÍdu w czasie
+  O1:=sedObciazenie1.Value/100;
+  O2:=sedObciazenie2.Value/100;
+  O3:=sedObciazenie3.Value/100;
+  t1:=sedCzas1.Value/100;
+  t2:=sedCzas2.Value/100;
+  t3:=sedCzas3.Value/100;
+  if edtTwardosc1.AsInteger<=350 then mf:=6
+  else mf:=9;
+  edtKFE.AsDouble:=RoundTo((Power(O1,mf)*t1)+(Power(O2,mf)*t2)+(Power(O3,mf)*t3),-4);
+
+  //Rownowaøna liczba cykli
+  edtNFE1.AsDouble:=Round(60*edtPredObr1.AsDouble*edtCzasPracy.AsInteger*edtKFE.AsDouble);
+  edtNFE2.AsDouble:=Round(60*edtPredObr2.AsDouble*edtCzasPracy.AsInteger*edtKFE.AsDouble);
+
+  //Wspo≥czynnik trwa≥oúci
+  if edtNFLim1.AsDouble<=edtNFE1.AsDouble then edtYN1.AsDouble:=1.0
+  else edtYN1.AsDouble:=RoundTo(Power(edtNFLim1.AsDouble/edtNFE1.AsDouble,1/mf),-3);
+
+  if edtNFLim2.AsDouble<=edtNFE2.AsDouble then edtYN2.AsDouble:=1.0
+  else edtYN2.AsDouble:=RoundTo(Power(edtNFLim2.AsDouble/edtNFE2.AsDouble,1/mf),-3);
+end;
+
+procedure TfrmMain.WspolYA;
+begin
+  if chbZmianaKierunku.Checked then edtYA.AsDouble:= 0.8
+  else edtYA.AsDouble:= 1;
+end;
+
+procedure TfrmMain.WspolYR;
+var
+  intObrobkaIndeks1: Integer;
+  iniDane: TIniFile;
+begin
+  if chbSzlifowane.Checked then
+  begin
+    //Wczytanie indeksu obrobki cieplnej
+    iniDane:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+    intObrobkaIndeks1:= iniDane.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'ObrobkaIndeks',-1);
+    iniDane.Free;
+
+    case intObrobkaIndeks1 of
+    -1   :  raise Exception.Create('Nie uda≥o sie wczytac indeksu materia≥u');
+     1   :  edtYR.AsDouble:=1.1;
+     2,3 :  edtYR.AsDouble:=1;
+     4,5 :  edtYR.AsDouble:=0.8;
+     else raise Exception.Create('èle zdefiniowana obrÛbka cieplna materia≥u');
+    end;
+  end
+  else edtYR.AsDouble:=1;
+end;
+
+procedure TfrmMain.chbSzlifowaneClick(Sender: TObject);  //Wywo≥anie obliczen dla etapu 5 po zmianie stannu checkboxa
+begin
+   btnDalej4Click(Sender);
+end;
+
+procedure TfrmMain.WspolYX; //Oblicza wspÛ≥czynnik uwzglÍdajπcy wymiery kÛ≥
+begin
+  edtYX1.AsDouble:= RoundTo(1.05-0.000125*edtSredPodzialowaZebnik.AsDouble,-3);
+  edtYX2.AsDouble:= RoundTo(1.05-0.000125*edtSredPodzialowaKolo.AsDouble,-3);
+end;
+
+procedure TfrmMain.cbxSFChange(Sender: TObject);
+begin
+  btnDalej4Click(Sender);
+end;
+
+procedure TfrmMain.NaprezGnaceSprawdz;
+begin
+  edtNaprDopGnace1.AsDouble:= RoundTo(edtNaprezKrytyczneZginanie1.AsDouble*
+    edtYN1.AsDouble*edtYA.AsDouble*edtYR.AsDouble*edtYX1.AsDouble/StrToFloat(cbxSF.Text),-2);
+  edtNaprDopGnace2.AsDouble:= RoundTo(edtNaprezKrytyczneZginanie2.AsDouble*
+    edtYN2.AsDouble*edtYA.AsDouble*edtYR.AsDouble*edtYX2.AsDouble/StrToFloat(cbxSF.Text),-2);
+end;
+
+procedure TfrmMain.WarunekWytrzGnacej;
+begin
+  //Obliczenia warunku wytrzyma≥osciowego sπ wykonywane dla ko≥a o mniejszym stosunku obliczonym w poniøszym warunku
+  if (edtNaprDopGnace1.AsDouble/edtYFS1.AsDouble)<(edtNaprDopGnace2.AsDouble/edtYFS2.AsDouble) then
+  begin
+    edtNaprezGnace.AsDouble:=edtOblNaprezGnace1.AsDouble;
+    edtDopNaprezGnace.AsDouble:=edtNaprDopGnace1.AsDouble;
+  end
+  else
+  begin
+    edtNaprezGnace.AsDouble:=edtOblNaprezGnace2.AsDouble;
+    edtDopNaprezGnace.AsDouble:=edtNaprDopGnace2.AsDouble;
+  end;
+
+  //Sprawdzenie warunku i ewentualne wyswietlenie ostrzeøenia
+  if edtNaprezGnace.AsDouble>edtDopNaprezGnace.AsDouble then lblOstrzezenie5_1.Visible:=true
+  else lblOstrzezenie5_1.Visible:=false;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Etap 6'}
+procedure TfrmMain.NaprezStykPrzyPrzeciaz;
+begin
+  edtNaprezStykPrzyPrzeciaz.AsDouble:= RoundTo(edtOblNaprezStyk.AsDouble*Sqrt(edtTmaxTnom.AsDouble),-2);
+
+  if edtMaxNaprStykZebnik.AsDouble<edtMaxNaprStykKolo.AsDouble then edtNaprezStykMax.AsDouble:= edtMaxNaprStykZebnik.AsDouble
+  else edtNaprezStykMax.AsDouble:= edtMaxNaprStykKolo.AsDouble;
+
+  if edtNaprezStykPrzyPrzeciaz.AsDouble>edtNaprezStykMax.AsDouble then lblOstrzezenie6_1.Visible:=True
+  else lblOstrzezenie6_1.Visible:=False;
+end;
+
+procedure TfrmMain.NaprezGnacePrzyPrzeciaz;
+begin
+  edtNaprezGnacPrzyPrzeciaz1.AsDouble:= RoundTo(edtOblNaprezGnace1.AsDouble*edtTmaxTnom.AsDouble,-2);
+  edtNaprezGnacPrzyPrzeciaz2.AsDouble:= RoundTo(edtOblNaprezGnace2.AsDouble*edtTmaxTnom.AsDouble,-2);
+
+  edtNaprezGnacMax1.AsDouble:= edtMaxNaprGnacZebnik.AsDouble;
+  edtNaprezGnacMax2.AsDouble:= edtMaxNaprGnacKolo.AsDouble;
+
+  if (edtNaprezGnacPrzyPrzeciaz1.AsDouble>edtNaprezGnacMax1.AsDouble) or
+     (edtNaprezGnacPrzyPrzeciaz2.AsDouble>edtNaprezGnacMax2.AsDouble) then
+     lblOstrzezenie6_2.Visible:=True
+  else lblOstrzezenie6_2.Visible:=False;
+end;
+
+procedure TfrmMain.MomentRzecz;
+begin
+  edtMomentRzecz.AsDouble:= RoundTo(edtMoment2.AsDouble*edtPrzelozenieRzecz.AsDouble/StrToFloat(cbxPrzelozenie.Text),-2);
+end;
+
+procedure TfrmMain.SilyObwodowe;
+begin
+  edtSilaObwodowa1.AsDouble:= RoundTo(2*1000*edtMoment1.AsDouble/edtSredPodzialowaZebnik.AsDouble,-2);
+  edtSilaObwodowa2.AsDouble:= RoundTo(2*1000*edtMomentRzecz.AsDouble/edtSredPodzialowaKolo.AsDouble,-2);
+end;
+
+procedure TfrmMain.SilyPromieniowe;
+begin
+  edtSilaPromeniowa1.AsDouble:= RoundTo(edtSilaObwodowa1.AsDouble*0.364*cos(DegToRad(edtKatyZebnik.AsDouble)),-2);
+  edtSilaPromeniowa2.AsDouble:= RoundTo(edtSilaObwodowa2.AsDouble*0.364*sin(DegToRad(edtKatyZebnik.AsDouble)),-2);
+end;
+
+procedure TfrmMain.SilyPoosiowe;
+begin
+  edtSilaPoosiowa1.AsDouble:= RoundTo(edtSilaObwodowa1.AsDouble*0.364*sin(DegToRad(edtKatyZebnik.AsDouble)),-2);
+  edtSilaPoosiowa2.AsDouble:= RoundTo(edtSilaObwodowa2.AsDouble*0.364*cos(DegToRad(edtKatyZebnik.AsDouble)),-2);
 end;
 
 {$ENDREGION}

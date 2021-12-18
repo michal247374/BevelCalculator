@@ -27,7 +27,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap5
+    ActivePage = tshEtap6
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -728,7 +728,7 @@
           Alignment = taRightJustify
           AutoSize = False
           BiDiMode = bdLeftToRight
-          Caption = 'Moment skr'#281'caj'#261'cy na wej'#347'ciu T1 ='
+          Caption = 'Moment skr'#281'caj'#261'cy na wyj'#347'ciu T2 ='
           ParentBiDiMode = False
           Layout = tlCenter
         end
@@ -3090,15 +3090,15 @@
         object lblStopnie1: TLabel
           Left = 243
           Top = 25
-          Width = 23
-          Height = 17
+          Width = 7
+          Height = 13
           Caption = #9675
         end
         object lblStopnie2: TLabel
           Left = 243
           Top = 57
-          Width = 14
-          Height = 24
+          Width = 7
+          Height = 13
           Caption = #9675
         end
         object edtKatyZebnik: TEdit
@@ -3486,7 +3486,7 @@
           WordWrap = True
         end
       end
-      object pnlSilaObwodowa: TPanel
+      object pnlSilaObwodowaWZazeb: TPanel
         Left = 4
         Top = 83
         Width = 341
@@ -3495,7 +3495,7 @@
         Color = clGradientInactiveCaption
         ParentBackground = False
         TabOrder = 1
-        object lblSilaObwodowa: TLabel
+        object lblSilaObwodowaWZazeb: TLabel
           Left = 8
           Top = 4
           Width = 208
@@ -3527,7 +3527,7 @@
           Caption = 'N'
           Layout = tlCenter
         end
-        object edtSilaObwodowa: TEdit
+        object edtSilaObwodowaWZazeb: TEdit
           Tag = 2
           Left = 113
           Top = 26
@@ -5377,6 +5377,7 @@
           Caption = 'Z'#281'by szlifowane'
           TabOrder = 1
           WordWrap = True
+          OnClick = chbSzlifowaneClick
         end
       end
       object pnlWspolYX: TPanel
@@ -5489,6 +5490,7 @@
           ItemIndex = 0
           TabOrder = 0
           Text = '1,7'
+          OnChange = cbxSFChange
           Items.Strings = (
             '1,7'
             '1,8'
@@ -5716,6 +5718,671 @@
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 16
+        OnClick = btnDalej5Click
+      end
+    end
+    object tshEtap6: TTabSheet
+      Caption = 'Etap VI'
+      ImageIndex = 5
+      object lblOstrzezenie6_1: TLabel
+        Left = 4
+        Top = 287
+        Width = 654
+        Height = 36
+        Caption = 
+          'Warunek wytrzyma'#322'o'#347'ci stykowej z'#281'b'#243'w przy przeci'#261#380'eniach nie zos' +
+          'ta'#322' spe'#322'niony. Nale'#380'y wprowadzi'#263' poprawki w obliczeniach.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object lblOstrzezenie6_2: TLabel
+        Left = 4
+        Top = 324
+        Width = 654
+        Height = 32
+        Caption = 
+          'Warunek wytrzyma'#322'o'#347'ci gn'#261'cej z'#281'b'#243'w przy przeci'#261#380'eniach nie zosta' +
+          #322' spe'#322'niony. Nale'#380'y wprowadzi'#263' poprawki w obliczeniach.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+        WordWrap = True
+      end
+      object pnlNaprezStykPrzyPrzeciaz: TPanel
+        Left = 4
+        Top = 83
+        Width = 654
+        Height = 78
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 0
+        object lblNaprezStykPrzyPrzeciaz: TLabel
+          Left = 8
+          Top = 4
+          Width = 293
+          Height = 16
+          Caption = 'NAPR'#280#379'ENIA STYKOWE PRZY PRZECI'#260#379'ENIACH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblWarunekStykowyPrzeciaz: TLabel
+          Left = 296
+          Top = 35
+          Width = 13
+          Height = 23
+          Caption = #10877
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSigmaHMax: TLabel
+          Left = 36
+          Top = 36
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'H max ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblSigmaHPMax: TLabel
+          Left = 338
+          Top = 36
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'HP max ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa6_1: TLabel
+          Left = 568
+          Top = 37
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object edtNaprezStykPrzyPrzeciaz: TEdit
+          Tag = 2
+          Left = 122
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtNaprezStykMax: TEdit
+          Tag = 2
+          Left = 422
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlNaglowek6: TPanel
+        Left = 4
+        Top = 3
+        Width = 1060
+        Height = 74
+        BevelOuter = bvNone
+        Color = clSkyBlue
+        ParentBackground = False
+        TabOrder = 1
+        object lblNaglowek6: TLabel
+          Left = 8
+          Top = 3
+          Width = 77
+          Height = 23
+          Caption = 'ETAP VI'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblNaglowek6Tresc: TLabel
+          Left = 8
+          Top = 30
+          Width = 1041
+          Height = 32
+          AutoSize = False
+          BiDiMode = bdLeftToRight
+          Caption = 
+            'Wyliczenie i sprawdzenie wytrzyma'#322'o'#347'ci z'#281'b'#243'w przy przeci'#261#380'eniach' +
+            '. Warto'#347#263' napr'#281#380'e'#324' przy przeci'#261#380'eniach w g'#322#243'wnej mierze zale'#380'y o' +
+            'd wspo'#322'czynnika jednorazowego przeci'#261#380'enia. Okre'#347'lenie warto'#347'ci ' +
+            'si'#322' pojawiaj'#261'ce sie w zaz'#281'bniu podczas wspo'#322'pracy k'#243#322' z'#281'batych.'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentFont = False
+          WordWrap = True
+        end
+      end
+      object pnlMomentRzecz: TPanel
+        Left = 664
+        Top = 83
+        Width = 400
+        Height = 78
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 2
+        object lblMomentRzecz: TLabel
+          Left = 8
+          Top = 4
+          Width = 304
+          Height = 16
+          Caption = 'MOMENT RZECZYWISTY NA WALE WYJ'#346'CIOWYM'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblT2RZ: TLabel
+          Left = 49
+          Top = 36
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'T2 rz ='
+          Layout = tlCenter
+        end
+        object lblNm6_1: TLabel
+          Left = 270
+          Top = 36
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'Nm'
+          Layout = tlCenter
+        end
+        object edtMomentRzecz: TEdit
+          Tag = 2
+          Left = 113
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object pnlSilaObwodowa: TPanel
+        Left = 664
+        Top = 167
+        Width = 400
+        Height = 114
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 3
+        object lblSilyObwodowe: TLabel
+          Left = 8
+          Top = 4
+          Width = 111
+          Height = 16
+          Caption = 'SI'#321'Y OBWODOWE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblFt1: TLabel
+          Left = 49
+          Top = 36
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Ft1='
+          Layout = tlCenter
+        end
+        object lblN6_1: TLabel
+          Left = 270
+          Top = 36
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblN6_2: TLabel
+          Left = 270
+          Top = 73
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblFt2: TLabel
+          Left = 49
+          Top = 73
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Ft2='
+          Layout = tlCenter
+        end
+        object edtSilaObwodowa1: TEdit
+          Tag = 2
+          Left = 113
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtSilaObwodowa2: TEdit
+          Tag = 2
+          Left = 113
+          Top = 74
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlNaprezGnacPrzyPrzeciaz: TPanel
+        Left = 4
+        Top = 167
+        Width = 654
+        Height = 114
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 4
+        object lblNaprezGnacPrzyPrzeciaz: TLabel
+          Left = 8
+          Top = 4
+          Width = 273
+          Height = 16
+          Caption = 'NAPR'#280#379'ENIA GN'#260'CE PRZY PRZECI'#260#379'ENIACH'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblWarunekGnacyPrzeciaz1: TLabel
+          Left = 296
+          Top = 35
+          Width = 13
+          Height = 23
+          Caption = #10877
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSigmaFMax1: TLabel
+          Left = 36
+          Top = 36
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F max1 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblSigmaFPmax1: TLabel
+          Left = 327
+          Top = 36
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'FP max1 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa6_2: TLabel
+          Left = 568
+          Top = 37
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object lblSigmaFMax2: TLabel
+          Left = 36
+          Top = 73
+          Width = 64
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'F max2 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblWarunekGnacyPrzeciaz2: TLabel
+          Left = 296
+          Top = 72
+          Width = 13
+          Height = 23
+          Caption = #10877
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSigmaFPMax2: TLabel
+          Left = 327
+          Top = 73
+          Width = 75
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = #963'FP max2 ='
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object lblMPa6_3: TLabel
+          Left = 568
+          Top = 74
+          Width = 28
+          Height = 20
+          AutoSize = False
+          Caption = 'MPa'
+          Layout = tlCenter
+        end
+        object edtNaprezGnacPrzyPrzeciaz1: TEdit
+          Tag = 2
+          Left = 122
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtNaprezGnacMax1: TEdit
+          Tag = 2
+          Left = 422
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object edtNaprezGnacPrzyPrzeciaz2: TEdit
+          Tag = 2
+          Left = 122
+          Top = 74
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object edtNaprezGnacMax2: TEdit
+          Tag = 2
+          Left = 422
+          Top = 74
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 3
+        end
+      end
+      object pnlSilyPromeniowe: TPanel
+        Left = 664
+        Top = 287
+        Width = 400
+        Height = 114
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 5
+        object lblSilyPromeniowe: TLabel
+          Left = 8
+          Top = 4
+          Width = 289
+          Height = 32
+          Caption = 'SI'#321'Y PROMIENIOWE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblFr1: TLabel
+          Left = 49
+          Top = 36
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Fr1='
+          Layout = tlCenter
+        end
+        object lblN6_3: TLabel
+          Left = 270
+          Top = 36
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblN6_4: TLabel
+          Left = 270
+          Top = 73
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblFr2: TLabel
+          Left = 49
+          Top = 73
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Fr2='
+          Layout = tlCenter
+        end
+        object edtSilaPromeniowa1: TEdit
+          Tag = 2
+          Left = 113
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtSilaPromeniowa2: TEdit
+          Tag = 2
+          Left = 113
+          Top = 74
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlSilyPoosiowe: TPanel
+        Left = 664
+        Top = 407
+        Width = 400
+        Height = 114
+        BevelOuter = bvNone
+        Color = clGradientInactiveCaption
+        ParentBackground = False
+        TabOrder = 6
+        object lblSilyPoosiowe: TLabel
+          Left = 8
+          Top = 4
+          Width = 102
+          Height = 16
+          Caption = 'SI'#321'Y POOSIOWE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object lblFa1: TLabel
+          Left = 49
+          Top = 36
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Fa1='
+          Layout = tlCenter
+        end
+        object lblN6_5: TLabel
+          Left = 270
+          Top = 36
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblN6_6: TLabel
+          Left = 270
+          Top = 73
+          Width = 31
+          Height = 21
+          AutoSize = False
+          Caption = 'N'
+          Layout = tlCenter
+        end
+        object lblFa2: TLabel
+          Left = 49
+          Top = 73
+          Width = 39
+          Height = 21
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Fa2='
+          Layout = tlCenter
+        end
+        object edtSilaPoosiowa1: TEdit
+          Tag = 2
+          Left = 113
+          Top = 37
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edtSilaPoosiowa2: TEdit
+          Tag = 2
+          Left = 113
+          Top = 74
+          Width = 130
+          Height = 21
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 1
+        end
       end
     end
   end
