@@ -547,6 +547,8 @@ type
     procedure chbSzlifowaneClick(Sender: TObject);
     procedure cbxSFChange(Sender: TObject);
     procedure btnDalej5Click(Sender: TObject);
+    procedure DeaktywacjaPrzyZmianach(Sender: TObject);
+    procedure ZabezpieczTEdit(Sender: TObject);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
@@ -646,6 +648,9 @@ procedure TfrmMain.btnDalej1Click(Sender: TObject); //Przejœcie do Etapu2, oblic
 begin
   if (cbxMaterial1.ItemIndex or cbxMaterial2.ItemIndex)=-1 then
     raise Exception.Create('Aby dalej prowadziæ obliczenia nale¿y wybraæ materia³');
+
+  if sedCzas1.Value+sedCzas2.Value+sedCzas3.Value<>100 then
+    raise Exception.Create('£¹czny czas trwania w panelu "ZMIANA OBCI¥¯ENIA W CZASIE" powinien wynosiæ 100%');
 
   tshEtap2.TabVisible:= true;
   pgcMain.TabIndex:=1;  //Odblokowuje i prze³¹cz na 2 zak³adke
@@ -851,6 +856,42 @@ begin
   Result:=  AproksymacjaLiniowa('HBnaHV.ini', intTwardoscWHB);
 end;
 
+procedure TfrmMain.DeaktywacjaPrzyZmianach(Sender: TObject);
+begin
+  case pgcMain.ActivePageIndex of
+  0:begin
+      tshEtap2.TabVisible:= false;
+      tshEtap3.TabVisible:= false;
+      tshEtap4.TabVisible:= false;
+      tshEtap5.TabVisible:= false;
+      tshEtap6.TabVisible:= false;
+    end;
+  1:begin
+      tshEtap3.TabVisible:= false;
+      tshEtap4.TabVisible:= false;
+      tshEtap5.TabVisible:= false;
+      tshEtap6.TabVisible:= false;
+    end;
+  2:begin
+      tshEtap4.TabVisible:= false;
+      tshEtap5.TabVisible:= false;
+      tshEtap6.TabVisible:= false;
+    end;
+  3:begin
+      tshEtap5.TabVisible:= false;
+      tshEtap6.TabVisible:= false;
+    end;
+  4:begin
+      tshEtap6.TabVisible:= false;
+    end;
+  end;
+end;
+
+procedure TfrmMain.ZabezpieczTEdit(Sender: TObject);
+begin
+    if not TEdit(Sender).IsValid then
+    raise Exception.Create('Podana wartoœæ momentu nie reprezentuje liczby');
+end;
 {$ENDREGION}
 
 {$Region 'Etap 1'}
@@ -867,6 +908,7 @@ begin
   edtRm1.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'Rm',0);
   edtRe1.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial1.ItemIndex),'Re',0);
   iniMaterialy.Free;
+  DeaktywacjaPrzyZmianach(Sender);
 end;
 
 procedure TfrmMain.cbxMaterial2Change(Sender: TObject);
@@ -882,12 +924,14 @@ begin
   edtRm2.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'Rm',0);
   edtRe2.AsInteger:= iniMaterialy.ReadInteger(IntToStr(cbxMaterial2.ItemIndex),'Re',0);
   iniMaterialy.Free;
+  DeaktywacjaPrzyZmianach(Sender);
 end;
 
 procedure TfrmMain.cbxPrzelozenieChange(Sender: TObject);
 begin
   edtPredObr2.AsDouble :=RoundTo(edtPredObr1.AsDouble/strtofloat(cbxPrzelozenie.text),-2);
   edtMoment2.AsDouble :=RoundTo(edtMoment1.AsDouble*strtofloat(cbxPrzelozenie.text),-2);
+  DeaktywacjaPrzyZmianach(Sender);
 end;
 
 procedure TfrmMain.edtMoment1Exit(Sender: TObject);
@@ -911,10 +955,13 @@ Jeszcze do poprawki}
 procedure TfrmMain.sedCzas2Change(Sender: TObject);
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
+  DeaktywacjaPrzyZmianach(Sender);
 end;
+
 procedure TfrmMain.sedCzas3Change(Sender: TObject);
 begin
   sedCzas1.Value:=100-sedCzas2.Value-sedCzas3.Value;
+  DeaktywacjaPrzyZmianach(Sender);
 end;
 
 {$ENDREGION}
@@ -1011,6 +1058,7 @@ procedure TfrmMain.cbxShChange(Sender: TObject);
 begin
    DopNaprezStyk;
    OblDopNaprezStyk;
+   DeaktywacjaPrzyZmianach(Sender);
 end;
 
 procedure TfrmMain.OblDopNaprezStyk;
@@ -1026,12 +1074,12 @@ begin
   //Sprawdza czy zosta³ spe³niowny warunek
   if edtOblDopNapreStyk.AsDouble> 1.15* douMinDopNapreStyk then //Przekroczone napre¿enia, potrzeba poprawek
     begin
-      btnDalej2.Enabled:=false;
+      //btnDalej2.Enabled:=false;
       lblOstrze¿enie2_1.Visible:=true;
     end
   else
     begin
-      btnDalej2.Enabled:=true;
+      //btnDalej2.Enabled:=true;
       lblOstrze¿enie2_1.Visible:=false;
     end;
 
@@ -1089,6 +1137,7 @@ end;
 procedure TfrmMain.updKbeClick(Sender: TObject; Button: TUDBtnType); //Zmiana wartosci wspo³czynnika kbe
 begin
   edtKbe.AsDouble:= updKbe.Position*0.01;
+  DeaktywacjaPrzyZmianach(Sender);
   btnDalej2Click(sender);
 end;
 
@@ -1277,7 +1326,7 @@ begin
   SredniceZewnetrzne;
 
   {Modu³ w œrednim przekroju zêba}
-   ModulSredni;
+  ModulSredni;
 
   {Œrednice œrednie kó³ zêbatych}
   SrednieSrednice;
@@ -1457,7 +1506,7 @@ begin
 
   //Obliczenia i wyœwietlanie komunikatu o wartoœci wspo³czynnik kbe
   dNoweKbe:= edtNowaSzerokoscWienca.AsInteger/edtTworzaca.AsDouble;
-  if dNoweKbe<0.2 then
+  if (dNoweKbe<0.2) or (dNoweKbe>0.3) then
   begin
     lblOstrzezenie4_3.Visible:=true;
     lblOstrzezenie4_3.Caption:='Wspo³czynnik kbe poza zakresem: ' + FloatToStr(RoundTo(dNoweKbe,-3));
@@ -1468,6 +1517,7 @@ end;
 procedure TfrmMain.updNowaSzerokoscWiencaClick(Sender: TObject; Button: TUDBtnType);
 begin
  edtNowaSzerokoscWienca.AsInteger:= updNowaSzerokoscWienca.Position; //Naciœniêcie przycisku zmienia wartoœæ szerokoœæi wienca
+ DeaktywacjaPrzyZmianach(Sender);
  ObliczeniaEtap3(edtNowaSzerokoscWienca.AsInteger); //Wywo³anie obliczen dla etapu 3 z pominieciem obliczen srednicy wienca
  btnDalej3Click(Sender); // Wywo³anie obliczen dla etapu 4 przy nowych wartosciach etapu 3
 end;
@@ -1630,6 +1680,7 @@ end;
 
 procedure TfrmMain.chbSzlifowaneClick(Sender: TObject);  //Wywo³anie obliczen dla etapu 5 po zmianie stannu checkboxa
 begin
+   DeaktywacjaPrzyZmianach(Sender);
    btnDalej4Click(Sender);
 end;
 
@@ -1642,6 +1693,7 @@ end;
 procedure TfrmMain.cbxSFChange(Sender: TObject);
 begin
   btnDalej4Click(Sender);
+  DeaktywacjaPrzyZmianach(Sender);
 end;
 
 procedure TfrmMain.NaprezGnaceSprawdz;

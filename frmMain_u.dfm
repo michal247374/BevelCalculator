@@ -170,6 +170,7 @@
           MaxLength = 10
           TabOrder = 0
           Text = '1450'
+          OnChange = DeaktywacjaPrzyZmianach
           OnExit = edtPredObr1Exit
         end
         object edtMoc: TEdit
@@ -182,6 +183,8 @@
           MaxLength = 10
           TabOrder = 1
           Text = '5,0'
+          OnChange = DeaktywacjaPrzyZmianach
+          OnExit = ZabezpieczTEdit
         end
         object edtMoment1: TEdit
           Tag = 2
@@ -193,6 +196,7 @@
           MaxLength = 10
           TabOrder = 2
           Text = '36,22'
+          OnChange = DeaktywacjaPrzyZmianach
           OnExit = edtMoment1Exit
         end
       end
@@ -207,8 +211,8 @@
         TabOrder = 2
         object lblCzasPracy: TLabel
           Left = 8
-          Top = 8
-          Width = 226
+          Top = 4
+          Width = 240
           Height = 16
           Caption = 'LICZBA GODZIN PRACY PRZEK'#321'ADNI'
           Font.Charset = DEFAULT_CHARSET
@@ -217,6 +221,7 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
+          WordWrap = True
         end
         object lblLh: TLabel
           Left = 29
@@ -244,9 +249,10 @@
           Height = 21
           Alignment = taRightJustify
           MaxLength = 10
-          NumbersOnly = True
           TabOrder = 0
           Text = '10000'
+          OnChange = DeaktywacjaPrzyZmianach
+          OnExit = ZabezpieczTEdit
         end
       end
       object pnlZmianaObciazeniaWCzasie: TPanel
@@ -263,7 +269,7 @@
           167)
         object lblZmianaObciazenia: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 198
           Height = 16
           Caption = 'ZMIANA OBCIA'#379'ENIA W CZASIE'
@@ -388,6 +394,7 @@
           MinValue = 1
           TabOrder = 0
           Value = 100
+          OnChange = DeaktywacjaPrzyZmianach
         end
         object sedObciazenie1: TSpinEdit
           Tag = 1
@@ -399,6 +406,7 @@
           MinValue = 0
           TabOrder = 1
           Value = 100
+          OnChange = DeaktywacjaPrzyZmianach
         end
         object sedCzas2: TSpinEdit
           Tag = 1
@@ -436,6 +444,7 @@
           MinValue = 0
           TabOrder = 4
           Value = 0
+          OnChange = DeaktywacjaPrzyZmianach
         end
         object sedObciazenie2: TSpinEdit
           Tag = 1
@@ -447,6 +456,7 @@
           MinValue = 0
           TabOrder = 5
           Value = 0
+          OnChange = DeaktywacjaPrzyZmianach
         end
         object btnZmianaObciazeniaWCzasieHelp: TButton
           Tag = 2
@@ -473,7 +483,7 @@
           69)
         object lblZmianaKierunku: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 188
           Height = 16
           Caption = 'ZMIANA KIERUNKU OBROT'#211'W '
@@ -483,6 +493,7 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
+          WordWrap = True
         end
         object chbZmianaKierunku: TCheckBox
           Left = 24
@@ -494,6 +505,7 @@
           Checked = True
           State = cbChecked
           TabOrder = 0
+          OnClick = DeaktywacjaPrzyZmianach
         end
       end
       object pnlMaterialZebnika: TPanel
@@ -507,7 +519,7 @@
         TabOrder = 5
         object lblMaterialZebnika: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 124
           Height = 16
           Caption = 'MATERIA'#321' Z'#280'BNIKA'
@@ -676,7 +688,7 @@
         TabOrder = 6
         object lblParametryWyjscia: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 143
           Height = 16
           Caption = 'PARAMETRY WYJ'#346'CIA'
@@ -837,7 +849,7 @@
         TabOrder = 7
         object lblMaterialKolaZebatego: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 173
           Height = 16
           Caption = 'MATERIA'#321' KO'#321'A Z'#280'BATEGO'
@@ -996,7 +1008,7 @@
         TabOrder = 8
         object lblWspPrzeciazenia: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 309
           Height = 16
           Caption = 'WSP'#211#321'CZYNNIK JEDNORAZOWEGO PRZECI'#260#379'ENIA'
@@ -1026,7 +1038,8 @@
           Alignment = taRightJustify
           MaxLength = 3
           TabOrder = 0
-          Text = '1,0'
+          Text = '2,9'
+          OnExit = ZabezpieczTEdit
         end
         object bntWspPrzeciazeniaHelp: TButton
           Tag = 3
@@ -1050,7 +1063,7 @@
         TabOrder = 9
         object lblSchamat: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 143
           Height = 16
           Caption = 'SCHEMAT PRZEK'#321'ADNI'
@@ -1062,9 +1075,9 @@
           ParentFont = False
         end
         object lblMontazKol: TLabel
-          Left = 29
+          Left = 8
           Top = 33
-          Width = 52
+          Width = 73
           Height = 21
           Alignment = taRightJustify
           AutoSize = False
@@ -1099,6 +1112,7 @@
           ItemIndex = 0
           TabOrder = 1
           Text = 'Jedno lub dwa ko'#322'a montowane wysi'#281'gowo'
+          OnChange = DeaktywacjaPrzyZmianach
           Items.Strings = (
             'Jedno lub dwa ko'#322'a montowane wysi'#281'gowo'
             'Dwa ko'#322'a montowane mi'#281'dzy podporami')
@@ -1112,6 +1126,7 @@
           ItemIndex = 0
           TabOrder = 2
           Text = 'Sto'#380'kowe'
+          OnChange = DeaktywacjaPrzyZmianach
           Items.Strings = (
             'Sto'#380'kowe'
             'Kulkowo sko'#347'ne')
@@ -1128,7 +1143,7 @@
         TabOrder = 10
         object lblWarunkiPracy: TLabel
           Left = 8
-          Top = 8
+          Top = 4
           Width = 109
           Height = 16
           Caption = 'WARUNKI PRACY'
@@ -1178,6 +1193,7 @@
           ItemIndex = 0
           TabOrder = 1
           Text = 'Lekkie - silniki elektryczne, turbiny gazowe i parowe '
+          OnChange = DeaktywacjaPrzyZmianach
           Items.Strings = (
             'Lekkie - silniki elektryczne, turbiny gazowe i parowe '
             #346'rednie - silniki hydrauliczne'
@@ -1193,6 +1209,7 @@
           ItemIndex = 0
           TabOrder = 2
           Text = 'Lekkie - pompy od'#347'rodkowe, przeno'#347'niki '
+          OnChange = DeaktywacjaPrzyZmianach
           Items.Strings = (
             'Lekkie - pompy od'#347'rodkowe, przeno'#347'niki '
             #346'rednie - obrabiarki, spr'#281#380'arki od'#347'rodkowe, mieszalniki'
@@ -1406,9 +1423,9 @@
           Layout = tlCenter
         end
         object lblRownowaznaWspol: TLabel
-          Left = 296
-          Top = 33
-          Width = 156
+          Left = 267
+          Top = 37
+          Width = 185
           Height = 30
           Alignment = taRightJustify
           AutoSize = False
@@ -1779,7 +1796,7 @@
           Left = 8
           Top = 4
           Width = 341
-          Height = 16
+          Height = 37
           Caption = 'OBLICZENIOWE DOPUSZCZALNE NAPR'#280#379'ENIA STYKOWE'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1787,6 +1804,7 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
+          WordWrap = True
         end
         object lblMPa2_5: TLabel
           Left = 268
@@ -2578,6 +2596,7 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
+          WordWrap = True
         end
         object lblKd: TLabel
           Left = 23
@@ -4175,7 +4194,7 @@
         object lblNaprezeniaDop: TLabel
           Left = 8
           Top = 4
-          Width = 276
+          Width = 345
           Height = 32
           Caption = 'NAPR'#280#379'ENIA DOPUSZCZALNE DLA OBLICZE'#323' SPRAWDZAJ'#260'CYCH'
           Font.Charset = DEFAULT_CHARSET
@@ -4271,8 +4290,8 @@
         object lblWarWytrzStykowej: TLabel
           Left = 8
           Top = 4
-          Width = 299
-          Height = 16
+          Width = 345
+          Height = 21
           Caption = 'WARUNEK WYTRZYMA'#321'O'#346'CI STYKOWEJ Z'#280'B'#211'W'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -4765,7 +4784,7 @@
         object lblWspolKFA: TLabel
           Left = 8
           Top = 4
-          Width = 290
+          Width = 334
           Height = 48
           Caption = 
             'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY NIER'#211'WNOMIERNO'#346#262' ROZK'#321'ADU OBCI'#260#379'ENIA' +
@@ -4870,7 +4889,7 @@
         object lblWspolYFS: TLabel
           Left = 8
           Top = 4
-          Width = 214
+          Width = 334
           Height = 16
           Caption = 'WSP'#211#321'CZYNNIK KSZTA'#321'TU Z'#280'B'#211'W'
           Font.Charset = DEFAULT_CHARSET
@@ -4879,7 +4898,6 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          WordWrap = True
         end
         object lblYFS1: TLabel
           Left = 25
@@ -5395,7 +5413,7 @@
         object lblWspolYX: TLabel
           Left = 8
           Top = 4
-          Width = 317
+          Width = 345
           Height = 16
           Caption = 'WSP'#211#321'CZYNNIK UWZGL'#280'DNIAJ'#260'CY WYMIARY K'#211#321
           Font.Charset = DEFAULT_CHARSET
@@ -5461,7 +5479,7 @@
         object lblWspolSF: TLabel
           Left = 8
           Top = 4
-          Width = 213
+          Width = 345
           Height = 16
           Caption = 'WSP'#211#321'CZYNNIK BEZPIECZE'#323'STWA'
           Font.Charset = DEFAULT_CHARSET
@@ -5470,7 +5488,6 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          WordWrap = True
         end
         object lblSF: TLabel
           Left = 57
@@ -5512,7 +5529,7 @@
         object lblWarunekWytrzyGnacy: TLabel
           Left = 8
           Top = 4
-          Width = 279
+          Width = 345
           Height = 16
           Caption = 'WARUNEK WYTRZYMA'#321'O'#346'CI GN'#260'CEJ Z'#280'B'#211'W'
           Font.Charset = DEFAULT_CHARSET
@@ -5621,7 +5638,7 @@
         object lblNaprezDopGnace: TLabel
           Left = 8
           Top = 4
-          Width = 276
+          Width = 345
           Height = 32
           Caption = 'NAPR'#280#379'ENIA DOPUSZCZALNE DLA OBLICZE'#323' SPRAWDZAJ'#260'CYCH'
           Font.Charset = DEFAULT_CHARSET
@@ -5727,8 +5744,8 @@
       object lblOstrzezenie6_1: TLabel
         Left = 4
         Top = 287
-        Width = 654
-        Height = 36
+        Width = 585
+        Height = 32
         Caption = 
           'Warunek wytrzyma'#322'o'#347'ci stykowej z'#281'b'#243'w przy przeci'#261#380'eniach nie zos' +
           'ta'#322' spe'#322'niony. Nale'#380'y wprowadzi'#263' poprawki w obliczeniach.'
@@ -5744,7 +5761,7 @@
       object lblOstrzezenie6_2: TLabel
         Left = 4
         Top = 324
-        Width = 654
+        Width = 650
         Height = 32
         Caption = 
           'Warunek wytrzyma'#322'o'#347'ci gn'#261'cej z'#281'b'#243'w przy przeci'#261#380'eniach nie zosta' +
@@ -5779,7 +5796,6 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          WordWrap = True
         end
         object lblWarunekStykowyPrzeciaz: TLabel
           Left = 296
@@ -5914,7 +5930,7 @@
         object lblMomentRzecz: TLabel
           Left = 8
           Top = 4
-          Width = 304
+          Width = 385
           Height = 16
           Caption = 'MOMENT RZECZYWISTY NA WALE WYJ'#346'CIOWYM'
           Font.Charset = DEFAULT_CHARSET
@@ -5968,7 +5984,7 @@
         object lblSilyObwodowe: TLabel
           Left = 8
           Top = 4
-          Width = 111
+          Width = 217
           Height = 16
           Caption = 'SI'#321'Y OBWODOWE'
           Font.Charset = DEFAULT_CHARSET
@@ -6061,7 +6077,6 @@
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
-          WordWrap = True
         end
         object lblWarunekGnacyPrzeciaz1: TLabel
           Left = 296
@@ -6228,8 +6243,8 @@
         object lblSilyPromeniowe: TLabel
           Left = 8
           Top = 4
-          Width = 289
-          Height = 32
+          Width = 257
+          Height = 16
           Caption = 'SI'#321'Y PROMIENIOWE'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -6312,7 +6327,7 @@
         object lblSilyPoosiowe: TLabel
           Left = 8
           Top = 4
-          Width = 102
+          Width = 249
           Height = 16
           Caption = 'SI'#321'Y POOSIOWE'
           Font.Charset = DEFAULT_CHARSET
