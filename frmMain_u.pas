@@ -619,7 +619,7 @@ var
 implementation
 
 {$R *.dfm}
-procedure TfrmMain.FormCreate(Sender: TObject); //Domyslna procedura forma, uruchamiana na pocz¹tku programu
+procedure TfrmMain.FormCreate(Sender: TObject); //Domyslna procedura forma, uruchamiana na pocz¹tku programu, Obliczenia dla Etapu 1
 var
   iniMaterialy: TIniFile;
   intIloscMaterialow, intIndeks: Integer;
@@ -627,6 +627,8 @@ begin
    Application.OnHint:=ShowHint;
    //Wczytywanie materia³ow z pliku Materaly.ini w katalogu z plikiem .exe
    iniMaterialy:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
+   if not iniMaterialy.SectionExists('Ustawienia') then  //Sprawdzenie czy dokument zosta³ otwarty prawid³owo lub czy jest pusty
+    raise Exception.Create('Nie uda³o siê otworzyæ pliku '+'Materialy.ini'+' lub jest pusty');
    intIloscMaterialow:=iniMaterialy.ReadInteger('Ustawienia','IloscMaterialow',000);
    for intIndeks := 0 to intIloscMaterialow-1 do
     begin
@@ -827,7 +829,7 @@ var
 begin
   iniDane:=TIniFile.Create(ExtractFilePath(Application.ExeName)+ strNazwaDokumentu);
   //Otwiera plik o nazwie z podanej w wywo³aniu, który znajduje sie w tym samym katalogu co plik.exe
-  if not iniDane.SectionExists('0') then  //Sprawdzenie czy dokument zosta³ otwarty prawid³owo lub czy jest pusty
+  if not iniDane.SectionExists('0') then  //Sprawdzenie czy dokument zosta³ otworzony prawid³owo lub czy jest pusty
     raise Exception.Create('Nie uda³o siê otworzyæ pliku '+strNazwaDokumentu+' lub jest pusty');
   intDlugosc:=0;
   while iniDane.SectionExists(IntToStr(intDlugosc)) do intDlugosc:=intDlugosc+1;
@@ -839,7 +841,7 @@ begin
     tabDane[1,I] := iniDane.ReadFloat(IntToStr(I),'y',0);
   end;
   I:=0;
-  while douWejscie>tabDane[0,I+1] do i:=i+1; //Sukamy przedzia³u zawieraj¹cego nasz argument
+  while douWejscie>tabDane[0,I+1] do i:=i+1; //Szukamy przedzia³u zawieraj¹cego nasz argument
   Result:=tabDane[1,I] + (tabDane[1,I+1] - tabDane[1,I]) * (douWejscie - tabDane[0,I]) / (tabDane[0,I+1] - tabDane[0,I]);
   // Zwraca wartoœæ aproksymacji liniowej obliczonej na podstawie 2 skrajnych punktów przedzia³u
 end;
@@ -1145,29 +1147,29 @@ procedure TfrmMain.WspolKHB; //Wylicza wartoœæ wspolczynnika na podstawie wspo³c
 var
 douArgument: Double;
 begin
-//Argument do funkcji AproksymacjaLiniowa
-douArgument:=edtKbe.AsDouble*StrToFloat(cbxPrzelozenie.Text)/(2-edtKbe.AsDouble);
- if edtTwardosc2.AsInteger<=350 then // wykres kHB_a lub kHB_b w zaleznoœci od twardosci ko³a
- begin
-  if cbxMontazKol.ItemIndex=0 then //  wykres kHB_a_1 lub kHB_a_2 w zaleznosci od rodzaju monta¿u ko³
-  begin
-    if cbxLozyska.ItemIndex=0 then //  wykres kHB_a_1a lub kHB_a_1b w zaleznosci od ³o¿yskowania
-      edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_1a.ini',douArgument),-3)
-    else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_1b.ini',douArgument),-3)
-  end
-  else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_2.ini',douArgument),-3)
- end
- else
-  begin
-  if cbxMontazKol.ItemIndex=0 then //  wykres kHB_b_1 lub kHB_b_2 w zaleznosci od rodzaju monta¿u ko³
-  begin
-    if cbxLozyska.ItemIndex=0 then //  wykres kHB_b_1a lub kHB_b_1b w zaleznosci od ³o¿yskowania
-      edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_1a.ini',douArgument),-3)
-    else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_1b.ini',douArgument),-3)
-  end
-  else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_2.ini',douArgument),-3)
- end;
- if edtKhb.AsDouble=0 then edtKhb.AsDouble:=1.4; //Zabezpieczenie przed wartoscia poza zakresem np. przy du¿ych prze³ozeniach
+  //Argument do funkcji AproksymacjaLiniowa
+  douArgument:=edtKbe.AsDouble*StrToFloat(cbxPrzelozenie.Text)/(2-edtKbe.AsDouble);
+  if edtTwardosc2.AsInteger<=350 then // wykres kHB_a lub kHB_b w zaleznoœci od twardosci ko³a
+     begin
+      if cbxMontazKol.ItemIndex=0 then //  wykres kHB_a_1 lub kHB_a_2 w zaleznosci od rodzaju monta¿u ko³
+        begin
+          if cbxLozyska.ItemIndex=0 then //  wykres kHB_a_1a lub kHB_a_1b w zaleznosci od ³o¿yskowania
+            edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_1a.ini',douArgument),-3)
+          else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_1b.ini',douArgument),-3)
+        end
+      else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_a_2.ini',douArgument),-3)
+     end
+  else
+    begin
+    if cbxMontazKol.ItemIndex=0 then //  wykres kHB_b_1 lub kHB_b_2 w zaleznosci od rodzaju monta¿u ko³
+      begin
+        if cbxLozyska.ItemIndex=0 then //  wykres kHB_b_1a lub kHB_b_1b w zaleznosci od ³o¿yskowania
+          edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_1a.ini',douArgument),-3)
+        else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_1b.ini',douArgument),-3)
+    end
+    else edtKhb.AsDouble:=RoundTo(AproksymacjaLiniowa('kHB_b_2.ini',douArgument),-3)
+   end;
+  if edtKhb.AsDouble=0 then edtKhb.AsDouble:=1.4; //Zabezpieczenie przed wartoscia poza zakresem np. przy du¿ych prze³ozeniach
 end;
 
 procedure TfrmMain.WspolKA; //Wspo³czynnik uwzglêdniaj¹cy zewnetrzne obci¹zenie dynamiczne
