@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.ComCtrls;
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Imaging.jpeg;
 
 type
   TfrmPomoc = class(TForm)
@@ -20,8 +20,21 @@ type
     tshSchemat: TTabSheet;
     tshWarPracy: TTabSheet;
     tshNapreStyk: TTabSheet;
+    tshObciazenie: TTabSheet;
+    pnlZmienneObcia: TPanel;
+    pnlNaglowek3: TPanel;
+    lblNaglowek3: TLabel;
+    lblZmienneObcia1: TLabel;
+    lblZmienneObcia2: TLabel;
+    pnlPrzelozenie: TPanel;
+    lblPrzelozenie: TLabel;
+    pnlNaglowek1: TPanel;
+    lblNaglowek1: TLabel;
+    imgPrzelozenie: TImage;
     procedure btnPoprzedniClick(Sender: TObject);
     procedure btnNastepnaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -43,6 +56,11 @@ end;
 procedure TfrmPomoc.btnPoprzedniClick(Sender: TObject);
 begin
   if pgcPomoc.TabIndex>0 then pgcPomoc.TabIndex:=pgcPomoc.TabIndex-1;
+end;
+
+procedure TfrmPomoc.FormCreate(Sender: TObject);
+begin
+   //
 end;
 
 end.

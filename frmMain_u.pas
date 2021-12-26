@@ -528,6 +528,8 @@ type
     edtSilaPoosiowa2: TEdit;
     lblOstrzezenie6_1: TLabel;
     lblOstrzezenie6_2: TLabel;
+    Button2: TButton;
+    btnRaport: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -625,6 +627,7 @@ var
   intIloscMaterialow, intIndeks: Integer;
 begin
    Application.OnHint:=ShowHint;
+   //Application.MainFormOnTaskBar:= False; //Pozawala na zmiane aktywnego okna
    //Wczytywanie materia³ow z pliku Materaly.ini w katalogu z plikiem .exe
    iniMaterialy:= TIniFile.Create(ExtractFilePath(Application.ExeName)+ 'Materialy.ini');
    if not iniMaterialy.SectionExists('Ustawienia') then  //Sprawdzenie czy dokument zosta³ otwarty prawid³owo lub czy jest pusty
@@ -637,8 +640,12 @@ begin
     end;
    iniMaterialy.Free;
 
-   cbxPrzelozenie.Hint:='Prze³o¿enie|Wartoœci prze³o¿eñ s¹ uszeregowane, wiêcej w pomocy'; //Dodanie #13 tworzy now¹ linie w hincie a | przenosi do pasku stanu
-   pgcMain.TabIndex:=0;
+   //Wczytanie domyœlnych materia³ow
+   cbxMaterial1.ItemIndex:= 3;
+   cbxMaterial1Change(self);
+   cbxMaterial2.ItemIndex:= 4;
+   cbxMaterial2Change(self);
+
    tshEtap2.TabVisible:= false;
    tshEtap3.TabVisible:= false;
    tshEtap4.TabVisible:= false;
@@ -891,8 +898,16 @@ end;
 
 procedure TfrmMain.ZabezpieczTEdit(Sender: TObject);
 begin
+  if TEdit(Sender).Tag=1 then
+  begin
     if not TEdit(Sender).IsValid then
-    raise Exception.Create('Podana wartoœæ momentu nie reprezentuje liczby');
+    raise Exception.Create('Wprowadzona wartoœæ nie reprezentuje liczby ca³kowitej');
+  end
+  else
+  begin
+    if not TEdit(Sender).IsValid then
+    raise Exception.Create('Wprowadzona wartoœæ nie reprezentuje liczby');
+  end;
 end;
 {$ENDREGION}
 
@@ -1466,12 +1481,12 @@ begin
   if edtWarOblNaprezStyk.AsDouble>= edtNaprezStykDop.AsDouble then
   begin
     lblOstrzezenie4_2.Visible:=True;
-    btnDalej4.Enabled:=False;
+    //btnDalej4.Enabled:=False;
   end
   else
   begin
     lblOstrzezenie4_2.Visible:=False;
-    btnDalej4.Enabled:=True;
+    //btnDalej4.Enabled:=True;
   end;
 
 end;
@@ -1482,7 +1497,7 @@ douNiedoobciazenie: Double;
 begin
   douNiedoobciazenie:= RoundTo(Abs(edtWarOblNaprezStyk.AsDouble- edtNaprezStykDop.AsDouble)*100/edtNaprezStykDop.AsDouble,-2);
   edtObciazeniePrzekladni.AsDouble:= 100- douNiedoobciazenie;
-  {Je¿eli wartoœcæ niedoobci¹¿enia przekroczy 5% wyswietlany jest komunikat o potrzenje korekcie}
+  {Je¿eli wartoœcæ niedoobci¹¿enia przekroczy 5% uaktywniana jest procedura odpowedzialna za korekte}
   if douNiedoobciazenie>5 then KorektaSzerokosciWienca(true)
   else KorektaSzerokosciWienca(false);
 end;
@@ -1760,8 +1775,8 @@ end;
 
 procedure TfrmMain.SilyObwodowe;
 begin
-  edtSilaObwodowa1.AsDouble:= RoundTo(2*1000*edtMoment1.AsDouble/edtSredPodzialowaZebnik.AsDouble,-2);
-  edtSilaObwodowa2.AsDouble:= RoundTo(2*1000*edtMomentRzecz.AsDouble/edtSredPodzialowaKolo.AsDouble,-2);
+  edtSilaObwodowa1.AsDouble:= RoundTo(2*1000*edtMoment1.AsDouble/edtSredSredniaZebnik.AsDouble,-2);
+  edtSilaObwodowa2.AsDouble:= RoundTo(2*1000*edtMomentRzecz.AsDouble/edtSredSredniaKolo.AsDouble,-2);
 end;
 
 procedure TfrmMain.SilyPromieniowe;
