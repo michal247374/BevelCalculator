@@ -1816,9 +1816,15 @@
           Left = 122
           Top = 68
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           ReadOnly = True
           TabOrder = 0
         end
@@ -1827,9 +1833,15 @@
           Left = 122
           Top = 34
           Width = 130
-          Height = 22
+          Height = 21
           Alignment = taRightJustify
           Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           ReadOnly = True
           TabOrder = 1
         end
@@ -2848,7 +2860,7 @@
           Height = 18
           Alignment = taRightJustify
           AutoSize = False
-          Caption = 'Ko'#322'o z'#281'bate'
+          Caption = 'z2 ='
           Layout = tlCenter
         end
         object lblLiczbaZebowZebnik: TLabel
@@ -2858,7 +2870,7 @@
           Height = 21
           Alignment = taRightJustify
           AutoSize = False
-          Caption = 'Z'#281'bnik'
+          Caption = 'z1 ='
           Layout = tlCenter
         end
         object edtLiczbaZebowZebnik: TEdit
@@ -6460,6 +6472,7 @@
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 7
+        OnClick = btnRaportClick
       end
     end
   end
@@ -6472,5 +6485,11 @@
       item
         Width = 50
       end>
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '*.pdf'
+    Filter = 'Pliki PDF|*.pdf'
+    Left = 825
+    Top = 568
   end
 end

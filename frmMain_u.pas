@@ -530,6 +530,7 @@ type
     lblOstrzezenie6_2: TLabel;
     Button2: TButton;
     btnRaport: TButton;
+    SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure btnDalej1Click(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
@@ -551,6 +552,7 @@ type
     procedure btnDalej5Click(Sender: TObject);
     procedure DeaktywacjaPrzyZmianach(Sender: TObject);
     procedure ZabezpieczTEdit(Sender: TObject);
+    procedure btnRaportClick(Sender: TObject);
   private
     procedure ShowHint(ASender: TObject);
     procedure WspolczynnikZmianyObciarzenia();
@@ -620,6 +622,7 @@ var
 
 implementation
 
+uses SynPdf,ShellApi;
 {$R *.dfm}
 procedure TfrmMain.FormCreate(Sender: TObject); //Domyslna procedura forma, uruchamiana na pocz¹tku programu, Obliczenia dla Etapu 1
 var
@@ -1791,6 +1794,214 @@ begin
   edtSilaPoosiowa2.AsDouble:= RoundTo(edtSilaObwodowa2.AsDouble*0.364*cos(DegToRad(edtKatyZebnik.AsDouble)),-2);
 end;
 
+procedure TfrmMain.btnRaportClick(Sender: TObject); //Procedura odpowedzialna za generowanie raportu w PDF
+//Zeby wszytko dzia³a³o nale¿y za³¹czyæ biblioteke z katalogu SynPDF
+var
+  fname: String;
+  lPdf   : TPdfDocumentGDI;
+  lPage  : TPdfPage;
+begin
+  //Obs³uga TOpenDialog
+  SaveDialog1.InitialDir:= ExtractFilePath(Application.ExeName);
+  if not SaveDialog1.Execute then Exit;
+  fname:=SaveDialog1.FileName;
+
+  //Generowanie do pdfa
+  lPdf := TPdfDocumentGDI.Create;
+  try
+    //Nag³owek pdf
+    lPdf.Info.Author        := 'BevelCalc';
+    lPdf.Info.CreationDate  := Now;
+    lPdf.Info.Creator       := 'BevelCalc';
+    lPdf.DefaultPaperSize   := psA4;
+    lPdf.Info.Title         := 'Raport z obliczen';
+
+    //Dodawanie treœci
+    //Tytu³
+    lPage:= lPdf.AddPage;
+    lPdf.VCLCanvas.Font.Name:= 'Tahoma';
+    lPdf.VCLCanvas.Font.Size:= 22;
+    lPdf.VCLCanvas.Font.Style:= [fsBold];
+    lPdf.VCLCanvas.TextOut(50,30,'Raport z obliczeñ przek³adni sto¿kowej');
+
+    //Podtytu³ z dat¹
+    lPdf.VCLCanvas.Font.Name:= 'Times';
+    lPdf.VCLCanvas.Font.Size:= 12;
+    lPdf.VCLCanvas.Font.Style:= [] ;
+    lPdf.VCLCanvas.TextOut(60,70,'Wygenerowano: '+DateTimeToStr(now));
+
+    //Parametry wejœcia i wyjœcia
+    lPdf.VCLCanvas.TextOut(50,100,'Prêdkoœæ obrotowa zêbnika n1 =');
+      lPdf.VCLCanvas.TextOut(540,100,edtPredObr1.Text);
+      lPdf.VCLCanvas.TextOut(600,100,'[obr/min]');
+    lPdf.VCLCanvas.TextOut(50,120,'Prêdkoœæ obrotowa ko³a zêbatego n2 =');
+      lPdf.VCLCanvas.TextOut(540,120,edtPredObr2.Text);
+      lPdf.VCLCanvas.TextOut(600,120,'[obr/min]');
+    lPdf.VCLCanvas.TextOut(50,140,'Moment skrêcaj¹cy na wejœciu T1 =');
+      lPdf.VCLCanvas.TextOut(540,140,edtMoment1.Text);
+      lPdf.VCLCanvas.TextOut(600,140,'[Nm]');
+    lPdf.VCLCanvas.TextOut(50,160,'Moment skrêcaj¹cy na wyjœciu T2 =');
+      lPdf.VCLCanvas.TextOut(540,160,edtMoment2.Text);
+      lPdf.VCLCanvas.TextOut(600,160,'[Nm]');
+    lPdf.VCLCanvas.TextOut(50,180,'Prze³o¿enie i =');
+      lPdf.VCLCanvas.TextOut(540,180,cbxPrzelozenie.Text);
+      lPdf.VCLCanvas.TextOut(600,180,'');
+    lPdf.VCLCanvas.TextOut(50,220,'Liczba godzin pracy przek³adni Lh =');
+      lPdf.VCLCanvas.TextOut(540,220,edtCzasPracy.Text);
+      lPdf.VCLCanvas.TextOut(600,220,'[h]');
+    lPdf.VCLCanvas.TextOut(50,240,'Wspo³czynnik jednorazowego przeci¹¿enia Tmax/Tnom =');
+      lPdf.VCLCanvas.TextOut(540,240,edtTmaxTnom.Text);
+
+    //Materia³y
+    lPdf.VCLCanvas.TextOut(50,280,'Materia³ zêbnika:');
+      lPdf.VCLCanvas.TextOut(540,280,cbxMaterial1.Text);
+    lPdf.VCLCanvas.TextOut(50,300,'Obróbka cieplna:');
+      lPdf.VCLCanvas.TextOut(540,300,edtObrobkaCieplna1.Text);
+    lPdf.VCLCanvas.TextOut(50,320,'Twardoœæ =');
+      lPdf.VCLCanvas.TextOut(540,320,edtTwardosc1.Text);
+      lPdf.VCLCanvas.TextOut(600,320,'[HB]');
+    lPdf.VCLCanvas.TextOut(50,340,'Wytrzyma³oœæ na rozci¹ganie Rm =');
+      lPdf.VCLCanvas.TextOut(540,340,edtRm1.Text);
+      lPdf.VCLCanvas.TextOut(600,340,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,360,'Granica plastycznoœci Re =');
+      lPdf.VCLCanvas.TextOut(540,360,edtRe1.Text);
+      lPdf.VCLCanvas.TextOut(600,360,'[MPa]');
+
+    lPdf.VCLCanvas.TextOut(50,400,'Materia³ ko³a zêbatego:');
+      lPdf.VCLCanvas.TextOut(540,400,cbxMaterial2.Text);
+    lPdf.VCLCanvas.TextOut(50,420,'Obróbka cieplna:');
+      lPdf.VCLCanvas.TextOut(540,420,edtObrobkaCieplna2.Text);
+    lPdf.VCLCanvas.TextOut(50,440,'Twardoœæ =');
+      lPdf.VCLCanvas.TextOut(540,440,edtTwardosc2.Text);
+      lPdf.VCLCanvas.TextOut(600,440,'[HB]');
+    lPdf.VCLCanvas.TextOut(50,460,'Wytrzyma³oœæ na rozci¹ganie Rm =');
+      lPdf.VCLCanvas.TextOut(540,460,edtRm2.Text);
+      lPdf.VCLCanvas.TextOut(600,460,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,480,'Granica plastycznoœci Re =');
+      lPdf.VCLCanvas.TextOut(540,480,edtRe2.Text);
+      lPdf.VCLCanvas.TextOut(600,480,'[MPa]');
+
+    //Parametry geometryczne
+    lPdf.VCLCanvas.TextOut(50,520,'Modu³ obwodowy zewnêtrzny mte =');
+      lPdf.VCLCanvas.TextOut(540,520,edtModulZewnetrzny.Text);
+      lPdf.VCLCanvas.TextOut(600,520,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,540,'Modu³ w œrednim przekroju mm =');
+      lPdf.VCLCanvas.TextOut(540,540,edtModulSredni.Text);
+      lPdf.VCLCanvas.TextOut(600,540,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,560,'Liczba zêbów zêbnika z1 =');
+      lPdf.VCLCanvas.TextOut(540,560,edtLiczbaZebowZebnik.Text);
+    lPdf.VCLCanvas.TextOut(50,580,'Liczba zêbów ko³a zêbatego z2 =');
+      lPdf.VCLCanvas.TextOut(540,580,edtLiczbaZebowKolo.Text);
+    lPdf.VCLCanvas.TextOut(50,600,'D³ugoœæ zewnêtrzniej tworz¹cej Re =');
+      lPdf.VCLCanvas.TextOut(540,600,edtTworzaca.Text);
+      lPdf.VCLCanvas.TextOut(600,600,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,620,'D³ugoœæ œrednia tworz¹cej Rm =');
+      lPdf.VCLCanvas.TextOut(540,620,edtSredTworzaca.Text);
+      lPdf.VCLCanvas.TextOut(600,620,'[mm]');
+
+    lPdf.VCLCanvas.TextOut(50,660,'Œrednica podzia³owa zêbnika de1 =');
+      lPdf.VCLCanvas.TextOut(540,660,edtSredPodzialowaZebnik.Text);
+      lPdf.VCLCanvas.TextOut(600,660,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,680,'Œrednica podzia³owa ko³a zêbatego de2 =');
+      lPdf.VCLCanvas.TextOut(540,680,edtSredPodzialowaKolo.Text);
+      lPdf.VCLCanvas.TextOut(600,680,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,700,'Œrednica wierzcho³ków zêbów zêbnika dae1 =');
+      lPdf.VCLCanvas.TextOut(540,700,edtSredWierzZebnik.Text);
+      lPdf.VCLCanvas.TextOut(600,700,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,720,'Œrednica wierzcho³ków zêbów ko³a zêbatego dae2 =');
+      lPdf.VCLCanvas.TextOut(540,720,edtSredWierzKolo.Text);
+      lPdf.VCLCanvas.TextOut(600,720,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,740,'Œrednica stóp zêbów zêbnika dfe1 =');
+      lPdf.VCLCanvas.TextOut(540,740,edtSredStopZebnik.Text);
+      lPdf.VCLCanvas.TextOut(600,740,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,760,'Œrednica stóp zêbów ko³a zêbatego dfe2 =');
+      lPdf.VCLCanvas.TextOut(540,760,edtSredStopKolo.Text);
+      lPdf.VCLCanvas.TextOut(600,760,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,780,'Œrednica œrednia zêbnika dm1 =');
+      lPdf.VCLCanvas.TextOut(540,780,edtSredSredniaZebnik.Text);
+      lPdf.VCLCanvas.TextOut(600,780,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,800,'Œrednica œrednia ko³a zêbatego dm2 =');
+      lPdf.VCLCanvas.TextOut(540,800,edtSredSredniaKolo.Text);
+      lPdf.VCLCanvas.TextOut(600,800,'[mm]');
+
+    lPdf.VCLCanvas.TextOut(50,840,'Prze³o¿enie rzeczywiste irz =');
+      lPdf.VCLCanvas.TextOut(540,840,edtPrzelozenieRzecz.Text);
+    lPdf.VCLCanvas.TextOut(50,860,'Szerokoœæ wieñca kó³ zêbatych b =');
+      lPdf.VCLCanvas.TextOut(540,860,edtNowaSzerokoscWienca.Text);
+      lPdf.VCLCanvas.TextOut(600,860,'[mm]');
+    lPdf.VCLCanvas.TextOut(50,880,'K¹t tworz¹cej zêbnika '+ #$03B4 +'1 =');
+      lPdf.VCLCanvas.TextOut(540,880,edtKatyZebnik.Text);
+      lPdf.VCLCanvas.TextOut(600,880,'[°]');
+    lPdf.VCLCanvas.TextOut(50,900,'K¹t tworz¹cej ko³a zêbatego '+ #$03B4 +'2 =');
+      lPdf.VCLCanvas.TextOut(540,900,edtKatyKolo.Text);
+      lPdf.VCLCanvas.TextOut(600,900,'[°]');
+
+    //Naprezenia
+    lPdf.VCLCanvas.TextOut(50,940,'Obliczeniowe naprê¿enia stykowe '+ #$03C3 + 'H =');
+      lPdf.VCLCanvas.TextOut(540,940,edtWarOblNaprezStyk.Text);
+      lPdf.VCLCanvas.TextOut(600,940,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,960,'Dopuszczalne naprê¿enia stykowe '+ #$03C3 + 'HP =');
+      lPdf.VCLCanvas.TextOut(540,960,edtNaprezStykDop.Text);
+      lPdf.VCLCanvas.TextOut(600,960,'[MPa]');
+
+    lPdf.VCLCanvas.TextOut(50,1000,'Obliczeniowe naprê¿enia gn¹ce '+ #$03C3 + 'F =');
+      lPdf.VCLCanvas.TextOut(540,1000,edtNaprezGnace.Text);
+      lPdf.VCLCanvas.TextOut(600,1000,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,1020,'Dopuszczalne naprê¿enia gn¹ce '+ #$03C3 + 'FP =');
+      lPdf.VCLCanvas.TextOut(540,1020,edtDopNaprezGnace.Text);
+      lPdf.VCLCanvas.TextOut(600,1020,'[MPa]');
+
+    //Dodanie nowej strony
+    lPage:= lPdf.AddPage;
+    lPdf.VCLCanvas.Font.Name:= 'Times';
+    lPdf.VCLCanvas.Font.Size:= 12;
+    lPdf.VCLCanvas.Font.Style:= [] ;
+
+    //Napre¿enie przy przeci¹¿eniach
+    lPdf.VCLCanvas.TextOut(50,40,'Obliczeniowe naprê¿enia stykowe przy przeci¹¿eniach '+ #$03C3 + 'H max =');
+      lPdf.VCLCanvas.TextOut(540,40,edtNaprezStykPrzyPrzeciaz.Text);
+      lPdf.VCLCanvas.TextOut(600,40,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,60,'Dopuszczalne naprê¿enia stykowe przy przeci¹¿eniach '+ #$03C3 + 'HP max =');
+      lPdf.VCLCanvas.TextOut(540,60,edtNaprezStykMax.Text);
+      lPdf.VCLCanvas.TextOut(600,60,'[MPa]');
+
+    lPdf.VCLCanvas.TextOut(50,100,'Obliczeniowe naprê¿enia gn¹ce przy przeci¹¿eniach '+ #$03C3 + 'F max =');
+      lPdf.VCLCanvas.TextOut(540,100,edtNaprezGnacPrzyPrzeciaz1.Text);
+      lPdf.VCLCanvas.TextOut(600,100,'[MPa]');
+    lPdf.VCLCanvas.TextOut(50,120,'Dopuszczalne naprê¿enia gn¹ce przy przeci¹¿eniach '+ #$03C3 + 'FP max =');
+      lPdf.VCLCanvas.TextOut(540,120,edtNaprezGnacMax1.Text);
+      lPdf.VCLCanvas.TextOut(600,120,'[MPa]');
+
+    //Si³y
+    lPdf.VCLCanvas.TextOut(50,160,'Moment rzeczywisty na wale wyjœciowym =');
+      lPdf.VCLCanvas.TextOut(540,160,edtMomentRzecz.Text);
+      lPdf.VCLCanvas.TextOut(600,160,'[Nm]');
+    lPdf.VCLCanvas.TextOut(50,180,'Si³a obwodowa zêbnika Ft1 =');
+      lPdf.VCLCanvas.TextOut(540,180,edtSilaObwodowa1.Text);
+      lPdf.VCLCanvas.TextOut(600,180,'[N]');
+    lPdf.VCLCanvas.TextOut(50,200,'Si³a obwodowa ko³a zêbatego Ft2 =');
+      lPdf.VCLCanvas.TextOut(540,200,edtSilaObwodowa2.Text);
+      lPdf.VCLCanvas.TextOut(600,200,'[N]');
+    lPdf.VCLCanvas.TextOut(50,220,'Si³a promieniowa zêbnika Fr1 =');
+      lPdf.VCLCanvas.TextOut(540,220,edtSilaPromeniowa1.Text);
+      lPdf.VCLCanvas.TextOut(600,220,'[N]');
+    lPdf.VCLCanvas.TextOut(50,240,'Si³a promieniowa ko³a zêbatego Fr2 =');
+      lPdf.VCLCanvas.TextOut(540,240,edtSilaPromeniowa2.Text);
+      lPdf.VCLCanvas.TextOut(600,240,'[N]');
+     lPdf.VCLCanvas.TextOut(50,260,'Si³a poosiowa zêbnika Fa1 =');
+      lPdf.VCLCanvas.TextOut(540,260,edtSilaPoosiowa1.Text);
+      lPdf.VCLCanvas.TextOut(600,260,'[N]');
+    lPdf.VCLCanvas.TextOut(50,280,'Si³a poosiowa ko³a zêbatego Fa2 =');
+      lPdf.VCLCanvas.TextOut(540,280,edtSilaPoosiowa2.Text);
+      lPdf.VCLCanvas.TextOut(600,280,'[N]');
+
+    //Zapis, zwolnienie pamieci i otwarcie pliku w przegladarce
+    lPdf.SaveToFile(fname);
+  finally
+    lPdf.Free;
+    ShellExecute(Handle,'open',pchar(fname),'','',SW_Normal);
+  end;
+end;
 {$ENDREGION}
 
 {$REGION 'TEdit'}
