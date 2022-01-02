@@ -34,7 +34,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap2
+    ActivePage = tshEtap6
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -93,6 +93,7 @@
         Top = 83
         Width = 454
         Height = 117
+        Hint = '|Podstawowe dane wej'#347'ciowe do oblicze'#324' przek'#322'adni'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -271,6 +272,9 @@
         Top = 281
         Width = 454
         Height = 167
+        Hint = 
+          '|Program daje mo'#380'liwo'#347#263' prowadzenia oblicze'#324' dla przek'#322'adni o zm' +
+          'iennym obciazeniu w czasie. Wi'#281'cej w "Pomocy"'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -527,6 +531,10 @@
         Top = 206
         Width = 600
         Height = 118
+        Hint = 
+          '|Materia'#322' konstrukcyjny k'#243#322' z'#281'batych znacz'#261'co wp'#322'ywa na parametr' +
+          'y wytrzyma'#322'o'#347'ciowe przek'#322'adni. Zalecania przy doborze materia'#322'u ' +
+          'znajduj'#261' si'#281' w "Pomocy".'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -864,6 +872,10 @@
         Top = 330
         Width = 600
         Height = 118
+        Hint = 
+          '|Materia'#322' konstrukcyjny k'#243#322' z'#281'batych znacz'#261'co wp'#322'ywa na parametr' +
+          'y wytrzyma'#322'o'#347'ciowe przek'#322'adni. Zalecania przy doborze materia'#322'u ' +
+          'znajduj'#261' si'#281' w "Pomocy".'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1023,6 +1035,9 @@
         Top = 454
         Width = 454
         Height = 70
+        Hint = 
+          '|Parametr charakterystyczny dla maszyny nap'#281'dzaj'#261'cej, wp'#322'ywa na ' +
+          'dopuszczalne napr'#281#380'enia przy przeci'#261#380'eniach.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1078,6 +1093,9 @@
         Top = 454
         Width = 601
         Height = 70
+        Hint = 
+          '|Spos'#243'b monta'#380'u k'#243#322' z'#281'batych oraz typ '#322'o'#380'ysk wp'#322'ywa na wielko'#347#263'i' +
+          ' wsp'#243#322'czynnik'#243'w przy obliczeniach.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1158,6 +1176,9 @@
         Top = 529
         Width = 949
         Height = 70
+        Hint = 
+          '|Warunki pracy przek'#322'adni wp'#322'ywaja na warto'#347#263' wspo'#322'czynnika kA u' +
+          'wgl'#281'dniaj'#261'cego dynamiczno'#347#263' obcia'#380'enia zewn'#281'trznego. '
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1243,6 +1264,7 @@
         Top = 530
         Width = 106
         Height = 69
+        Hint = 'Przej'#347'cie do kolejnego etapu i wywo'#322'anie oblicze'#324
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1326,6 +1348,9 @@
         Top = 83
         Width = 500
         Height = 117
+        Hint = 
+          '|Podstawa pr'#243'by zm'#281'czeniowej jest nazywana r'#243'wnie'#380' bazow'#261' liczb'#261 +
+          ' cykli. Zale'#380'y od twardo'#347'ci materia'#322'u k'#243#322' z'#281'batych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1391,6 +1416,7 @@
         Top = 486
         Width = 106
         Height = 113
+        Hint = 'Przej'#347'cie do kolejnego etapu i wywo'#322'anie oblicze'#324
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1406,6 +1432,9 @@
         Top = 206
         Width = 500
         Height = 117
+        Hint = 
+          '|Poza wsp'#243#322'czynnikiem kFE na warto'#347#263' wp'#322'ywa predko'#347'c obrotowa z'#281 +
+          'bnika i czas pracy przek'#322'adni.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1486,6 +1515,9 @@
           Top = 61
           Width = 156
           Height = 21
+          Hint = 
+            '|Wspo'#322'czynnik obliczany na podstawie cykli zmiennego obci'#261#380'enia.' +
+            ' Dla sta'#322'ego obci'#261#380'enia wynosci 1.'
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -1497,6 +1529,9 @@
         Top = 329
         Width = 500
         Height = 117
+        Hint = 
+          '|Warto'#347#263' wsp'#243#322'czynnika wynika z zale'#380'no'#347'ci miedzy podstawow'#261' pr'#243 +
+          'by zm'#281'czeniowej i r'#243'wnowa'#380'n'#261' liczba cykli obci'#261#380'enia.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1562,6 +1597,9 @@
         Top = 452
         Width = 500
         Height = 117
+        Hint = 
+          '|Warto'#347#263' napr'#281#380'e'#324' krytycznych okre'#347'lana jest na podstawie rodzaj' +
+          'u obr'#243'bki cieplnej oraz twardo'#347#263' materia'#322'u.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1657,6 +1695,10 @@
         Top = 83
         Width = 555
         Height = 117
+        Hint = 
+          'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
+          'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
+          'a powierzchniowego, naweglania i azotowania'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1699,10 +1741,7 @@
           Top = 34
           Width = 145
           Height = 22
-          Hint = 
-            'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
-            'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
-            'a powierzchniowego, naweglania i azotowania'
+          Hint = 'Wsp'#243#322'czynnik bezpiecze'#324'stwa dla z'#281'bnika'
           Style = csOwnerDrawFixed
           ItemIndex = 1
           TabOrder = 0
@@ -1718,10 +1757,7 @@
           Top = 68
           Width = 145
           Height = 22
-          Hint = 
-            'Warto'#347#263' wspo'#322'czynnika zale'#380'y od obr'#243'bki cieplnej|Sh=1,1 dla norm' +
-            'alizacji, ulepszania lub hartowania na wskro'#347'; 1,2 dla hartowani' +
-            'a powierzchniowego, naweglania i azotowania'
+          Hint = 'Wsp'#243#322'czynnik bezpiecze'#324'stwa dla z'#281'bnika'
           Style = csOwnerDrawFixed
           ItemIndex = 1
           TabOrder = 1
@@ -1738,6 +1774,9 @@
         Top = 206
         Width = 555
         Height = 117
+        Hint = 
+          '|Wst'#281'pna warto'#347#263' napr'#281#380'e'#324' stykowych u'#380'ywana do oblicze'#324' projekto' +
+          'wych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         Font.Charset = DEFAULT_CHARSET
@@ -1851,6 +1890,9 @@
         Top = 486
         Width = 444
         Height = 83
+        Hint = 
+          '|Najwa'#380'niejsza wielko'#347'c w drugim etapie, u'#380'ywana jest do oblicze' +
+          'nia wst'#281'pnej '#347'rednicy z'#281'bnika. Wi'#281'cej informacji w "Pomocy".'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -1920,6 +1962,10 @@
         Top = 329
         Width = 555
         Height = 151
+        Hint = 
+          '|Warto'#347#263' dopuszczalnych napr'#281#380'e'#324' przy przeci'#261#380'eniach okre'#347'lana j' +
+          'est na podstawie wsp'#243#322'czynnika Tmax/Tnom oraz parametr'#243'w materia' +
+          #322'u.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2630,6 +2676,9 @@
         Top = 83
         Width = 325
         Height = 117
+        Hint = 
+          '|Pierwszy parametr geometrczny przek'#322'adni. Obliczany na podstawi' +
+          'e '#963'HP oraz szeregu innych parametr'#243'w .'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2770,6 +2819,9 @@
           Top = 58
           Width = 19
           Height = 21
+          Hint = 
+            '|Wielko'#347#263' wspo'#322'czynnika mo'#380'na modyfikowa'#263' w zakresie 0,2-0,3. Za' +
+            'lecana jest warto'#347#263' 0,3.'
           Min = 20
           Max = 30
           Position = 30
@@ -2782,6 +2834,7 @@
         Top = 206
         Width = 326
         Height = 67
+        Hint = '|Warto'#347'c modu'#322'u zewnetrznego jest znormalizowana.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2836,6 +2889,10 @@
         Top = 279
         Width = 326
         Height = 98
+        Hint = 
+          '|Liczba z'#281'b'#243'w z'#281'bnika to iloraz z'#281'wn'#281'trznej '#347'rednicy z'#281'bnika i m' +
+          'odu'#322'u zewnetrznego. Liczba z'#281'b'#243'w ko'#322'a z'#281'batego to iloczyn liczby' +
+          ' z'#281'b'#243'w z'#281'bnika i prze'#322'ozenia.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2879,6 +2936,9 @@
           Top = 25
           Width = 130
           Height = 21
+          Hint = 
+            'Liczba z'#281'b'#243'w z'#281'bnika|Jest to iloraz z'#281'wn'#281'trznej '#347'rednicy z'#281'bnika' +
+            ' i modu'#322'u zewnetrznego.'
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -2890,6 +2950,9 @@
           Top = 59
           Width = 130
           Height = 21
+          Hint = 
+            'Liczba z'#281'b'#243'w ko'#322'a z'#281'batego|Obliczana jako iloczyn liczby z'#281'b'#243'w z' +
+            #281'bnika i prze'#322'ozenia.'
           Alignment = taRightJustify
           Enabled = False
           ReadOnly = True
@@ -2901,6 +2964,9 @@
         Top = 383
         Width = 326
         Height = 66
+        Hint = 
+          '|Rzeczywista warto'#347#263' prze'#322'o'#380'enia wynika z wyliczonej liczby z'#281'b'#243 +
+          'w. Nie powinna znacz'#261'co odbiega'#263' od za'#322'o'#380'onego prze'#322'o'#380'enia.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2945,6 +3011,7 @@
         Top = 455
         Width = 326
         Height = 66
+        Hint = '|D'#322'ugo'#347#263' zewn'#281'trznej tworz'#261'cej zaznaczono na rysunku po prawej.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -2999,6 +3066,9 @@
         Top = 527
         Width = 326
         Height = 66
+        Hint = 
+          '|Wst'#281'pna szeroko'#347#263' wie'#324'ca, czesto wymaga korekty w dalszym etapi' +
+          'e oblicze'#324'.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3053,6 +3123,9 @@
         Top = 383
         Width = 298
         Height = 66
+        Hint = 
+          '|D'#322'ugo'#347#263' '#347'rednia tworz'#261'cej jest d'#322'ugo'#347'ci'#261' zewn'#281'trzn'#261' pomiejszon'#261 +
+          ' o po'#322'owe szeroko'#347'ci wie'#324'ca.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3107,6 +3180,9 @@
         Top = 278
         Width = 298
         Height = 99
+        Hint = 
+          '|K'#261'ty sto'#380'k'#243'w wp'#322'ywaj'#261' miedzy innymi na warto'#347'ci si'#322' w zaz'#281'bieni' +
+          'u.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3198,6 +3274,7 @@
         Top = 83
         Width = 298
         Height = 189
+        Hint = '|Obliczane '#347'rednice zosta'#322'y zaznaczone na rysunku po prawej'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3409,6 +3486,7 @@
         Top = 528
         Width = 115
         Height = 71
+        Hint = 'Przej'#347'cie do kolejnego etapu i wywo'#322'anie oblicze'#324
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -3424,6 +3502,7 @@
         Top = 455
         Width = 298
         Height = 66
+        Hint = '|Jedna z g'#322#243'wnych wielko'#347'ci charakteryzuj'#261'cych przek'#322'adnie.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3560,6 +3639,7 @@
         Top = 83
         Width = 341
         Height = 67
+        Hint = '|Wst'#281'pne wyliczenie si'#322'y obwodowej dla oblicze'#324' sprawdzaj'#261'cych'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3613,6 +3693,9 @@
         Top = 156
         Width = 342
         Height = 67
+        Hint = 
+          '|Pr'#281'dko'#347#263' obwodowa k'#243#322' wp'#322'ywa miedzy innymi  na klase dok'#322'adno'#347'c' +
+          'i w jakiej powinny by'#263' wykonane ko'#322'a'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3667,8 +3750,8 @@
         Width = 342
         Height = 67
         Hint = 
-          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
-          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+          '|Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate' +
+          '.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3704,8 +3787,8 @@
         Width = 342
         Height = 91
         Hint = 
-          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
-          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+          '|Na warto'#347#263' wsp'#243#322'czynnika wp'#322'ywa twardo'#347#263' materia'#322'u na ko'#322'o z'#281'ba' +
+          'te oraz pr'#281'dko'#347#263' obwodowa k'#243#322'.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3751,6 +3834,7 @@
         Top = 399
         Width = 342
         Height = 91
+        Hint = '|Dla z'#281'b'#243'w prosty wsp'#243#322'czynnik przyjmuje warto'#347'c 1,0'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3797,6 +3881,9 @@
         Top = 496
         Width = 342
         Height = 81
+        Hint = 
+          '|Jedna z podstawowoych wielko'#347'ci do obliczenia napr'#281#380'e'#324' stykowyc' +
+          'h.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -3945,7 +4032,7 @@
         Top = 229
         Width = 346
         Height = 92
-        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        Hint = '|Wsp'#243#322'czynnik obliczany jest na podstawie liczby z'#281'b'#243'w.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4015,6 +4102,9 @@
         Top = 326
         Width = 346
         Height = 67
+        Hint = 
+          '|Podstawowa wielko'#347#263' na podstawie kt'#243'rej sprawdzana jest wytrzym' +
+          'a'#322'o'#347#263' przek'#322'adni.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4074,6 +4164,9 @@
         Top = 400
         Width = 346
         Height = 92
+        Hint = 
+          '|Chropowato'#347#263' roboczej powierzchni z'#281'b'#243'w zale'#380'y od  klasy dok'#322'ad' +
+          'no'#347'ci w jakiej wykonane s'#261' ko'#322'a.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4145,9 +4238,8 @@
         Width = 346
         Height = 81
         Hint = 
-          'Wsp'#243#322'czynnik uwzgl'#281'dniaj'#261'cy obwodow'#261' pr'#281'dko'#347#263' k'#243#322' z'#281'batych|Na je' +
-          'go warto'#347#263' poza pr'#281'dko'#347'ci'#261' odwodow'#261' wp'#322'ywa r'#243'wnie'#380' twardo'#347#263' mate' +
-          'ria'#322'u. '
+          '|Na jego warto'#347#263' poza pr'#281'dko'#347'ci'#261' odwodow'#261' wp'#322'ywa r'#243'wnie'#380' twardo'#347 +
+          #263' materia'#322'u. '
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4192,7 +4284,9 @@
         Top = 83
         Width = 361
         Height = 67
-        Hint = 'Wsp'#243#322'czynnik uwzgl'#281'dniaj'#261'cy wymiary k'#243#322' z'#281'batych'
+        Hint = 
+          '|Wsp'#243#322'czynnik uwzgl'#281'dniaj'#261'cy wymiary k'#243#322' z'#281'batych. Dla ko'#322' mniej' +
+          'szych ni'#380' 700 mn wynosi 1,0'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4237,6 +4331,9 @@
         Top = 156
         Width = 361
         Height = 120
+        Hint = 
+          '|Napre'#380'enia o mniejszej warto'#347'ci u'#380'ywane s'#261' przy warunku wytrzym' +
+          'a'#322'o'#347'ciowym.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4333,6 +4430,9 @@
         Top = 282
         Width = 361
         Height = 112
+        Hint = 
+          '|Pierwszy z warunk'#243'w wytrzyma'#322'o'#347'ciowych sprawdzany przy obliczen' +
+          'iach'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4442,6 +4542,9 @@
         Top = 400
         Width = 361
         Height = 69
+        Hint = 
+          '|Parametr sprawdzaj'#261'cy przy przek'#322'adnia nie zosta'#322'a przewymiarow' +
+          'ana. Wi'#281'cej informacji w "Pomocy".'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4499,6 +4602,7 @@
         Top = 472
         Width = 96
         Height = 124
+        Hint = 'Przej'#347'cie do kolejnego etapu i wywo'#322'anie oblicze'#324
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4514,6 +4618,9 @@
         Top = 475
         Width = 259
         Height = 102
+        Hint = 
+          '|W sytuacji kiedy wymagana jest korekta panel znacz'#261'co zmienia s' +
+          'w'#243'j wygl'#261'd.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4672,6 +4779,9 @@
         Top = 83
         Width = 342
         Height = 78
+        Hint = 
+          '|Na warto'#347#263' wsp'#243#322'czynnika wp'#322'ywa twardo'#347#263' materia'#322'u na ko'#322'o z'#281'ba' +
+          'te oraz pr'#281'dko'#347#263' obwodowa k'#243#322'.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4717,7 +4827,7 @@
         Top = 448
         Width = 342
         Height = 57
-        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        Hint = '|Liczba z'#281'b'#243'w uwzgl'#281'dniaj'#261'ca k'#261'ty sto'#380'k'#243'w podzia'#322'owych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4788,8 +4898,8 @@
         Width = 342
         Height = 83
         Hint = 
-          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
-          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+          '|Warto'#347#263' wsp'#243#322'czynnika w du'#380'ej mierze zalezy od schematu monta'#380'u' +
+          ' k'#243#322'.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4837,6 +4947,9 @@
         Top = 256
         Width = 342
         Height = 95
+        Hint = 
+          '|Dla przek'#322'adni sto'#380'kowej z z'#281'bami prostymi wsp'#243#322'czynnik przyjmu' +
+          'je warto'#347'c 1,0'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4885,6 +4998,7 @@
         Top = 357
         Width = 342
         Height = 85
+        Hint = '|Jedna z podstawowoych wielko'#347'ci do obliczenia napr'#281#380'e'#324' gn'#261'cych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -4894,6 +5008,7 @@
           Top = 4
           Width = 317
           Height = 32
+          Hint = '|Jedna z podstawowoych wielko'#347'ci do obliczenia napr'#281#380'e'#324' gn'#261'cych.'
           Caption = 'JEDNOSTKOWA OBWODOWA SI'#321'A OBLICZENIOWA PRZY ZGINANIU'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -4940,8 +5055,8 @@
         Width = 342
         Height = 65
         Hint = 
-          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
-          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+          '|Warto'#347#263' wsp'#243#322'czynnika okre'#347'lana jest przy pomocy ekwiwalentnej ' +
+          'liczby z'#281'b'#243'w.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5007,6 +5122,7 @@
         Top = 84
         Width = 350
         Height = 65
+        Hint = '|Napr'#281#380'enia gn'#261'ce wywo'#322'ywane w przekroju z'#281'ba.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5093,7 +5209,9 @@
         Top = 155
         Width = 350
         Height = 95
-        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        Hint = 
+          '|Warto'#347#263' napr'#281#380'e'#324' krytycznych okre'#347'lana jest na podstawie rodzaj' +
+          'u obr'#243'bki cieplnej oraz twardo'#347#263' materia'#322'u.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5193,7 +5311,9 @@
         Top = 256
         Width = 350
         Height = 162
-        Hint = 'Wsp'#243#322'czynnik spr'#281#380'ysto'#347'c, wzgledniaj'#261'cy w'#322'asciwosci materia'#322#243'w'
+        Hint = 
+          '|Wsp'#243#322'czynnik trwa'#322'o'#347#263'i dla napr'#281#380'e'#324' gn'#261'cych okre'#347'lany jest w po' +
+          'dobny spos'#243'b jak dla napr'#281#380'e'#324' stykowych w etapie II'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5363,6 +5483,9 @@
         Top = 424
         Width = 350
         Height = 65
+        Hint = 
+          '|Dla przek'#322'adni bez zmiany kierunku wsp'#243#322'czynnik wynosi 1,0. Prz' +
+          'y zmianie kierunku 0,8'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5408,6 +5531,9 @@
         Top = 495
         Width = 350
         Height = 83
+        Hint = 
+          '|Dla z'#281'b'#243'w nieszlifowanych wsp'#243#322'czynnik wynosi 1,0. Przy szlifow' +
+          'aniu jego warto'#347#263' zale'#380'y od rodzaju obr'#243'bki cieplnej.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5464,8 +5590,8 @@
         Width = 357
         Height = 95
         Hint = 
-          'Minimalna klasa dok'#322'adno'#347'ci w jakiej nale'#380'y wykona'#263' ko'#322'a z'#281'bate|' +
-          'Klasa dok'#322'adno'#347'ci zale'#380'y od pr'#281'dko'#347'ci obwodowej k'#243#322
+          'Wsp'#243#322'czynnik uwzgl'#281'dniaj'#261'cy wymiary k'#243#322' z'#281'batych. Wyliczany jest' +
+          ' w inny spos'#243'b ni'#380' przy napr'#281#380'eniach stykowych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5532,6 +5658,9 @@
         Top = 184
         Width = 357
         Height = 65
+        Hint = 
+          'Warto'#347#263' wsp'#243#322'czynnika nale'#380'y wybra'#263' z listy|Wi'#281'ksze warto'#347'ci sto' +
+          'sowane s'#261' w przypadku odlew'#243'w.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5582,6 +5711,9 @@
         Top = 375
         Width = 357
         Height = 114
+        Hint = 
+          '|Drugi z warunk'#243'w wytrzyma'#322'o'#347'ciowych sprawdzany przy obliczeniac' +
+          'h.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5691,6 +5823,9 @@
         Top = 256
         Width = 357
         Height = 113
+        Hint = 
+          '|Do warunku wytrzyma'#322'o'#347'ciowego brana jest warto'#347#263' dla kt'#243'rej sto' +
+          'sunek '#963#39'FP/YFS jest miejszy.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5787,6 +5922,7 @@
         Top = 492
         Width = 96
         Height = 107
+        Hint = 'Przej'#347'cie do kolejnego etapu i wywo'#322'anie oblicze'#324
         Caption = 'Kolejny Etap'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -5840,6 +5976,9 @@
         Top = 83
         Width = 654
         Height = 78
+        Hint = 
+          '|Trzeci z warunk'#243'w wytrzyma'#322'o'#347'ciowych sprawdzany przy obliczenia' +
+          'ch.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -5983,6 +6122,9 @@
         Top = 83
         Width = 400
         Height = 78
+        Hint = 
+          '|Rzeczywisty moment uwgl'#281'dnia rzeczywiste prze'#322'o'#380'enie przek'#322'adni' +
+          '.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -6037,6 +6179,7 @@
         Top = 167
         Width = 400
         Height = 114
+        Hint = '|Finalna warto'#347#263' si'#322' obwodowych pojawiaj'#261'cych sie w zaz'#281'bieniu.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -6121,6 +6264,9 @@
         Top = 167
         Width = 654
         Height = 114
+        Hint = 
+          '|Czwarty i jednocze'#347'nie ostani z warunk'#243'w wytrzyma'#322'o'#347'ciowych spr' +
+          'awdzany przy obliczeniach.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -6296,6 +6442,9 @@
         Top = 287
         Width = 400
         Height = 114
+        Hint = 
+          '|Warto'#347'ci si'#322' promieniowych obliczane s'#261' przy pomocy si'#322' obwodow' +
+          'ych i kat'#243'w sto'#380'k'#243'w podzia'#322'owych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -6380,6 +6529,9 @@
         Top = 407
         Width = 400
         Height = 114
+        Hint = 
+          '|Warto'#347'ci si'#322' poosiowych obliczane s'#261' przy pomocy si'#322' obwodowych' +
+          ' i kat'#243'w sto'#380'k'#243'w podzia'#322'owych.'
         BevelOuter = bvNone
         Color = clGradientInactiveCaption
         ParentBackground = False
@@ -6464,6 +6616,7 @@
         Top = 524
         Width = 200
         Height = 75
+        Hint = 'Generowanie z raportu z oblicze'#324' do formatu PDF'
         Caption = 'Generuj raport z oblicze'#324
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
