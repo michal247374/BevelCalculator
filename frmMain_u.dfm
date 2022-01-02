@@ -34,7 +34,7 @@
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
-    ActivePage = tshEtap6
+    ActivePage = tshEtap2
     Align = alCustom
     MultiLine = True
     ParentShowHint = False
@@ -6489,7 +6489,7 @@
   object SaveDialog1: TSaveDialog
     DefaultExt = '*.pdf'
     Filter = 'Pliki PDF|*.pdf'
-    Left = 825
-    Top = 568
+    Left = 921
+    Top = 544
   end
 end
